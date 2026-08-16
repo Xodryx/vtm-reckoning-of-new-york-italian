@@ -69,6 +69,11 @@ fallisce con un errore di pathspec. Scrivi il messaggio in un file e usa `git co
   *Naomh Pádraig*) e lo spagnolo con cui Kali sbaglia la lingua di Kaiser
   (*No hablo español* → *Vorrai dire alemán*) sono la battuta, non l'ostacolo.
 - **Il vero nome di Kali è California**, rivelato da Hope nella quarta notte.
+- **Gli indovinelli che nascondono un toponimo inglese restano in inglese nelle
+  parole-chiave.** Nella terza notte una preghiera cela *North Brother Island* e
+  tre righe successive scandiscono «North.» «Brother.» «Island.». Tradurle
+  spezzerebbe l'indovinello, perché l'isola si chiama così anche in italiano: le
+  tre parole restano in inglese dentro la preghiera, il resto è tradotto.
 - **I nominativi radio dei cacciatori si traducono**: `Lightbringer` è
   *Portaluce*. Sono nomi parlanti, non cognomi: nella quinta notte la voce alla
   radio dice che «la luce scaccerà le tenebre», e in inglese il gioco si sente.
