@@ -45,7 +45,10 @@
     "_source": "No Italian source found that names these powers. Compel follows valmneira.com, which gives Comando for the level-one imperative command of Dominazione, but that page describes the older edition rather than V5. Lingering Kiss has no Italian attestation at all.",
     "_confidence": "unverified",
     "COMPEL": "COMANDO",
-    "LINGERING KISS": "BACIO PERSISTENTE"
+    "LINGERING KISS": "BACIO PERSISTENTE",
+    "ENTRANCEMENT": "AMMALIAMENTO",
+    "UNLIVING HIVE": "ALVEARE NON VIVENTE",
+    "FATA MORGANA": "FATA MORGANA"
   },
 
   "sects_and_clans": {
