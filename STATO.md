@@ -1,7 +1,7 @@
 # Stato del lavoro
 
-Aggiornato il 16 agosto 2026. **6.247 battute tradotte su 11.141 (56,1%)**,
-529.512 caratteri su 932.478 (56,8%). Il conteggio nel README lo aggiorna da sé
+Aggiornato il 16 agosto 2026. **6.836 battute tradotte su 11.141 (61,4%)**,
+578.018 caratteri su 932.478 (62,0%). Il conteggio nel README lo aggiorna da sé
 `apply.py`.
 
 Questo documento serve a riprendere il lavoro senza rileggere tutto il resto.
@@ -25,6 +25,7 @@ di ogni notte e il testo delle carte.
 | Notte 3, missioni | **complete**: Oh Brother, Connecting the Dots, `LITTLELEPER`, `CHASING_CHURCH`, `CHASING_PARK` |
 | Notte 4, missioni | **complete**: entrambi i rami (`LLINE` e `FULLB`), le due code `WMAYBE` e i due `RIVERTWICE` |
 | Notte 5, missioni | **complete**: `SYSCOLLAPSE` e `BADOMENS`, entrambe in doppia versione |
+| Notte 6, missioni | **complete**: `DEATHAFTER`, `ETERSUNSHINE` in doppia versione, `CONVERS` |
 
 ## Come si riprende
 
@@ -83,10 +84,10 @@ fallisce con un errore di pathspec. Scrivi il messaggio in un file e usa `git co
 
 ## Cosa manca, in ordine
 
-1. **La traduzione**: 4.894 battute, il 43% dei caratteri. Le prime cinque notti
-   sono finite; si riprende dalla sesta con `R_NIGHT6_MSQ_DEATHAFTER` (230) e
-   `R_NIGHT6_MSQ_ETERSUNSHINE` (205), poi la settima con
-   `R_NIGHT7_MSQ_BURNINGMAN` (433), la conversazione più grossa del gioco.
+1. **La traduzione**: 4.305 battute, il 38% dei caratteri. Le prime sei notti sono
+   finite; si riprende dalla settima con `R_NIGHT7_MSQ_BURNINGMAN` (433), la
+   conversazione più grossa del gioco, poi `M_NIGHT7_MSQ2_SHADOWDAY` (161),
+   `R_NIGHT7_MSQ_WEEKNIGHTMARES` (131) e `M_NIGHT7_MSQ2_BURNED` (102).
    Restano intatti il testo delle carte (`CardinalTMP/*`, ~600 battute), i finali
    (`BEAST_ENDING`, `FALSE_ENDING`), il diario (`Journal/CONTACTS`) e gli agguati
    (`R_AMBUSH_*`).
