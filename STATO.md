@@ -1,7 +1,7 @@
 # Stato del lavoro
 
-Aggiornato il 16 agosto 2026. **3.483 battute tradotte su 11.141 (31,3%)**,
-283.456 caratteri su 932.478 (30,4%). Il conteggio nel README lo aggiorna da sé
+Aggiornato il 16 agosto 2026. **4.470 battute tradotte su 11.141 (40,1%)**,
+365.862 caratteri su 932.478 (39,2%). Il conteggio nel README lo aggiorna da sé
 `apply.py`.
 
 Questo documento serve a riprendere il lavoro senza rileggere tutto il resto.
@@ -22,7 +22,7 @@ di ogni notte e il testo delle carte.
 | Trama principale (`R_NIGHT_1`…`R_NIGHT_5`, `R_NIGHT_MQ_*`) | **completa** |
 | Notte 2, missioni | **complete**: A for Anarchy (entrambe le versioni), Empire of the Sun, The Night Courier, Spinfluence |
 | Notte 3, missioni | **complete**: Oh Brother e Connecting the Dots, entrambe in doppia versione |
-| Notte 4, missioni | a metà: fatti `LLINEKAISER`, `LLINEHOPE` e i due `WMAYBEPRELUDE`; mancano i due **coda** e il ramo `FULLB` |
+| Notte 4, missioni | **complete**: entrambi i rami (`LLINE` e `FULLB`), le due code `WMAYBE` e i due `RIVERTWICE` |
 
 ## Come si riprende
 
@@ -67,10 +67,11 @@ fallisce con un errore di pathspec. Scrivi il messaggio in un file e usa `git co
 
 ## Cosa manca, in ordine
 
-1. **La traduzione**: 7.658 battute, il 70% dei caratteri. Si riprende dalle due
-   code della quarta notte, `R_NIGHT4_MSQ_WMAYBECODA` (234) e il suo gemello
-   `M_NIGHT4_MSQ2_WMAYBECODA` (102). Le conversazioni più grosse rimaste sono
-   `R_NIGHT7_MSQ_BURNINGMAN` (433) e `CardinalTMP/CRD_PONY1` (268).
+1. **La traduzione**: 6.671 battute, il 61% dei caratteri. Le prime quattro notti
+   sono finite; si riprende dalla quinta con `M_NIGHT5_MSQ_SYSCOLLAPSE` (225) e il
+   suo gemello `M_NIGHT5_MSQ2_SYSCOLLAPSE` (113). Le conversazioni più grosse
+   rimaste sono `R_NIGHT7_MSQ_BURNINGMAN` (433) e `CardinalTMP/CRD_PONY1` (268);
+   il testo delle carte (`CardinalTMP/*`) non è ancora stato toccato.
 2. Un controllo CI che esegua `tools/apply.py --check` a ogni push.
 3. La pipeline di release. Vincoli in `ARCHITETTURA.md`.
 
