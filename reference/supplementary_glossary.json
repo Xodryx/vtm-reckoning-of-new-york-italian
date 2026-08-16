@@ -24,11 +24,12 @@
   },
 
   "discipline_powers": {
-    "_source": "Italian V5 power names. Ascendente's first level offers Soggezione or Sguardo Terrificante, which map to Awe and Daunt. These appear in dialogue as bracketed choice tags such as [AWE]. Mesmerize, Reveal Temperament and Unseen Passage were confirmed against Italian V5 write-ups of Dominazione, Auspex and Oscurazione (libercarminii.wikidot.com, valmneira.com).",
+    "_source": "Italian V5 power names. Ascendente's first level offers Soggezione or Sguardo Terrificante, which map to Awe and Daunt. These appear in dialogue as bracketed choice tags such as [AWE]. Mesmerize, Reveal Temperament, Unseen Passage and Sense the Unseen were confirmed against Italian V5 write-ups of Dominazione, Auspicio and Oscurazione (libercarminii.wikidot.com, valmneira.com).",
     "_confidence": "sourced",
     "MESMERIZE": "MESMERISMO",
     "REVEAL TEMPERAMENT": "RIVELARE IL TEMPERAMENTO",
     "UNSEEN PASSAGE": "PASSAGGIO INOSSERVATO",
+    "SENSE THE UNSEEN": "PERCEPIRE L’INVISIBILE",
     "AWE": "SOGGEZIONE",
     "DAUNT": "SGUARDO TERRIFICANTE",
     "CLOAK OF SHADOWS": "MANTO D’OMBRA",
