@@ -65,6 +65,8 @@
   "setting": {
     "_source": "Not found in the Coteries script or the extracted glossary.",
     "_confidence": "unverified",
-    "Eternal Struggle": "Eterna Lotta"
+    "Eternal Struggle": "Eterna Lotta",
+    "Daystar": "Astro Diurno",
+    "the reckoning": "la resa dei conti"
   }
 }
