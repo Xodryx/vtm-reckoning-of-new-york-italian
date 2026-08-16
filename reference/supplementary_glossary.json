@@ -33,8 +33,12 @@
   },
 
   "camarilla": {
-    "_source": "Standard Italian VtM usage; not in the Coteries script. Praxis is left untranslated, as Elysium and Masquerade are.",
+    "_source": "Standard Italian VtM usage; not in the Coteries script. Praxis is left untranslated, as Elysium and Masquerade are. Hound follows the Italian V5 Camarilla material, where the Sheriff's enforcers are Segugi. The acronym SAD stays English the way FBI and NSA do, even though the full name is translated on first mention.",
     "_confidence": "unverified",
+    "Hound": "Segugio",
+    "Hounds": "Segugi",
+    "Special Affairs Division": "Divisione Affari Speciali",
+    "SAD": "SAD",
     "Tradition of Hospitality": "Tradizione dell’Ospitalità",
     "Circulatory System": "Sistema Circolatorio",
     "praxis": "praxis",
