@@ -1,7 +1,7 @@
 # Stato del lavoro
 
-Aggiornato il 16 agosto 2026. **2.233 battute tradotte su 11.141 (20,0%)**,
-167.050 caratteri su 932.478 (17,9%). Il conteggio nel README lo aggiorna da sé
+Aggiornato il 16 agosto 2026. **3.090 battute tradotte su 11.141 (27,7%)**,
+246.994 caratteri su 932.478 (26,5%). Il conteggio nel README lo aggiorna da sé
 `apply.py`.
 
 Questo documento serve a riprendere il lavoro senza rileggere tutto il resto.
@@ -21,6 +21,7 @@ di ogni notte e il testo delle carte.
 | Interfaccia | **completa** (627 stringhe) |
 | Trama principale (`R_NIGHT_1`…`R_NIGHT_5`, `R_NIGHT_MQ_*`) | **completa** |
 | Notte 2, missioni | **complete**: A for Anarchy (entrambe le versioni), Empire of the Sun, The Night Courier, Spinfluence |
+| Notte 3, missioni | **complete**: Oh Brother e Connecting the Dots, entrambe in doppia versione |
 
 ## Come si riprende
 
@@ -58,9 +59,9 @@ fallisce con un errore di pathspec. Scrivi il messaggio in un file e usa `git co
 
 ## Cosa manca, in ordine
 
-1. **La traduzione**: 8.908 battute, l'82% dei caratteri. Le conversazioni più
-   grosse sono `R_NIGHT7_MSQ_BURNINGMAN` (433), `R_NIGHT3_MSQ_OHBROTHER` (326) e
-   `CardinalTMP/CRD_PONY1` (268).
+1. **La traduzione**: 8.051 battute, il 73% dei caratteri. Le conversazioni più
+   grosse sono `R_NIGHT7_MSQ_BURNINGMAN` (433), `CardinalTMP/CRD_PONY1` (268) e
+   `R_NIGHT4_MSQ_WMAYBECODA` (234).
 2. Un controllo CI che esegua `tools/apply.py --check` a ogni push.
 3. La pipeline di release. Vincoli in `ARCHITETTURA.md`.
 
@@ -76,7 +77,7 @@ davvero bloccato senza di te.
 2. **Un riscontro sui termini marcati `unverified`** in
    `reference/supplementary_glossary.json` — `Raven` → *Corvo*, `Rogue` →
    *Canaglia*, `Daystar` → *Astro Diurno*, `Unseen Passage` → *Passaggio
-   Inosservato*, `praxis` invariato. Se hai i manuali italiani, sono quelli da
+   Inosservato*, `Lingering Kiss` → *Bacio Persistente*, `praxis` invariato. Se hai i manuali italiani, sono quelli da
    controllare: compaiono ovunque e un errore si propaga per tutte le 11.000 righe.
 
 Il precedente vale come monito: tre nomi di Discipline su cinque erano sbagliati
