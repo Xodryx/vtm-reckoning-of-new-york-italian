@@ -1,0 +1,19 @@
+# The game's English text is copyrighted material and never gets versioned.
+# Regenerate it from your own copy of the game with tools/extract_i2.py.
+dump/
+
+# Internal working notes. These mention private addresses and local paths, and the
+# repository is public.
+START-HERE.md
+reference/memorie-sony/
+
+# Reverse-engineering scratch output (Il2CppDumper, extracted assets).
+tools/dumper/
+*.bin
+
+# Build output.
+plugin/bin/
+plugin/obj/
+
+__pycache__/
+*.pyc

@@ -1,0 +1,86 @@
+using System;
+using System.IO;
+using System.Reflection;
+using BepInEx;
+using BepInEx.Configuration;
+using BepInEx.Logging;
+using BepInEx.Unity.IL2CPP;
+using HarmonyLib;
+
+namespace RonyItalian
+{
+    /// <summary>
+    /// Italian translation for VtM: Reckoning of New York.
+    ///
+    /// The plugin adds Italian to the language selector and serves the translated text
+    /// as the game asks for it. It never rewrites the game's own language data, and it
+    /// never touches a file in the game folder.
+    /// </summary>
+    [BepInPlugin(Guid, "Reckoning of New York - Italian", Version)]
+    public class Plugin : BasePlugin
+    {
+        public const string Guid = "dev.xodryx.rony.italian";
+        public const string Version = "0.1.0";
+
+        internal static ManualLogSource Logger;
+        internal static TranslationStore Translations = TranslationStore.Empty();
+
+        /// <summary>
+        /// Runs the game untouched while keeping the plugin's diagnostics, which is the
+        /// fastest way to tell our own faults apart from the game's.
+        /// </summary>
+        internal static ConfigEntry<bool> Enabled;
+
+        public override void Load()
+        {
+            Logger = Log;
+
+            Enabled = Config.Bind(
+                "General", "Enabled", true,
+                "Set to false to leave the game completely untranslated while keeping the "
+                + "plugin's logging, for comparing against the unmodified game.");
+
+            LanguageMemory.Initialize(Config, Log);
+
+            if (!Enabled.Value)
+            {
+                Log.LogWarning("disabled by config - the game runs untouched");
+                return;
+            }
+
+            Translations = TranslationStore.Load(TranslationPath(), Log);
+
+            foreach (var type in new[]
+                     {
+                         typeof(CreateLanguagesDataPatch),
+                         typeof(LocalizationSystemInitializePatch),
+                         typeof(GetValuePatch),
+                         typeof(TermGetTranslationPatch),
+                         typeof(SetCurrentLanguagePatch),
+                         typeof(LanguageSettingDefaultPatch),
+                         typeof(OptionSettingValuePatch),
+                         typeof(AutoSkipResetTimePatch),
+                     })
+            {
+                try
+                {
+                    Harmony.CreateAndPatchAll(type);
+                    Log.LogInfo($"patched: {type.Name}");
+                }
+                catch (Exception e)
+                {
+                    Log.LogError($"patch failed for {type.Name}: {e.Message}");
+                }
+            }
+
+            Log.LogInfo($"v{Version} ready");
+        }
+
+        /// <summary>The translation file lives next to the plugin assembly.</summary>
+        private static string TranslationPath()
+        {
+            var directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            return Path.Combine(directory ?? ".", TranslationStore.FileName);
+        }
+    }
+}

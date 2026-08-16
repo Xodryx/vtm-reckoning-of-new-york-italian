@@ -1,0 +1,9 @@
+# The plugin reads these at runtime and the tools rewrite them constantly. Keep git
+# from churning the diffs with line-ending rewrites.
+*.json text eol=lf
+*.py text eol=lf
+*.cs text eol=lf
+*.md text eol=lf
+*.sh text eol=lf
+
+*.dll binary

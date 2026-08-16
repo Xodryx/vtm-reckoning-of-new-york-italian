@@ -1,0 +1,263 @@
+{
+ "0": {
+  "Beast": "Bestia"
+ },
+ "1": {
+  "bloodlines": "linee di sangue"
+ },
+ "2": {
+  "Cam": "Cama",
+  "Camarilla": "Camarilla",
+  "Cammie": "Camarillini",
+  "Cammies": "Camarillini",
+  "Cams": "Camarillini"
+ },
+ "3": {
+  "childe": "infante",
+  "childer": "infanti"
+ },
+ "4": {
+  "Clan": "Clan",
+  "Clans": "Clan"
+ },
+ "5": {
+  "Coterie": "Coterie",
+  "coterie": "coterie",
+  "coteries": "coterie"
+ },
+ "6": {
+  "Embrace": "Abbraccio",
+  "Embraced": "Abbracciata"
+ },
+ "7": {
+  "Fledgling": "Infante",
+  "fledgling": "infante",
+  "fledglings": "infanti"
+ },
+ "8": {
+  "Hunger": "Fame",
+  "The Hunger": "La Fame",
+  "the Hunger": "La Fame"
+ },
+ "9": {
+  "blood": "sangue",
+  "vitae": "vitae"
+ },
+ "10": {
+  "Final Death": "Morte Ultima",
+  "Final Deaths": "Morti Ultime"
+ },
+ "11": {
+  "Prince": "Principe"
+ },
+ "12": {
+  "Sire": "Sire",
+  "sire": "sire",
+  "sires": "sire"
+ },
+ "13": {
+  "Antediluvians": "Antidiluviani"
+ },
+ "14": {
+  "Anarch": "Anarchico",
+  "Anarch Movement": "Movimento Anarchico",
+  "Anarch movement": "Movimento Anarchico",
+  "Anarchs": "Anarchici",
+  "Anarchy": "Anarchia",
+  "Movement": "Movimento"
+ },
+ "15": {
+  "Autarkis": "Autarkis"
+ },
+ "16": {
+  "Blood Bond": "Legame di Sangue",
+  "Blood Bound": "Legame di Sangue"
+ },
+ "17": {
+  "Blood Hunt": "Caccia di Sangue"
+ },
+ "18": {
+  "Caine": "Caino"
+ },
+ "19": {
+  "Chantry": "Cappella",
+  "chantry": "cappella"
+ },
+ "20": {
+  "diablerie": "diablerie"
+ },
+ "21": {
+  "Domain": "Dominio",
+  "domain": "dominio",
+  "domains": "domini"
+ },
+ "22": {
+  "Elders": "Anziani",
+  "elder": "anziano",
+  "elders": "anziani"
+ },
+ "23": {
+  "Elysium": "Elysium"
+ },
+ "24": {
+  "Generation": "Generazione"
+ },
+ "25": {
+  "ghoul": "ghoul",
+  "ghouls": "ghoul"
+ },
+ "26": {
+  "Haven": "Rifugio",
+  "Havens": "rifugi",
+  "haven": "rifugio",
+  "havens": "rifugi"
+ },
+ "27": {
+  "Kindred": "Fratelli",
+  "kindred": "Fratelli"
+ },
+ "28": {
+  "Kine": "vacche",
+  "kine": "vacche"
+ },
+ "29": {
+  "Kiss": "Bacio",
+  "The Kiss": "Il Bacio"
+ },
+ "30": {
+  "lick": "succhiatrice",
+  "licks": "succhiatori",
+  "lick (m)": "succhiatore"
+ },
+ "31": {
+  "lineage": "lignaggio",
+  "lineages": "lignaggi"
+ },
+ "32": {
+  "Masquerade": "Masquerade"
+ },
+ "33": {
+  "Methuselahs": "Matusalemme"
+ },
+ "34": {
+  "Neonates": "Neonati",
+  "neonate": "neonato",
+  "neonates": "neonato",
+  "neonate (f)": "neonata"
+ },
+ "35": {
+  "retainer": "servitore",
+  "retainers": "seguaci"
+ },
+ "37": {
+  "FIRSTLIGHT": "FIRSTLIGHT",
+  "Inquisition": "Inquisizione",
+  "SI": "SI",
+  "Second Inquisition": "Seconda Inquisizione"
+ },
+ "38": {
+  "sect": "setta",
+  "sects": "sette"
+ },
+ "39": {
+  "vessel": "vena",
+  "vessels": "vene"
+ },
+ "40": {
+  "whelp": "Marmocchia"
+ },
+ "41": {
+  "Court": "Corte",
+  "court": "corte"
+ },
+ "42": {
+  "Sheriff": "Sceriffo",
+  "sheriff": "Sceriffo"
+ },
+ "43": {
+  "Primogen": "Primogenito",
+  "Primogen council": "Consiglio dei Primogeniti"
+ },
+ "44": {
+  "Tradition": "Tradizione",
+  "Traditions": "Tradizioni"
+ },
+ "45": {
+  "Harpy": "Arpia",
+  "Herald": "Araldo"
+ },
+ "46": {
+  "Regent": "Reggente"
+ },
+ "47": {
+  "Archons": "Arconti"
+ },
+ "48": {
+  "Scourge": "Frusta"
+ },
+ "49": {
+  "Baron": "Barone",
+  "Baron’s": "Barone"
+ },
+ "50": {
+  "Pyramid": "Piramide"
+ },
+ "51": {
+  "Council of Seven": "Consiglio dei Sette"
+ },
+ "52": {
+  "Ivory Tower": "Torre d'Avorio",
+  "Tower": "Torre"
+ },
+ "53": {
+  "Brujah": "Brujah",
+  "Rabble": "Feccia",
+  "Rebels": "Ribelli"
+ },
+ "54": {
+  "Feral": "Ferale",
+  "Ferals": "Ferali",
+  "Gangrel": "Gangrel",
+  "Outcasts": "Reietti",
+  "Savage": "Selvaggio",
+  "Stray": "Randagia"
+ },
+ "55": {
+  "Clan of the Moon": "Clan della Luna",
+  "Jesters": "Buffoni",
+  "Lunatic": "Lunatica",
+  "Malk": "Malk",
+  "Malkavian": "Malkavian",
+  "Malkavians": "Malkavian",
+  "Moonies": "Lunatici"
+ },
+ "56": {
+  "Leper": "Lebbroso",
+  "Nosferatu": "Nosferatu",
+  "Orloks": "Orlok",
+  "Sewer Rat": "Topo di Fogna",
+  "Sewer Rats": "Topi di Fogna"
+ },
+ "57": {
+  "Artist": "Artista",
+  "Diva": "Diva",
+  "Toreador": "Toreador"
+ },
+ "58": {
+  "Blood Sorcerer": "Stregone del Sangue",
+  "Tremere": "Tremere",
+  "Warlock": "Stregone",
+  "Warlocks": "Stregoni"
+ },
+ "59": {
+  "Blue Bloods": "Sangue Blu",
+  "Ventrue": "Ventrue"
+ },
+ "60": {
+  "Duskborn": "Crepuscolari",
+  "Thin-blood": "Sangue-Debole",
+  "thin-Blood": "Sangue Debole",
+  "thin-blood": "Sangue Debole",
+  "thin-bloods": "Sangue-debole"
+ }
+}
