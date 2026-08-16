@@ -85,10 +85,14 @@ davvero bloccato senza di te.
    validatore sa dire che un `<link="Sire">` è integro, non che una battuta
    sarcastica suona sincera.
 2. **Un riscontro sui termini marcati `unverified`** in
-   `reference/supplementary_glossary.json` — `Raven` → *Corvo*, `Rogue` →
-   *Canaglia*, `Daystar` → *Astro Diurno*, `Unseen Passage` → *Passaggio
-   Inosservato*, `Lingering Kiss` → *Bacio Persistente*, `praxis` invariato. Se hai i manuali italiani, sono quelli da
-   controllare: compaiono ovunque e un errore si propaga per tutte le 11.000 righe.
+   `reference/supplementary_glossary.json` — `Daystar` → *Astro Diurno*,
+   `Lingering Kiss` → *Bacio Persistente*, `Compel` → *Comando*, `praxis`
+   invariato. Se hai i manuali italiani, sono quelli da controllare: compaiono
+   ovunque e un errore si propaga per tutte le 11.000 righe.
+
+   Le ricerche in rete hanno già confermato *Corvi* e *Canaglie* per i Ravnos
+   (Compendio italiano), *Mesmerismo*, *Rivelare il Temperamento* e *Passaggio
+   Inosservato*. Restano dubbi solo i quattro qui sopra.
 
 Il precedente vale come monito: tre nomi di Discipline su cinque erano sbagliati
 finché non li abbiamo verificati su una fonte. *Animalismo*, *Offuscamento* e

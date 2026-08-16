@@ -24,8 +24,11 @@
   },
 
   "discipline_powers": {
-    "_source": "Italian V5 power names. Ascendente's first level offers Soggezione or Sguardo Terrificante, which map to Awe and Daunt. These appear in dialogue as bracketed choice tags such as [AWE].",
+    "_source": "Italian V5 power names. Ascendente's first level offers Soggezione or Sguardo Terrificante, which map to Awe and Daunt. These appear in dialogue as bracketed choice tags such as [AWE]. Mesmerize, Reveal Temperament and Unseen Passage were confirmed against Italian V5 write-ups of Dominazione, Auspex and Oscurazione (libercarminii.wikidot.com, valmneira.com).",
     "_confidence": "sourced",
+    "MESMERIZE": "MESMERISMO",
+    "REVEAL TEMPERAMENT": "RIVELARE IL TEMPERAMENTO",
+    "UNSEEN PASSAGE": "PASSAGGIO INOSSERVATO",
     "AWE": "SOGGEZIONE",
     "DAUNT": "SGUARDO TERRIFICANTE",
     "CLOAK OF SHADOWS": "MANTO D’OMBRA",
@@ -39,13 +42,10 @@
   },
 
   "discipline_powers_unconfirmed": {
-    "_source": "Unseen Passage is the V5 rename of the older Unseen Presence, which Italian sources give as Presenza Inosservata. No Italian source found that names the V5 power itself, so the Italian keeps Passage and reuses the established adjective.",
+    "_source": "No Italian source found that names these powers. Compel follows valmneira.com, which gives Comando for the level-one imperative command of Dominazione, but that page describes the older edition rather than V5. Lingering Kiss has no Italian attestation at all.",
     "_confidence": "unverified",
-    "UNSEEN PASSAGE": "PASSAGGIO INOSSERVATO",
-    "LINGERING KISS": "BACIO PERSISTENTE",
-    "MESMERIZE": "MESMERISMO",
-    "COMPEL": "COSTRIZIONE",
-    "REVEAL TEMPERAMENT": "RIVELARE IL TEMPERAMENTO"
+    "COMPEL": "COMANDO",
+    "LINGERING KISS": "BACIO PERSISTENTE"
   },
 
   "sects_and_clans": {
@@ -71,8 +71,8 @@
   },
 
   "clan_nicknames": {
-    "_source": "Not found in the Coteries script or the extracted glossary. The game uses two nicknames for the Ravnos, both linked to the same glossary entry; the Italian keeps them distinct the way the English does.",
-    "_confidence": "unverified",
+    "_source": "Not in the Coteries script, but the Italian Compendio (the V5 Companion) lists both Ravnos nicknames as Corvi and Canaglie. The game uses the two interchangeably, both linked to the same glossary entry; the Italian keeps them distinct the way the English does.",
+    "_confidence": "sourced",
     "Raven": "Corvo",
     "Ravens": "Corvi",
     "Rogue": "Canaglia",
