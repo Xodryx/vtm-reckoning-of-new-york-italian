@@ -1,7 +1,7 @@
 # Stato del lavoro
 
-Aggiornato il 16 agosto 2026. **4.470 battute tradotte su 11.141 (40,1%)**,
-365.862 caratteri su 932.478 (39,2%). Il conteggio nel README lo aggiorna da sé
+Aggiornato il 16 agosto 2026. **6.247 battute tradotte su 11.141 (56,1%)**,
+529.512 caratteri su 932.478 (56,8%). Il conteggio nel README lo aggiorna da sé
 `apply.py`.
 
 Questo documento serve a riprendere il lavoro senza rileggere tutto il resto.
@@ -20,9 +20,11 @@ di ogni notte e il testo delle carte.
 |---|---|
 | Interfaccia | **completa** (627 stringhe) |
 | Trama principale (`R_NIGHT_1`…`R_NIGHT_5`, `R_NIGHT_MQ_*`) | **completa** |
-| Notte 2, missioni | **complete**: A for Anarchy (entrambe le versioni), Empire of the Sun, The Night Courier, Spinfluence |
-| Notte 3, missioni | **complete**: Oh Brother e Connecting the Dots, entrambe in doppia versione |
+| Notte 1, missioni | **complete**: `REBUKE`, `UPINTHEAIR`, `LIAISONS` |
+| Notte 2, missioni | **complete**: A for Anarchy, Empire of the Sun, The Night Courier, Spinfluence, `RUDEAWAKEN` |
+| Notte 3, missioni | **complete**: Oh Brother, Connecting the Dots, `LITTLELEPER`, `CHASING_CHURCH`, `CHASING_PARK` |
 | Notte 4, missioni | **complete**: entrambi i rami (`LLINE` e `FULLB`), le due code `WMAYBE` e i due `RIVERTWICE` |
+| Notte 5, missioni | **complete**: `SYSCOLLAPSE` e `BADOMENS`, entrambe in doppia versione |
 
 ## Come si riprende
 
@@ -81,11 +83,13 @@ fallisce con un errore di pathspec. Scrivi il messaggio in un file e usa `git co
 
 ## Cosa manca, in ordine
 
-1. **La traduzione**: 6.671 battute, il 61% dei caratteri. Le prime quattro notti
-   sono finite; si riprende dalla quinta con `M_NIGHT5_MSQ_SYSCOLLAPSE` (225) e il
-   suo gemello `M_NIGHT5_MSQ2_SYSCOLLAPSE` (113). Le conversazioni più grosse
-   rimaste sono `R_NIGHT7_MSQ_BURNINGMAN` (433) e `CardinalTMP/CRD_PONY1` (268);
-   il testo delle carte (`CardinalTMP/*`) non è ancora stato toccato.
+1. **La traduzione**: 4.894 battute, il 43% dei caratteri. Le prime cinque notti
+   sono finite; si riprende dalla sesta con `R_NIGHT6_MSQ_DEATHAFTER` (230) e
+   `R_NIGHT6_MSQ_ETERSUNSHINE` (205), poi la settima con
+   `R_NIGHT7_MSQ_BURNINGMAN` (433), la conversazione più grossa del gioco.
+   Restano intatti il testo delle carte (`CardinalTMP/*`, ~600 battute), i finali
+   (`BEAST_ENDING`, `FALSE_ENDING`), il diario (`Journal/CONTACTS`) e gli agguati
+   (`R_AMBUSH_*`).
 2. Un controllo CI che esegua `tools/apply.py --check` a ogni push.
 3. La pipeline di release. Vincoli in `ARCHITETTURA.md`.
 
