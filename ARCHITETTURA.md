@@ -124,4 +124,14 @@ rifiuta di partire a gioco aperto. Non è pignoleria: una build vecchia rimasta 
 
 1. Il grosso della traduzione: 31 stringhe su 11.141. Il flusso di lavoro è pronto
    e descritto in `FLUSSO.md`.
-2. Il repo, con l'identità git giusta.
+2. Un controllo CI che esegua `tools/apply.py --check` a ogni push, così un
+   marcatore rotto non entra nel repo.
+3. Una pipeline di release che costruisca lo zip al push di un tag `v*`, come su
+   *Shadows of New York*. Due differenze da tenere presenti:
+   - **BepInEx 6 IL2CPP pesa ~34 MB**, contro i ~640 KB della build Mono di
+     *Shadows*. E il primo avvio impiega una trentina di secondi a generare gli
+     assembly interop, con la finestra apparentemente ferma: va scritto nelle
+     istruzioni, o sembrerà bloccato.
+   - **Da verificare se possiamo redistribuire BepInEx.** In caso contrario lo zip
+     conterrà solo `RonyItalian.dll` e `italian.json`, e l'utente dovrà installare
+     BepInEx da sé — più scomodo, ma è il vincolo.
