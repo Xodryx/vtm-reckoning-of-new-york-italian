@@ -64,6 +64,10 @@ fallisce con un errore di pathspec. Scrivi il messaggio in un file e usa `git co
   *Naomh Pádraig*) e lo spagnolo con cui Kali sbaglia la lingua di Kaiser
   (*No hablo español* → *Vorrai dire alemán*) sono la battuta, non l'ostacolo.
 - **Il vero nome di Kali è California**, rivelato da Hope nella quarta notte.
+- **I nominativi radio dei cacciatori si traducono**: `Lightbringer` è
+  *Portaluce*. Sono nomi parlanti, non cognomi: nella quinta notte la voce alla
+  radio dice che «la luce scaccerà le tenebre», e in inglese il gioco si sente.
+  L'acronimo `BFB` resta invece com'è, come la sigla di un'arma.
 
 ## Cosa manca, in ordine
 
