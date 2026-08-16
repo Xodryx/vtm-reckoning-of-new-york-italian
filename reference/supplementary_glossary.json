@@ -29,7 +29,14 @@
     "AWE": "SOGGEZIONE",
     "DAUNT": "SGUARDO TERRIFICANTE",
     "CLOAK OF SHADOWS": "MANTO D’OMBRA",
-    "SILENCE OF DEATH": "SILENZIO DI MORTE"
+    "SILENCE OF DEATH": "SILENZIO DI MORTE",
+    "FEED": "NUTRIRSI"
+  },
+
+  "discipline_powers_unconfirmed": {
+    "_source": "Unseen Passage is the V5 rename of the older Unseen Presence, which Italian sources give as Presenza Inosservata. No Italian source found that names the V5 power itself, so the Italian keeps Passage and reuses the established adjective.",
+    "_confidence": "unverified",
+    "UNSEEN PASSAGE": "PASSAGGIO INOSSERVATO"
   },
 
   "camarilla": {
