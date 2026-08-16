@@ -10,6 +10,7 @@
   "disciplines": {
     "_source": "Italian V5 rules terminology, cross-checked against lokendil.com's V5 rules commentary, which quotes the Discipline names in Italian. Corroborated by official_glossary.json entry 58, 'Blood Sorcerer' -> 'Stregone del Sangue', matching that source's 'Stregoneria del Sangue'.",
     "_confidence": "sourced",
+    "Chimerstry": "Chimerismo",
     "Animalism": "Animalità",
     "Auspex": "Auspex",
     "Dominate": "Dominazione",
