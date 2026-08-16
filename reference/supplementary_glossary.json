@@ -39,10 +39,12 @@
   },
 
   "clan_nicknames": {
-    "_source": "Not found in the Coteries script or the extracted glossary.",
+    "_source": "Not found in the Coteries script or the extracted glossary. The game uses two nicknames for the Ravnos, both linked to the same glossary entry; the Italian keeps them distinct the way the English does.",
     "_confidence": "unverified",
     "Raven": "Corvo",
-    "Ravens": "Corvi"
+    "Ravens": "Corvi",
+    "Rogue": "Canaglia",
+    "Rogues": "Canaglie"
   },
 
   "setting": {
