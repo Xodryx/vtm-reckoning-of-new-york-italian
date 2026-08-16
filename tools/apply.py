@@ -25,6 +25,12 @@ PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BLOCKS_DIR = os.path.join(PROJECT_DIR, "blocks")
 TERMS_FILE = os.path.join(PROJECT_DIR, "dump", "i2_terms.json")
 OUTPUT_FILE = os.path.join(PROJECT_DIR, "translations", "italian.json")
+README_FILE = os.path.join(PROJECT_DIR, "README.md")
+
+# The progress line in the README, kept in step automatically so it cannot drift
+# from what is actually translated.
+PROGRESS_LINE = re.compile(r"^(> ### Work in progress — )[\d,]+( of )[\d,]+( lines)$",
+                           re.MULTILINE)
 
 # Substituted at runtime; must survive untouched.
 PLACEHOLDER = re.compile(r"\{\[[^\]]*\]\}")
@@ -135,6 +141,23 @@ def check_entry(key, italian, english, origin):
     return errors, warnings
 
 
+def update_readme(done, total):
+    """Rewrites the progress line in the README. Silent if it is not there."""
+    if not os.path.exists(README_FILE):
+        return
+
+    with open(README_FILE, encoding="utf-8") as fh:
+        text = fh.read()
+
+    updated, count = PROGRESS_LINE.subn(
+        lambda m: f"{m.group(1)}{done:,}{m.group(2)}{total:,}{m.group(3)}", text)
+
+    if count and updated != text:
+        with open(README_FILE, "w", encoding="utf-8", newline="\n") as fh:
+            fh.write(updated)
+        print(f"aggiornato README.md: {done:,} su {total:,}")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="controlla senza scrivere")
@@ -206,6 +229,8 @@ def main():
     with open(OUTPUT_FILE, "w", encoding="utf-8") as fh:
         json.dump(translated, fh, ensure_ascii=False, indent=1, sort_keys=True)
         fh.write("\n")
+
+    update_readme(len(translated), total)
 
     print(f"\nscritto {OUTPUT_FILE}")
     print("installa con: bash tools/deploy.sh")
