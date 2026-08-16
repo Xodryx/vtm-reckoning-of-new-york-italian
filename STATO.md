@@ -1,7 +1,7 @@
 # Stato del lavoro
 
-Aggiornato il 16 agosto 2026. **6.836 battute tradotte su 11.141 (61,4%)**,
-578.018 caratteri su 932.478 (62,0%). Il conteggio nel README lo aggiorna da sé
+Aggiornato il 16 agosto 2026. **7.899 battute tradotte su 11.141 (70,9%)**,
+661.157 caratteri su 932.478 (70,9%). Il conteggio nel README lo aggiorna da sé
 `apply.py`.
 
 Questo documento serve a riprendere il lavoro senza rileggere tutto il resto.
@@ -12,9 +12,9 @@ Questo documento serve a riprendere il lavoro senza rileggere tutto il resto.
 già in italiano, il flusso di traduzione ha la validazione automatica. Da qui in
 avanti è solo traduzione: non c'è più reverse engineering da fare.
 
-**Tutta la linea narrativa principale è tradotta.** Non resta più nessuna
-conversazione `Dialogue/R_NIGHT_*`: quello che manca sono le missioni secondarie
-di ogni notte e il testo delle carte.
+**La storia è tradotta dalla prima riga all'ultima**, epilogo e finali alternativi
+compresi. Quello che resta è tutto materiale di contorno: il testo delle carte,
+il diario, gli agguati, le missioni facoltative e le voci fuori campo.
 
 | Fatto | |
 |---|---|
@@ -26,6 +26,9 @@ di ogni notte e il testo delle carte.
 | Notte 4, missioni | **complete**: entrambi i rami (`LLINE` e `FULLB`), le due code `WMAYBE` e i due `RIVERTWICE` |
 | Notte 5, missioni | **complete**: `SYSCOLLAPSE` e `BADOMENS`, entrambe in doppia versione |
 | Notte 6, missioni | **complete**: `DEATHAFTER`, `ETERSUNSHINE` in doppia versione, `CONVERS` |
+| Notte 7, missioni | **complete**: `BURNINGMAN` (433, la più lunga del gioco), `SHADOWDAY`, `WEEKNIGHTMARES`, `BURNED` |
+| Notte 8 ed epilogo | **completo**: `FROMASHES` |
+| Finali alternativi | **completi**: `BEAST_ENDING`, `FALSE_ENDING` |
 
 ## Come si riprende
 
@@ -77,6 +80,10 @@ fallisce con un errore di pathspec. Scrivi il messaggio in un file e usa `git co
   tre righe successive scandiscono «North.» «Brother.» «Island.». Tradurle
   spezzerebbe l'indovinello, perché l'isola si chiama così anche in italiano: le
   tre parole restano in inglese dentro la preghiera, il resto è tradotto.
+- **`reckoning` è sempre *resa dei conti***, la parola del titolo. Torna nel nome
+  della settima notte, nelle ultime righe di Kali (*«questa è la mia fottuta resa
+  dei conti»*) e in quelle di Pádraic, che le fanno eco (*«mi hai concesso la mia
+  resa dei conti»*). Le due chiuse vanno lette insieme: sono la stessa frase.
 - **I nominativi radio dei cacciatori si traducono**: `Lightbringer` è
   *Portaluce*. Sono nomi parlanti, non cognomi: nella quinta notte la voce alla
   radio dice che «la luce scaccerà le tenebre», e in inglese il gioco si sente.
@@ -84,13 +91,13 @@ fallisce con un errore di pathspec. Scrivi il messaggio in un file e usa `git co
 
 ## Cosa manca, in ordine
 
-1. **La traduzione**: 4.305 battute, il 38% dei caratteri. Le prime sei notti sono
-   finite; si riprende dalla settima con `R_NIGHT7_MSQ_BURNINGMAN` (433), la
-   conversazione più grossa del gioco, poi `M_NIGHT7_MSQ2_SHADOWDAY` (161),
-   `R_NIGHT7_MSQ_WEEKNIGHTMARES` (131) e `M_NIGHT7_MSQ2_BURNED` (102).
-   Restano intatti il testo delle carte (`CardinalTMP/*`, ~600 battute), i finali
-   (`BEAST_ENDING`, `FALSE_ENDING`), il diario (`Journal/CONTACTS`) e gli agguati
-   (`R_AMBUSH_*`).
+1. **La traduzione**: 3.242 battute, il 29% dei caratteri. La storia è finita, quindi
+   quello che resta non ha più un ordine narrativo da rispettare. I blocchi grossi:
+   il testo delle carte (`CardinalTMP/*`, ~600 battute, mai toccato), le missioni
+   facoltative (`MQ_LUCKBEALADY` 153, `MQ_DREADGAME` 102, `FO_1_CLUB` 81,
+   `MQ_BLOODANDCIGS` 75), il diario (`Journal/CONTACTS` 104, `Journal/LOGBOOK` 63),
+   i tre agguati (`R_AMBUSH_*`, ~75 ciascuno) e le descrizioni delle missioni
+   (`Quest/MSQ`, `Quest/MSQ-2`).
 2. Un controllo CI che esegua `tools/apply.py --check` a ogni push.
 3. La pipeline di release. Vincoli in `ARCHITETTURA.md`.
 
@@ -110,8 +117,8 @@ davvero bloccato senza di te.
    ovunque e un errore si propaga per tutte le 11.000 righe.
 
    Le ricerche in rete hanno già confermato *Corvi* e *Canaglie* per i Ravnos
-   (Compendio italiano), *Mesmerismo*, *Rivelare il Temperamento* e *Passaggio
-   Inosservato*. Restano dubbi solo i quattro qui sopra.
+   (Compendio italiano), *Mesmerismo*, *Rivelare il Temperamento*, *Passaggio
+   Inosservato* e *Percepire l'Invisibile*. Restano dubbi solo i quattro qui sopra.
 
 Il precedente vale come monito: tre nomi di Discipline su cinque erano sbagliati
 finché non li abbiamo verificati su una fonte. *Animalismo*, *Offuscamento* e
