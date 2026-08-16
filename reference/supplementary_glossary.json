@@ -42,7 +42,10 @@
     "_source": "Unseen Passage is the V5 rename of the older Unseen Presence, which Italian sources give as Presenza Inosservata. No Italian source found that names the V5 power itself, so the Italian keeps Passage and reuses the established adjective.",
     "_confidence": "unverified",
     "UNSEEN PASSAGE": "PASSAGGIO INOSSERVATO",
-    "LINGERING KISS": "BACIO PERSISTENTE"
+    "LINGERING KISS": "BACIO PERSISTENTE",
+    "MESMERIZE": "MESMERISMO",
+    "COMPEL": "COSTRIZIONE",
+    "REVEAL TEMPERAMENT": "RIVELARE IL TEMPERAMENTO"
   },
 
   "sects_and_clans": {
@@ -84,6 +87,9 @@
     "_confidence": "unverified",
     "Eternal Struggle": "Eterna Lotta",
     "Daystar": "Astro Diurno",
-    "the reckoning": "la resa dei conti"
+    "the reckoning": "la resa dei conti",
+    "torpor": "torpore",
+    "Final Death": "Morte Ultima",
+    "final death": "morte ultima"
   }
 }
