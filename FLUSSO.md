@@ -31,6 +31,12 @@ Regole che valgono sempre:
   contiene la traduzione italiana ufficiale di *Coteries of New York*: `Kindred` è
   **Fratelli**, `Kine` è **vacche**, `Final Death` è **Morte Ultima**, `sire` resta
   **sire**.
+- **Quello che il glossario non copre sta in `reference/supplementary_glossary.json`**,
+  con la fonte dichiarata voce per voce. Ci sono finiti i nomi delle Discipline, che
+  in *Coteries* non compaiono mai: `Animalism` è **Animalità**, `Obfuscate` è
+  **Oscurazione**, `Presence` è **Ascendente**. Tre termini su cui l'intuito sbaglia,
+  ed è successo davvero prima di verificarli. Ciò che è marcato `unverified` resta
+  una scelta nostra, da rivedere.
 - **I tag TMP vanno lasciati identici**, attributi compresi: `<link="Sire">` è ciò
   che apre la voce di glossario. Si traduce solo il testo fra i tag.
 - **I segnaposto `{[...]}` non si toccano**: `{[button]}`, `{[NIGHT_NUMBER]}` sono

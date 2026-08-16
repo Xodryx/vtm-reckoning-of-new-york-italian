@@ -1,0 +1,37 @@
+{
+  "_comment": [
+    "Terms that Reckoning of New York uses but the extracted Coteries glossary does",
+    "not cover, because they never appear in that game's script. Unlike",
+    "official_glossary.json, these are NOT machine-extracted from a shipped official",
+    "translation, so each one records where it comes from and how confident we are.",
+    "Anything marked 'unverified' is a judgement call worth a human check."
+  ],
+
+  "disciplines": {
+    "_source": "Italian V5 rules terminology, cross-checked against lokendil.com's V5 rules commentary, which quotes the Discipline names in Italian. Corroborated by official_glossary.json entry 58, 'Blood Sorcerer' -> 'Stregone del Sangue', matching that source's 'Stregoneria del Sangue'.",
+    "_confidence": "sourced",
+    "Animalism": "Animalità",
+    "Auspex": "Auspex",
+    "Dominate": "Dominazione",
+    "Obfuscate": "Oscurazione",
+    "Presence": "Ascendente",
+    "Potence": "Potenza",
+    "Celerity": "Velocità",
+    "Fortitude": "Robustezza",
+    "Protean": "Proteide",
+    "Blood Sorcery": "Stregoneria del Sangue"
+  },
+
+  "clan_nicknames": {
+    "_source": "Not found in the Coteries script or the extracted glossary.",
+    "_confidence": "unverified",
+    "Raven": "Corvo",
+    "Ravens": "Corvi"
+  },
+
+  "setting": {
+    "_source": "Not found in the Coteries script or the extracted glossary.",
+    "_confidence": "unverified",
+    "Eternal Struggle": "Eterna Lotta"
+  }
+}
