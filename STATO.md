@@ -47,7 +47,12 @@ fallisce con un errore di pathspec. Scrivi il messaggio in un file e usa `git co
 ## Decisioni di traduzione già prese
 
 - **Kali è donna**, prima persona, presente, colloquiale e sardonica. Concordare al
-  femminile: *"sono andata"*, *"mi ha messa in allerta"*.
+  femminile: *"sono andata"*, *"mi ha messa in allerta"*. **Vale anche quando sono
+  gli altri a parlarle**: D'Angelo le diceva *"sei stato tu a chiedermi"*, ed è
+  sfuggito fino alla prova in gioco. L'inglese non marca il genere alla seconda
+  persona, quindi l'errore non si vede nel testo di partenza: va cercato apposta.
+  Un rastrellamento su `sei stato`, `ti sei`, `sarai`, `eri`, `fossi`, `ti ho` e
+  simili nei blocchi costa poco e va rifatto ogni tanto.
 - **Pádraic è formale e misurato**, prima persona, maschile. Dove Kali dice
   *"stronzate"*, lui dice *"accidenti"*.
 - **Dove l'inglese alza il tiro, l'italiano lo segue.** `"pull an answer out of my
