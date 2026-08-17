@@ -1,0 +1,49 @@
+# Compiles the plugin without a copy of the game.
+#
+# The plugin normally builds against the interop assemblies BepInEx generates from the
+# game's IL2CPP metadata, which are a derivative of the game and are never committed.
+# The stubs in refs/ carry the same assembly names and the same signatures for the
+# twelve types the plugin touches, which is all the compiler needs.
+#
+# This is a compile check, not a test. A stub that has drifted from the real API
+# compiles happily and fails once the game loads it, and no runner can catch that. The
+# DLL that ships is still built locally by tools/release.sh against the real
+# assemblies, so nothing here is ever published.
+
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      # Only BepInEx's own assemblies, which are public and have nothing of the game in
+      # them. Pinned to the build the plugin is developed against: BepInEx 6 is a
+      # bleeding-edge line and its API moves between builds.
+      - name: Scarica il core di BepInEx
+        run: |
+          curl -sSL -o bepinex.zip \
+            'https://builds.bepinex.dev/projects/bepinex_be/785/BepInEx-Unity.IL2CPP-win-x64-6.0.0-be.785%2B6abdba4.zip'
+          unzip -q bepinex.zip 'BepInEx/core/*' -d bepinex-tmp
+          mkdir -p bepinex-core
+          cp bepinex-tmp/BepInEx/core/*.dll bepinex-core/
+
+      - name: Compila i gusci di riferimento
+        run: bash tools/build-refs.sh
+
+      - name: Compila il plugin
+        run: |
+          dotnet build plugin/RonyItalian.csproj -c Release -v minimal \
+            -p:Interop="$GITHUB_WORKSPACE/build/refs" \
+            -p:BepInExCore="$GITHUB_WORKSPACE/bepinex-core" \
+            -p:BaseOutputPath="$GITHUB_WORKSPACE/build/plugin/"

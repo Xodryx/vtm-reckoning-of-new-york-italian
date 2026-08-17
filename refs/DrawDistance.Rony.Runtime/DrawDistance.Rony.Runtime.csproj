@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AssemblyName>DrawDistance.Rony.Runtime</AssemblyName>
+    <Nullable>disable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <NoWarn>CS0626;CS8981;CS0649;CS0108;CS0108</NoWarn>
+    <AssemblyVersion>0.0.0.0</AssemblyVersion>
+    <FileVersion>0.0.0.0</FileVersion>
+    <BepInExCore Condition="'$(BepInExCore)' == ''">$(MSBuildThisFileDirectory)..\..\bepinex-core</BepInExCore>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="$(BepInExCore)\Il2CppInterop.Runtime.dll" Private="false" />
+    <Reference Include="$(BepInExCore)\Il2Cppmscorlib.dll" Private="false" Condition="Exists('$(BepInExCore)\Il2Cppmscorlib.dll')" />
+  </ItemGroup>
+</Project>

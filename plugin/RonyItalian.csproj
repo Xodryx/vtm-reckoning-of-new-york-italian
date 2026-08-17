@@ -10,8 +10,10 @@
          points at the working copy rather than the Steam install. Override with
          -p:GameDir=... to build against a different one. -->
     <GameDir Condition="'$(GameDir)' == ''">C:\Users\Rodrigo\Documents\RoNY-game-copy</GameDir>
-    <BepInExCore>$(GameDir)\BepInEx\core</BepInExCore>
-    <Interop>$(GameDir)\BepInEx\interop</Interop>
+    <BepInExCore Condition="'$(BepInExCore)' == ''">$(GameDir)\BepInEx\core</BepInExCore>
+    <!-- Overridden with the reference stubs in refs/ when there is no game to build
+         against, which is how CI compiles this at all. See tools/build-refs.sh. -->
+    <Interop Condition="'$(Interop)' == ''">$(GameDir)\BepInEx\interop</Interop>
   </PropertyGroup>
 
   <ItemGroup>

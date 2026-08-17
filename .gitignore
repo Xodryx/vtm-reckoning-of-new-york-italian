@@ -20,3 +20,9 @@ __pycache__/
 
 # Release output, rebuilt by tools/release.sh.
 dist/
+
+# Binari di BepInEx e output di compilazione dei gusci: si riscaricano e si rifanno.
+bepinex-core/
+build/
+refs/*/bin/
+refs/*/obj/
