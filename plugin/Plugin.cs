@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using BepInEx;
@@ -50,17 +51,7 @@ namespace RonyItalian
 
             Translations = TranslationStore.Load(TranslationPath(), Log);
 
-            foreach (var type in new[]
-                     {
-                         typeof(CreateLanguagesDataPatch),
-                         typeof(LocalizationSystemInitializePatch),
-                         typeof(GetValuePatch),
-                         typeof(TermGetTranslationPatch),
-                         typeof(SetCurrentLanguagePatch),
-                         typeof(LanguageSettingDefaultPatch),
-                         typeof(OptionSettingValuePatch),
-                         typeof(AutoSkipResetTimePatch),
-                     })
+            foreach (var type in PatchClasses())
             {
                 try
                 {
@@ -74,6 +65,28 @@ namespace RonyItalian
             }
 
             Log.LogInfo($"v{Version} ready");
+        }
+
+        /// <summary>
+        /// Every patch class in this assembly, found by its attribute.
+        ///
+        /// This used to be a hand-written list, and a patch class left out of it was
+        /// simply never applied: no error, no warning, just a plugin that quietly did
+        /// less than the source said it did. That cost an afternoon.
+        /// </summary>
+        private static Type[] PatchClasses()
+        {
+            var found = new List<Type>();
+            foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
+            {
+                if (type.GetCustomAttribute<HarmonyPatch>() != null)
+                {
+                    found.Add(type);
+                }
+            }
+
+            found.Sort((a, b) => string.CompareOrdinal(a.Name, b.Name));
+            return found.ToArray();
         }
 
         /// <summary>The translation file lives next to the plugin assembly.</summary>

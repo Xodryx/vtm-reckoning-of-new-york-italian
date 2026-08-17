@@ -182,6 +182,38 @@ prova degli sviluppatori (`Dialogue_0`…`Dialogue_16`, `Dialogue_ImVampire`,
 `Lorem Ipsum` dell'interfaccia. Stanno nei blocchi con il valore originale, così
 il conteggio è onesto e a runtime non cambia nulla.
 
+## Un bug del gioco, non nostro: le descrizioni nella selezione del personaggio
+
+In quella schermata il titolo è tradotto, ma la descrizione di Kali resta inglese e al
+posto di quella di Pádraic compare la chiave `UI/MainMenu/Rony/PadraicDescription`.
+**Non toccare niente: succede identico nel gioco non modificato.**
+
+La prova è semplice e si rifà in un minuto: **metti il gioco in francese**. Il titolo
+diventa *«Choisir un personnage»*, il pulsante *«Retour»*, e quelle due etichette
+restano inglese e chiave, esattamente come in italiano. La localizzazione francese è
+ufficiale, fatta da Draw Distance e presente nell'asset: se è rotta anche lì, il difetto
+è del gioco.
+
+Prima di arrivarci ho perso mezza giornata a indagare, quindi ecco cosa è già stato
+escluso, per non rifarlo:
+
+- Il termine `KaliDescription` è tradotto e viene richiesto due volte; la patch su
+  `TermData.GetTranslation` risponde con l'italiano entrambe le volte (verificato
+  registrando valore in ingresso e in uscita).
+- Le due sorgenti indicizzano l'italiano allo stesso modo (`italian=2` entrambe).
+- Riempire la colonna italiana con `SetTranslation` prima che qualsiasi schermata
+  esista **funziona** — 11.152 celle per sorgente, nessun crash, contrariamente a
+  quanto teme il commento in `TranslationStore.cs`, che si riferisce a un tentativo di
+  scrittura diretta sull'array. A schermo però non cambia niente, quindi è stato tolto:
+  è codice rischioso senza un beneficio dimostrato.
+- `PadraicDescription` non viene **mai** richiesta, in sei avvii.
+- Una patch su `TMP_Text.set_text` non intercetta nessuna scrittura di quei testi.
+
+Esiste una traduzione russa a pagamento che invece le traduce, e lo fa sostituendo
+`data.unity3d` (AssetRipper per estrarre, UABEA per reinserire). Cioè ricostruendo gli
+asset: l'unica via, e non è la nostra. Questo progetto non modifica file del gioco, per
+non farsi cancellare dalla verifica di Steam e per non redistribuire materiale protetto.
+
 ## Le due cose che servono da un umano
 
 Nessun controllo automatico può darle, e sono l'unico punto in cui il lavoro è

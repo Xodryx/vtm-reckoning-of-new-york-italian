@@ -89,6 +89,7 @@ namespace RonyItalian
                                        + $"{ItalianIndex}: its terms will not be translated");
                     }
                 }
+
                 _done = ItalianIndex >= 0;
             }
             catch (Exception e)
