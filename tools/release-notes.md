@@ -52,18 +52,36 @@ locali**, e te la apre lui.
 1. Scompatta lì l'archivio, lasciando che Windows unisca le cartelle quando lo chiede.
 2. Avvia il gioco. Parte già in italiano.
 
-A installazione fatta i nostri due file stanno qui — sono gli unici due di questo
-progetto, tutto il resto è BepInEx:
+L'archivio completo rovescia parecchia roba nella cartella del gioco, ed è normale: quasi
+tutta è BepInEx. Ecco com'è dopo, con segnato cosa arriva da dove:
 
 ```
 Vampire The Masquerade - Reckoning of New York\
+├── VtM Reckoning of New York.exe        già presente: è il gioco
+├── VtM Reckoning of New York_Data\      già presente
+├── GameAssembly.dll                     già presente
+│
+├── winhttp.dll                          BepInEx (l'aggancio all'avvio)
+├── doorstop_config.ini                  BepInEx
+├── .doorstop_version                    BepInEx
+├── changelog.txt                        BepInEx
+├── dotnet\                              BepInEx (187 file, il runtime .NET)
+├── licenses\                            le licenze dei componenti inclusi
+├── LICENZE.txt                          chi è di chi
+├── LEGGIMI.txt                          queste istruzioni
 └── BepInEx\
+    ├── core\                            BepInEx (37 file)
+    ├── config\BepInEx.cfg               BepInEx (spegne la console)
     └── plugins\
-        ├── RonyItalian.dll
-        └── italian.json
+        ├── RonyItalian.dll              ← NOSTRO
+        └── italian.json                 ← NOSTRO
 ```
 
-Se hai preso l'archivio senza BepInEx, installa prima quello, nella stessa cartella.
+**Le uniche due righe di questo progetto sono le ultime**: 1,5 MB su 77. Tutto il resto è
+BepInEx, che avresti dovuto installare comunque.
+
+L'archivio senza BepInEx contiene invece solo tre file: quei due più il `LEGGIMI.txt`.
+Se prendi quello, installa prima BepInEx nella stessa cartella.
 
 **Il primo avvio è lento**: BepInEx deve generare gli assembly di interoperabilità del
 gioco e ci mette una trentina di secondi, durante i quali la finestra sembra bloccata.
