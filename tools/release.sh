@@ -10,8 +10,9 @@
 # Without --with-bepinex the zip holds only the plugin and the translation, and the
 # player installs BepInEx themselves. With it, BepInEx is bundled: that is allowed,
 # it is LGPL-2.1, but only on the licence's terms -- the licence text travels with
-# the binaries and the source is credited. The script refuses to bundle a BepInEx
-# archive that carries no licence file, so a release cannot quietly break that.
+# the binaries and the source is credited. The official BepInEx archives ship no
+# licence file of their own, so this script adds one and refuses to build a bundle
+# without it, which is what keeps a release from quietly breaking that.
 set -euo pipefail
 
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -44,13 +45,28 @@ if [ -z "$VERSION" ]; then
 fi
 
 STAGE="$DIST_DIR/stage"
-ARCHIVE="$DIST_DIR/RonyItalian-ita-v$VERSION.zip"
+LICENSE_TEXT="$PROJECT_DIR/reference/bepinex-license.txt"
+
+# The two variants used to share a file name, so building one silently replaced the
+# other and there was no telling them apart afterwards either.
+if [ -n "$BEPINEX_ZIP" ]; then
+    ARCHIVE="$DIST_DIR/RonyItalian-ita-v$VERSION-con-bepinex.zip"
+else
+    ARCHIVE="$DIST_DIR/RonyItalian-ita-v$VERSION.zip"
+fi
 
 echo "Controllo dei blocchi..."
 python "$PROJECT_DIR/tools/apply.py" --check > /dev/null
 
 echo "Compilazione..."
-dotnet build "$PROJECT_DIR/plugin/RonyItalian.csproj" -c Release -v minimal | tail -3
+# Piping straight into tail -3 hides the compiler errors behind a silent exit that looks
+# exactly like a build which succeeded. Same trap that was sitting in deploy.sh.
+if ! build_output="$(dotnet build "$PROJECT_DIR/plugin/RonyItalian.csproj" -c Release -v minimal 2>&1)"; then
+    echo "$build_output" >&2
+    echo "ERRORE: compilazione fallita, nessun pacchetto è stato creato." >&2
+    exit 1
+fi
+echo "$build_output" | tail -3
 
 rm -rf "$STAGE"
 mkdir -p "$STAGE/BepInEx/plugins"
@@ -67,10 +83,20 @@ if [ -n "$BEPINEX_ZIP" ]; then
     python -c "import sys, zipfile; zipfile.ZipFile(sys.argv[1]).extractall(sys.argv[2])" \
         "$BEPINEX_ZIP" "$STAGE"
 
-    # LGPL-2.1 lets us ship the binaries only if the licence ships with them.
-    if ! find "$STAGE" -iname 'LICENSE*' -o -iname 'COPYING*' | grep -q .; then
-        echo "ERRORE: lo zip di BepInEx non contiene il testo della licenza." >&2
-        echo "La LGPL-2.1 lo richiede per ridistribuire i binari. Non impacchetto." >&2
+    # The official BepInEx archives carry no licence file at all -- checked against
+    # 6.0.0-be.785, 233 files, not one LICENSE or COPYING. The LGPL does not ask them
+    # to; it asks whoever redistributes the binaries. That is us, so we ship the text.
+    if [ ! -f "$LICENSE_TEXT" ]; then
+        echo "ERRORE: manca $LICENSE_TEXT, il testo della LGPL-2.1." >&2
+        echo "Senza quello non si possono ridistribuire i binari di BepInEx." >&2
+        exit 1
+    fi
+    cp "$LICENSE_TEXT" "$STAGE/BepInEx-LICENSE.txt"
+
+    # Belt and braces: whatever happened above, the package does not leave without it.
+    if ! find "$STAGE" -iname 'LICENSE*' -o -iname 'COPYING*' -o -iname '*-LICENSE.txt' \
+        | grep -q .; then
+        echo "ERRORE: nel pacchetto non è finito nessun testo di licenza. Non impacchetto." >&2
         exit 1
     fi
 
@@ -78,10 +104,31 @@ if [ -n "$BEPINEX_ZIP" ]; then
 Questo pacchetto include BepInEx, che non è opera nostra.
 
 BepInEx è sviluppato dal team BepInEx ed è distribuito con licenza LGPL-2.1.
-Codice sorgente e licenza completa: https://github.com/BepInEx/BepInEx
+Codice sorgente: https://github.com/BepInEx/BepInEx
 
 I file di BepInEx qui inclusi non sono stati modificati in alcun modo.
+
+Il testo completo della licenza è in BepInEx-LICENSE.txt. Gli archivi ufficiali di
+BepInEx non lo contengono, quindi è la copia canonica della GNU LGPL versione 2.1
+presa da https://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt, riprodotta integra.
 ATTRIBUTION
+fi
+
+# Two paragraphs of the readme depend on whether BepInEx is in the package. A single
+# wording for both was wrong in one of them: it told players of the bundled package to
+# go and install BepInEx, and players of the plain one nothing about removing it.
+if [ -n "$BEPINEX_ZIP" ]; then
+    BEPINEX_HINT=""
+    UNINSTALL_EXTRA="Per togliere anche BepInEx, che era incluso in questo pacchetto: cancella la
+cartella BepInEx, la cartella dotnet, winhttp.dll, doorstop_config.ini,
+.doorstop_version, changelog.txt, BEPINEX.txt e BepInEx-LICENSE.txt.
+
+"
+else
+    BEPINEX_HINT="- Questo pacchetto non include BepInEx: senza, da solo non basta. Serve
+  BepInEx 6 per IL2CPP, da https://github.com/BepInEx/BepInEx
+"
+    UNINSTALL_EXTRA=""
 fi
 
 cat > "$STAGE/LEGGIMI.txt" <<INSTRUCTIONS
@@ -112,16 +159,14 @@ sempre.
 SE IL TESTO RESTA IN INGLESE
 
 - Controlla che RonyItalian.dll e italian.json siano in BepInEx/plugins.
-- Se non hai installato BepInEx, questo pacchetto da solo non basta: serve
-  BepInEx 6 per IL2CPP, da https://github.com/BepInEx/BepInEx
-- In BepInEx/LogOutput.log le righe del plugin cominciano per
+${BEPINEX_HINT}- In BepInEx/LogOutput.log le righe del plugin cominciano per
   "Reckoning of New York - Italian".
 
 
 COME SI DISINSTALLA
 
 Cancella BepInEx/plugins/RonyItalian.dll e BepInEx/plugins/italian.json.
-Il gioco torna in inglese senza altri interventi: la traduzione non tocca i file
+${UNINSTALL_EXTRA}Il gioco torna in inglese senza altri interventi: la traduzione non tocca i file
 del gioco, li lascia esattamente come sono.
 INSTRUCTIONS
 

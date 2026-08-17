@@ -25,8 +25,13 @@ namespace RonyItalian
         internal static void Initialize(ConfigFile config, ManualLogSource log)
         {
             _log = log;
+            // Italian rather than empty, and the difference only shows on a fresh
+            // install: with nothing remembered the plugin used to stand aside and let
+            // the game choose, so a player who had just installed an Italian
+            // translation was greeted in English. Whatever they pick afterwards is
+            // remembered over this.
             _lastLanguage = config.Bind(
-                "General", "LastLanguage", "",
+                "General", "LastLanguage", LanguageRegistration.LanguageCode,
                 "Language to restore at startup, remembered by the plugin because the game's "
                 + "own settings save is broken. Empty means: leave the game's default alone.");
         }

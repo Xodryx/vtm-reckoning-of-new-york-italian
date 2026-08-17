@@ -275,18 +275,56 @@ Non serve a niente, ed è stato tolto.
 
 ## Cosa manca, in ordine
 
-1. **`ContinuePrompt` resta in inglese.** L'etichetta *«Press any button to
-   continue...»* del pannello di caricamento si localizza **prima** che il plugin
-   registri l'italiano: nel log la sua riga `Localize on .../ContinuePrompt` compare
-   sopra `registered Italiano`. Non è un problema di traduzione ma di tempi, e si
-   risolve rifacendo localizzare quel pannello dopo la registrazione — I2 espone
-   `LocalizationManager.LocalizeAll` apposta. Piccolo, ma è la prima cosa che si vede
-   avviando il gioco.
-2. **Una vera prova di release.** `tools/release.sh` costruisce lo zip, controlla i
+1. **Una vera prova di release.** `tools/release.sh` costruisce lo zip, controlla i
    blocchi prima di compilare e con `--with-bepinex` include BepInEx rifiutandosi di
    farlo se manca il testo della licenza. Provato solo con archivi BepInEx finti, mai
    con quello ufficiale, e mai installato su una macchina pulita seguendo il
    `LEGGIMI.txt`. Da fare prima di pubblicare qualsiasi cosa.
+
+## Le voci lasciate identiche all'inglese
+
+Sono 361, di cui 242 fuori dai dialoghi, e **quasi tutte sono giuste**: nomi propri
+(Kali, Pádraic, Ravnos, New York), clan e Discipline che l'italiano ufficiale non
+traduce (Malkavian, Auspex), tasti dei controller (LB, RT, LS), parole che in italiano
+si dicono così (VSync, Codex, Auto, Max, Ultra, Tutorial), i segnaposto *Lorem Ipsum*
+del gioco, e le citazioni dal *Finnegans Wake* nelle voci interne
+(`kamminarronnkonnbronnto…`, la parola-tuono) che vanno lasciate intatte.
+
+Ci si nascondeva però una svista vera, trovata giocando: `UI/Misc/Select` era rimasto
+`Select`, ed è l'etichetta che compare accanto alla barra spaziatrice. Ora è
+*Seleziona*. **Il francese è il modo rapido per separare le due categorie**: dove il
+francese traduce e noi no, va guardato.
+
+Un caso resta in sospeso di proposito: `UI/Misc/Start` è ancora `Start`. Il francese
+dice *Commencer*, ma quel termine sta in mezzo ai nomi dei tasti dei controller, dove
+«Start» è il nome del pulsante e tradurlo sarebbe sbagliato. Non l'abbiamo mai visto a
+schermo: se salta fuori come azione, va reso *Avvia*.
+
+## La prova di release, e cosa ha trovato
+
+Fatta il 17 agosto 2026 su una copia vergine del gioco presa da Steam, installando solo
+il pacchetto e seguendo il `LEGGIMI.txt` alla lettera. Ha trovato quattro difetti nostri,
+tutti corretti — che è esattamente perché andava fatta invece di darla per buona.
+
+1. **Gli archivi ufficiali di BepInEx non contengono nessuna licenza.** Verificato su
+   `6.0.0-be.785`: 233 file, nessun `LICENSE`, nessun `COPYING`. La LGPL-2.1 non obbliga
+   loro, obbliga chi ridistribuisce i binari: noi. Il testo canonico ora sta in
+   `reference/bepinex-license.txt` (da gnu.org, integro) e viaggia nel pacchetto come
+   `BepInEx-LICENSE.txt`.
+2. **Il `LEGGIMI` prometteva il falso**: «il gioco parte già in italiano». Su
+   un'installazione pulita non c'è nessun config, quindi il plugin lasciava scegliere al
+   gioco. Sembrava vero solo perché la nostra copia di lavoro ricordava `it` dalle prove.
+   Ora `LastLanguage` nasce a `it`.
+3. **Un solo `LEGGIMI` per due pacchetti diversi**: diceva a chi aveva BepInEx incluso di
+   andarselo a installare, e a chi non ce l'aveva niente su come rimuoverlo.
+4. **Le due varianti avevano lo stesso nome di file** e si sovrascrivevano in silenzio.
+   Ora sono `RonyItalian-ita-v0.1.0.zip` (459 KB) e `RonyItalian-ita-v0.1.0-con-bepinex.zip` (34 MB).
+
+**Come si rifà.** Copia il gioco da Steam in una cartella nuova, estraici il pacchetto,
+e **aggiungi `steam_appid.txt` con dentro `2658720`**: senza, la SDK di Steam fa
+riavviare il gioco tramite Steam, che lancia la *sua* copia e la prova non prova niente.
+Non va nel pacchetto: un giocatore vero installa dentro la cartella di Steam, dove il
+problema non esiste.
 
 ## Le due cose che servono da un umano
 

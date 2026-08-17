@@ -98,6 +98,35 @@ namespace RonyItalian
             }
         }
 
+        /// <summary>
+        /// Makes every localized component on screen read its text again.
+        ///
+        /// Anything localized before the plugin has registered Italian keeps the language
+        /// it was born with, and nothing brings it back: the loading screen's "Press any
+        /// button to continue..." is localized while BepInEx is still starting the
+        /// chainloader, so it stayed English for the whole session — the first thing a
+        /// player sees, in the wrong language.
+        ///
+        /// Called on every language change, which is the moment this is meant for. I2
+        /// does its own pass there too, but evidently not one that reaches those.
+        /// </summary>
+        internal static void RefreshComponents(ManualLogSource log)
+        {
+            if (!_done)
+            {
+                return;
+            }
+
+            try
+            {
+                LocalizationManager.LocalizeAll(true);
+            }
+            catch (Exception e)
+            {
+                log.LogWarning($"could not re-localize the components on screen: {e.Message}");
+            }
+        }
+
         /// <summary>Every distinct LanguageSourceData the game has, deduplicated by pointer.</summary>
         private static List<LanguageSourceData> CollectSources(I2LocalizationDatabase database,
                                                                ManualLogSource log)

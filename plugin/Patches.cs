@@ -202,6 +202,7 @@ namespace RonyItalian
             CurrentLanguage.Set(language);
             LanguageMemory.Remember(language);
             Diagnostics.LanguageChanged(language);
+            LanguageRegistration.RefreshComponents(Plugin.Logger);
         }
     }
 
