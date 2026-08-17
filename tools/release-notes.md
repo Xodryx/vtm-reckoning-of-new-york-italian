@@ -17,27 +17,53 @@ con un editor qualsiasi e il gioco lo rilegge a ogni avvio, senza ricompilare ni
 
 ## Cosa scaricare
 
-**`RonyItalian-ita-v@VERSION@.zip`** — la traduzione, 459 KB. Contiene solo il nostro
-plugin e il testo italiano.
+### `RonyItalian-ita-v@VERSION@-with-bepinex.zip` — consigliato
 
-**Serve BepInEx**, che non è incluso: la versione **6 per IL2CPP a 64 bit**, dalle build
-di sviluppo su <https://builds.bepinex.dev/projects/bepinex_be> (il file
-`BepInEx-Unity.IL2CPP-win-x64`). Questa traduzione è stata provata con la build
-`6.0.0-be.785`.
+Contiene tutto. Si scompatta nella cartella del gioco e basta: non serve installare né
+configurare nient'altro. Include BepInEx 6 per IL2CPP nella build `6.0.0-be.785`, l'unica
+con cui questa traduzione sia stata provata, già configurato per non aprire la finestra
+nera della console.
+
+### `RonyItalian-ita-v@VERSION@.zip` — la sola traduzione, 459 KB
+
+Per chi ha già BepInEx e preferisce gestirselo. Contiene solo il nostro plugin e il testo
+italiano.
+
+**BepInEx non è incluso**, e senza non funziona: serve la versione **6 per IL2CPP a 64
+bit**, dalle build di sviluppo su <https://builds.bepinex.dev/projects/bepinex_be> (il
+file `BepInEx-Unity.IL2CPP-win-x64`).
 
 > **Attenzione:** BepInEx 5, che è quello che si scarica per primo dal sito principale,
 > con questo gioco **non funziona**. Deve essere la 6 per IL2CPP.
 
-Se preferisci non pensarci, quando è allegato c'è anche
-`RonyItalian-ita-v@VERSION@-with-bepinex.zip`, che include BepInEx già configurato: si
-scompatta e basta.
-
 ## Come si installa
 
-1. Installa BepInEx nella cartella del gioco, se non ce l'hai già.
-2. Scompatta questo archivio nella stessa cartella, quella che contiene
-   `VtM Reckoning of New York.exe`. Le cartelle si fondono con quelle già presenti.
-3. Avvia il gioco. Parte già in italiano.
+Tutto va nella **cartella del gioco**, quella che contiene
+`VtM Reckoning of New York.exe`, non in una sua sottocartella. Con Steam installato dove
+capita di default è:
+
+```
+C:\Program Files (x86)\Steam\steamapps\common\Vampire The Masquerade - Reckoning of New York\
+```
+
+Se Steam è altrove: tasto destro sul gioco nella libreria → **Gestisci** → **Sfoglia file
+locali**, e te la apre lui.
+
+1. Scompatta lì l'archivio, lasciando che Windows unisca le cartelle quando lo chiede.
+2. Avvia il gioco. Parte già in italiano.
+
+A installazione fatta i nostri due file stanno qui — sono gli unici due di questo
+progetto, tutto il resto è BepInEx:
+
+```
+Vampire The Masquerade - Reckoning of New York\
+└── BepInEx\
+    └── plugins\
+        ├── RonyItalian.dll
+        └── italian.json
+```
+
+Se hai preso l'archivio senza BepInEx, installa prima quello, nella stessa cartella.
 
 **Il primo avvio è lento**: BepInEx deve generare gli assembly di interoperabilità del
 gioco e ci mette una trentina di secondi, durante i quali la finestra sembra bloccata.
