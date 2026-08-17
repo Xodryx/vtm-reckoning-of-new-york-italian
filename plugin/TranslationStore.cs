@@ -25,9 +25,29 @@ namespace RonyItalian
             _entries = entries;
         }
 
+        private HashSet<string> _texts;
+
         internal int Count => _entries.Count;
 
         internal bool TryGet(string key, out string value) => _entries.TryGetValue(key, out value);
+
+        /// <summary>
+        /// Whether a piece of text on screen is one of ours.
+        ///
+        /// Used the other way round from TryGet: given what a label is showing, say
+        /// whether the translation put it there. Anything else on screen either came
+        /// from the game's own code or was never localized at all.
+        /// </summary>
+        internal bool Provided(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+            {
+                return false;
+            }
+
+            _texts ??= new HashSet<string>(_entries.Values, StringComparer.Ordinal);
+            return _texts.Contains(text);
+        }
 
         internal static TranslationStore Empty() =>
             new TranslationStore(new Dictionary<string, string>(StringComparer.Ordinal));

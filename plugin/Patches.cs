@@ -3,6 +3,7 @@ using DrawDistance.Localization;
 using DrawDistance.Settings;
 using HarmonyLib;
 using I2.Loc;
+using TMPro;
 using UnityEngine;
 
 namespace RonyItalian
@@ -261,6 +262,19 @@ namespace RonyItalian
         {
             Diagnostics.LocalizeRan(__instance);
             CharacterPanelText.OnLocalized(__instance);
+        }
+    }
+
+    /// <summary>
+    /// Every label, as it appears on screen. Only does anything when the survey of
+    /// untranslated text is switched on.
+    /// </summary>
+    [HarmonyPatch(typeof(TextMeshProUGUI), "OnEnable")]
+    internal static class LabelShownPatch
+    {
+        private static void Postfix(TextMeshProUGUI __instance)
+        {
+            UntranslatedReport.Inspect(__instance);
         }
     }
 

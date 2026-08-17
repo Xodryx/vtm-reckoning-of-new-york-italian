@@ -44,6 +44,7 @@ namespace RonyItalian
             LanguageMemory.Initialize(Config, Log);
             CharacterPanelText.Initialize(Config);
             Diagnostics.Initialize(Config);
+            UntranslatedReport.Initialize(Config);
 
             if (!Enabled.Value)
             {
