@@ -1,7 +1,7 @@
 # Stato del lavoro
 
-Aggiornato il 16 agosto 2026. **7.899 battute tradotte su 11.141 (70,9%)**,
-661.157 caratteri su 932.478 (70,9%). Il conteggio nel README lo aggiorna da sé
+Aggiornato il 17 agosto 2026. **9.669 battute tradotte su 11.141 (86,8%)**,
+821.677 caratteri su 932.478 (88,1%). Il conteggio nel README lo aggiorna da sé
 `apply.py`.
 
 Questo documento serve a riprendere il lavoro senza rileggere tutto il resto.
@@ -12,9 +12,11 @@ Questo documento serve a riprendere il lavoro senza rileggere tutto il resto.
 già in italiano, il flusso di traduzione ha la validazione automatica. Da qui in
 avanti è solo traduzione: non c'è più reverse engineering da fare.
 
-**La storia è tradotta dalla prima riga all'ultima**, epilogo e finali alternativi
-compresi. Quello che resta è tutto materiale di contorno: il testo delle carte,
-il diario, gli agguati, le missioni facoltative e le voci fuori campo.
+**Tutto il contenuto narrativo è tradotto**: le otto notti, l'epilogo, i due
+finali alternativi, le missioni facoltative, gli agguati, il diario, il registro
+delle missioni e le voci interne. Quello che resta sono code piccole — gli
+intermezzi e una lunga fila di gruppi da poche battute — più `CardinalTMP`, che
+non è contenuto di questo gioco (vedi sotto).
 
 | Fatto | |
 |---|---|
@@ -29,6 +31,10 @@ il diario, gli agguati, le missioni facoltative e le voci fuori campo.
 | Notte 7, missioni | **complete**: `BURNINGMAN` (433, la più lunga del gioco), `SHADOWDAY`, `WEEKNIGHTMARES`, `BURNED` |
 | Notte 8 ed epilogo | **completo**: `FROMASHES` |
 | Finali alternativi | **completi**: `BEAST_ENDING`, `FALSE_ENDING` |
+| Missioni facoltative | **complete**: `MQ_LUCKBEALADY`, `MQ_DREADGAME`, `MQ_BLOODANDCIGS`, `MQ_PROMISEMONSTER` |
+| Agguati e incontri | **completi**: i tre `R_AMBUSH_*`, i quattro `FO_*` |
+| Diario e registro | **completi**: `Journal/CONTACTS`, `Journal/LOGBOOK`, `Quest/MSQ`, `Quest/MSQ-2`, `Quest/ZONE` |
+| Voci interne | **complete**: le sei tracce `InnerVoices/*` |
 
 ## Come si riprende
 
@@ -84,6 +90,20 @@ fallisce con un errore di pathspec. Scrivi il messaggio in un file e usa `git co
   della settima notte, nelle ultime righe di Kali (*«questa è la mia fottuta resa
   dei conti»*) e in quelle di Pádraic, che le fanno eco (*«mi hai concesso la mia
   resa dei conti»*). Le due chiuse vanno lette insieme: sono la stessa frase.
+- **Il genere va controllato anche sui personaggi di contorno.** Julia Sowinski è
+  la Primogenita Lasombra, e l'inglese usa `them` proprio per non marcarla; in tre
+  battute della terza notte era diventata «il Primogenito». Stessa trappola di
+  Kali, stessa cura.
+- **`caretaker` è sempre *custode***, il ruolo che il Consiglio assegna a Pádraic
+  nella terza notte. Era sfuggito un *protettore* in `FALSE_ENDING`, corretto.
+- **Le citazioni nei titoli dei capitoli si rifanno al titolo italiano dell'opera**,
+  tranne quando quel titolo distruggerebbe il senso: `Eternal Sunshine of Naivety`
+  è *Eterno splendore dell'ingenuità* (dal verso di Pope), non *Se mi lasci ti
+  cancello*. `Burning Man` e `Burned Man` restano in inglese perché sono una coppia.
+- **Il *thunderword* di Joyce non si tocca.** Trenta righe di `VOICES_SHADOWDAY`
+  sono `kamminarronnkonnbronntonnerronntuonn`, il centro del primo tuono di
+  *Finnegans Wake*. Pádraic è «un patito di James Joyce» per esplicita ammissione
+  del diario: la parola è intraducibile in ogni lingua, inglese compreso.
 - **I nominativi radio dei cacciatori si traducono**: `Lightbringer` è
   *Portaluce*. Sono nomi parlanti, non cognomi: nella quinta notte la voce alla
   radio dice che «la luce scaccerà le tenebre», e in inglese il gioco si sente.
@@ -91,34 +111,44 @@ fallisce con un errore di pathspec. Scrivi il messaggio in un file e usa `git co
 
 ## Cosa manca, in ordine
 
-1. **La traduzione**: 3.242 battute, il 29% dei caratteri. La storia è finita, quindi
-   quello che resta non ha più un ordine narrativo da rispettare. I blocchi grossi:
-   il testo delle carte (`CardinalTMP/*`, ~600 battute, mai toccato), le missioni
-   facoltative (`MQ_LUCKBEALADY` 153, `MQ_DREADGAME` 102, `FO_1_CLUB` 81,
-   `MQ_BLOODANDCIGS` 75), il diario (`Journal/CONTACTS` 104, `Journal/LOGBOOK` 63),
-   i tre agguati (`R_AMBUSH_*`, ~75 ciascuno) e le descrizioni delle missioni
-   (`Quest/MSQ`, `Quest/MSQ-2`).
-2. Un controllo CI che esegua `tools/apply.py --check` a ogni push.
-3. La pipeline di release. Vincoli in `ARCHITETTURA.md`.
+1. **La traduzione**: 1.472 battute, ma **solo ~790 sono di questo gioco**. Sono
+   tutte code piccole e senza ordine narrativo: gli intermezzi (`R_INTERMISSION_1`
+   … `_12`, 11-23 battute l'uno), qualche coda di missione (`R_NIGHT3_MSQ_WHEREVER`,
+   `R_NIGHT2_MSQ_LASTRESORT`, `M_NIGHT7_MSQ2_OLDBOY`), `Quest/MQ` e `Quest/INT`, poi
+   una fila lunga di gruppi da meno di dieci battute. Conviene raccoglierne
+   parecchi in un blocco solo: `next_block.py <gruppo> -n N` senza `--write` stampa
+   l'inglese senza creare lo scheletro, così si compone un file unico a mano.
+2. **`CardinalTMP/*` (713 battute) non è contenuto di *Reckoning of New York*** e
+   l'ho lasciato da parte in attesa di una decisione dell'utente. È materiale di un
+   altro progetto Draw Distance rimasto nella tabella: i personaggi sono Rosa e
+   Radek, l'ambientazione è **piazza Podgórze a Cracovia**, e certe righe non sono
+   nemmeno in inglese (`CRD_NEIGHBOR/LINE-3` è polacco: *«Halo! Co to za łażenie
+   ludziom po balkonach?»*). `TMP` sta per *temporary*. Non lo vedrà mai nessun
+   giocatore: tradurlo è un quinto del lavoro rimasto speso a vuoto.
+3. Un controllo CI che esegua `tools/apply.py --check` a ogni push.
+4. La pipeline di release. Vincoli in `ARCHITETTURA.md`.
 
 ## Le due cose che servono da un umano
 
 Nessun controllo automatico può darle, e sono l'unico punto in cui il lavoro è
 davvero bloccato senza di te.
 
-1. **Una partita giocata in italiano.** Tutta la trama principale è tradotta: solo
-   giocandola si capisce se il registro di Kali regge sulla lunga distanza. Il
-   validatore sa dire che un `<link="Sire">` è integro, non che una battuta
-   sarcastica suona sincera.
+1. **Una partita giocata in italiano.** Ormai è tradotto tutto ciò che si incontra
+   giocando: solo giocandolo si capisce se il registro di Kali regge sulla lunga
+   distanza. Il validatore sa dire che un `<link="Sire">` è integro, non che una
+   battuta sarcastica suona sincera.
 2. **Un riscontro sui termini marcati `unverified`** in
    `reference/supplementary_glossary.json` — `Daystar` → *Astro Diurno*,
    `Lingering Kiss` → *Bacio Persistente*, `Compel` → *Comando*, `praxis`
-   invariato. Se hai i manuali italiani, sono quelli da controllare: compaiono
-   ovunque e un errore si propaga per tutte le 11.000 righe.
+   invariato, e i due soprannomi Ravnos che il Compendio non conferma,
+   `Daredevils` → *Spericolati* e `The Haunted` → *Braccati*. Se hai i manuali
+   italiani, sono quelli da controllare: compaiono ovunque e un errore si propaga
+   per tutte le 11.000 righe.
 
    Le ricerche in rete hanno già confermato *Corvi* e *Canaglie* per i Ravnos
    (Compendio italiano), *Mesmerismo*, *Rivelare il Temperamento*, *Passaggio
-   Inosservato* e *Percepire l'Invisibile*. Restano dubbi solo i quattro qui sopra.
+   Inosservato*, *Percepire l'Invisibile* e *Melpominee* invariato. Restano dubbi
+   solo quelli qui sopra.
 
 Il precedente vale come monito: tre nomi di Discipline su cinque erano sbagliati
 finché non li abbiamo verificati su una fonte. *Animalismo*, *Offuscamento* e
