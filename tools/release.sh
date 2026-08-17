@@ -8,11 +8,14 @@
 #     bash tools/release.sh --with-bepinex ~/Downloads/BepInEx-Unity.IL2CPP-win-x64.zip
 #
 # Without --with-bepinex the zip holds only the plugin and the translation, and the
-# player installs BepInEx themselves. With it, BepInEx is bundled: that is allowed,
-# it is LGPL-2.1, but only on the licence's terms -- the licence text travels with
-# the binaries and the source is credited. The official BepInEx archives ship no
-# licence file of their own, so this script adds one and refuses to build a bundle
-# without it, which is what keeps a release from quietly breaking that.
+# player installs BepInEx themselves. With it, BepInEx travels along, which every one
+# of its licences allows -- on their terms: the texts ship with the binaries, the
+# sources are credited, nothing is modified.
+#
+# "BepInEx" is sixteen projects, not one: LGPL-2.1, LGPL-3.0, MIT and Apache-2.0
+# between them, and its archives carry no licence file at all. So the texts live in
+# reference/licenses/, each fetched from its own upstream, and the build refuses to
+# make a bundle without them.
 set -euo pipefail
 
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -45,7 +48,7 @@ if [ -z "$VERSION" ]; then
 fi
 
 STAGE="$DIST_DIR/stage"
-LICENSE_TEXT="$PROJECT_DIR/reference/bepinex-license.txt"
+LICENSE_DIR="$PROJECT_DIR/reference/licenses"
 
 # The two variants used to share a file name, so building one silently replaced the
 # other and there was no telling them apart afterwards either.
@@ -84,33 +87,69 @@ if [ -n "$BEPINEX_ZIP" ]; then
         "$BEPINEX_ZIP" "$STAGE"
 
     # The official BepInEx archives carry no licence file at all -- checked against
-    # 6.0.0-be.785, 233 files, not one LICENSE or COPYING. The LGPL does not ask them
-    # to; it asks whoever redistributes the binaries. That is us, so we ship the text.
-    if [ ! -f "$LICENSE_TEXT" ]; then
-        echo "ERRORE: manca $LICENSE_TEXT, il testo della LGPL-2.1." >&2
-        echo "Senza quello non si possono ridistribuire i binari di BepInEx." >&2
+    # 6.0.0-be.785: 233 files, not one LICENSE or COPYING. The LGPL does not ask them
+    # to; it asks whoever redistributes the binaries, which is us. And BepInEx is not
+    # one project but sixteen: every licence in reference/licenses/ was fetched from
+    # its own upstream repository, so the notice below is checked, not remembered.
+    if [ ! -d "$LICENSE_DIR" ] || [ -z "$(ls -A "$LICENSE_DIR" 2>/dev/null)" ]; then
+        echo "ERRORE: manca $LICENSE_DIR con i testi delle licenze." >&2
+        echo "Senza quelli non si possono ridistribuire i binari di BepInEx." >&2
         exit 1
     fi
-    cp "$LICENSE_TEXT" "$STAGE/BepInEx-LICENSE.txt"
+    mkdir -p "$STAGE/licenses"
+    cp "$LICENSE_DIR"/*.txt "$STAGE/licenses/"
 
-    # Belt and braces: whatever happened above, the package does not leave without it.
-    if ! find "$STAGE" -iname 'LICENSE*' -o -iname 'COPYING*' -o -iname '*-LICENSE.txt' \
-        | grep -q .; then
-        echo "ERRORE: nel pacchetto non è finito nessun testo di licenza. Non impacchetto." >&2
-        exit 1
-    fi
+    cat > "$STAGE/LICENZE.txt" <<'ATTRIBUTION'
+COMPONENTI DI TERZE PARTI INCLUSI IN QUESTO PACCHETTO
 
-    cat > "$STAGE/BEPINEX.txt" <<'ATTRIBUTION'
-Questo pacchetto include BepInEx, che non è opera nostra.
+Questo pacchetto include BepInEx e le librerie che BepInEx porta con sé. Non sono
+opera nostra e non sono state modificate in alcun modo. Il testo completo di ogni
+licenza, con le rispettive note di copyright, è nella cartella licenses/.
 
-BepInEx è sviluppato dal team BepInEx ed è distribuito con licenza LGPL-2.1.
-Codice sorgente: https://github.com/BepInEx/BepInEx
+  File nel pacchetto                        Progetto                Licenza
+  ---------------------------------------------------------------------------
+  BepInEx/core/BepInEx.*.dll                BepInEx                 LGPL-2.1
+  BepInEx/core/Il2CppInterop.*.dll          Il2CppInterop           LGPL-3.0
+  winhttp.dll, doorstop_config.ini,
+    .doorstop_version                       UnityDoorstop           LGPL-2.1
+  BepInEx/core/0Harmony.dll                 HarmonyX                MIT
+  BepInEx/core/MonoMod.*.dll                MonoMod                 MIT
+  BepInEx/core/Mono.Cecil*.dll              Mono.Cecil              MIT
+  BepInEx/core/AsmResolver*.dll             AsmResolver             MIT
+  BepInEx/core/Cpp2IL.Core.dll,
+    LibCpp2IL.dll, StableNameDotNet.dll,
+    WasmDisassembler.dll                    Cpp2IL                  MIT
+  BepInEx/core/Disarm.dll                   Disarm                  MIT
+  BepInEx/core/AssetRipper.CIL.dll          AssetRipper.CIL         MIT
+  BepInEx/core/AssetRipper.Primitives.dll   AssetRipper.Primitives  MIT
+  BepInEx/core/Gee.External.Capstone.dll    Capstone.NET            MIT
+  BepInEx/core/Iced.dll                     iced                    MIT
+  BepInEx/core/SemanticVersioning.dll       SemanticVersioning      MIT
+  BepInEx/core/dobby.dll                    Dobby                   Apache-2.0
+  dotnet/                                   Runtime .NET            MIT
 
-I file di BepInEx qui inclusi non sono stati modificati in alcun modo.
+DOVE TROVARE I SORGENTI
 
-Il testo completo della licenza è in BepInEx-LICENSE.txt. Gli archivi ufficiali di
-BepInEx non lo contengono, quindi è la copia canonica della GNU LGPL versione 2.1
-presa da https://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt, riprodotta integra.
+  BepInEx                 https://github.com/BepInEx/BepInEx
+  Il2CppInterop           https://github.com/BepInEx/Il2CppInterop
+  HarmonyX                https://github.com/BepInEx/HarmonyX
+  UnityDoorstop           https://github.com/NeighTools/UnityDoorstop
+  MonoMod                 https://github.com/MonoMod/MonoMod
+  Mono.Cecil              https://github.com/jbevain/cecil
+  AsmResolver             https://github.com/Washi1337/AsmResolver
+  Cpp2IL                  https://github.com/SamboyCoding/Cpp2IL
+  Disarm                  https://github.com/SamboyCoding/Disarm
+  AssetRipper.CIL         https://github.com/AssetRipper/AssetRipper.CIL
+  AssetRipper.Primitives  https://github.com/AssetRipper/AssetRipper.Primitives
+  Capstone.NET            https://github.com/9ee1/Capstone.NET
+  iced                    https://github.com/icedland/iced
+  SemanticVersioning      https://github.com/adamreeve/semver.net
+  Dobby                   https://github.com/jmpews/Dobby
+  Runtime .NET            https://github.com/dotnet/runtime
+
+La traduzione italiana, cioè BepInEx/plugins/RonyItalian.dll e italian.json, è la
+sola parte di questo pacchetto che sia opera nostra, e non fa parte di nessuno dei
+progetti qui sopra.
 ATTRIBUTION
 fi
 
@@ -121,12 +160,21 @@ if [ -n "$BEPINEX_ZIP" ]; then
     BEPINEX_HINT=""
     UNINSTALL_EXTRA="Per togliere anche BepInEx, che era incluso in questo pacchetto: cancella la
 cartella BepInEx, la cartella dotnet, winhttp.dll, doorstop_config.ini,
-.doorstop_version, changelog.txt, BEPINEX.txt e BepInEx-LICENSE.txt.
+.doorstop_version, changelog.txt, LICENZE.txt e la cartella licenses.
 
 "
 else
-    BEPINEX_HINT="- Questo pacchetto non include BepInEx: senza, da solo non basta. Serve
-  BepInEx 6 per IL2CPP, da https://github.com/BepInEx/BepInEx
+    # Naming the exact build is not pedantry. BepInEx 5 is what a player finds first and
+    # it does not work with an IL2CPP game at all, and BepInEx 6 is a bleeding-edge line
+    # whose API moves between builds -- be.785 is the one this was built and tested
+    # against.
+    BEPINEX_HINT="- Questo pacchetto non include BepInEx, e da solo non basta.
+  Serve BepInEx 6 nella versione per IL2CPP, a 64 bit, dalle build di sviluppo:
+  https://builds.bepinex.dev/projects/bepinex_be
+  Cerca \"BepInEx-Unity.IL2CPP-win-x64\". La traduzione è stata provata con la
+  build 6.0.0-be.785.
+  ATTENZIONE: BepInEx 5, che è quello che si scarica per primo dal sito
+  principale, con questo gioco NON funziona. Deve essere la 6 per IL2CPP.
 "
     UNINSTALL_EXTRA=""
 fi

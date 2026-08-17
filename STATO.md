@@ -326,6 +326,28 @@ riavviare il gioco tramite Steam, che lancia la *sua* copia e la prova non prova
 Non va nel pacchetto: un giocatore vero installa dentro la cartella di Steam, dove il
 problema non esiste.
 
+## Le licenze del pacchetto con BepInEx
+
+Verificate una per una il 17 agosto 2026, interrogando ogni progetto a monte. **Non
+andare a memoria su questo**: due risultati non erano quelli che mi aspettavo.
+
+- **Gli archivi ufficiali di BepInEx non contengono nessun file di licenza.** Li mette
+  il pacchetto: `reference/licenses/`, un file per progetto, preso dal `LICENSE`
+  originale con le sue note di copyright.
+- **«BepInEx» sono sedici progetti**, non uno: BepInEx (LGPL-2.1), Il2CppInterop
+  (LGPL-3.0), UnityDoorstop (LGPL-2.1), Dobby (Apache-2.0), il runtime .NET e altri
+  undici sotto MIT.
+- **Il2CppInterop risulta `NOASSERTION` all'API di GitHub**, ma il file è la LGPL-3.0:
+  contiene solo l'addendum, senza il testo GPL-3 a cui si aggancia, e il classificatore
+  non lo riconosce. Va letto, non chiesto.
+- **AssetRipper è GPL-3.0 e sarebbe stato un problema**, ma i due file impacchettati —
+  `AssetRipper.CIL.dll` e `AssetRipper.Primitives.dll` — stanno in repository separati e
+  sono entrambi MIT. È il controllo che è servito di più.
+
+`LICENZE.txt` nel pacchetto mappa ogni file al suo progetto e alla sua licenza, con i
+link ai sorgenti. Se un domani si aggiorna la build di BepInEx, **quella tabella va
+rifatta**: i componenti cambiano.
+
 ## Le due cose che servono da un umano
 
 Nessun controllo automatico può darle, e sono l'unico punto in cui il lavoro è
