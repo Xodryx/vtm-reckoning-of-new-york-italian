@@ -182,20 +182,23 @@ prova degli sviluppatori (`Dialogue_0`…`Dialogue_16`, `Dialogue_ImVampire`,
 `Lorem Ipsum` dell'interfaccia. Stanno nei blocchi con il valore originale, così
 il conteggio è onesto e a runtime non cambia nulla.
 
-## Un bug del gioco, non nostro: le descrizioni nella selezione del personaggio
+## BUG APERTO: il plugin rompe la selezione del personaggio
 
-In quella schermata il titolo è tradotto, ma la descrizione di Kali resta inglese e al
-posto di quella di Pádraic compare la chiave `UI/MainMenu/Rony/PadraicDescription`.
-**Non toccare niente: succede identico nel gioco non modificato.**
+In quella schermata la descrizione di Kali resta inglese e al posto di quella di
+Pádraic compare la chiave `UI/MainMenu/Rony/PadraicDescription`. **È colpa nostra.**
 
-La prova è semplice e si rifà in un minuto: **metti il gioco in francese**. Il titolo
-diventa *«Choisir un personnage»*, il pulsante *«Retour»*, e quelle due etichette
-restano inglese e chiave, esattamente come in italiano. La localizzazione francese è
-ufficiale, fatta da Draw Distance e presente nell'asset: se è rotta anche lì, il difetto
-è del gioco.
+Nel gioco **non modificato in francese quella schermata funziona**: la descrizione di
+Kali è in francese e al posto della chiave compare, correttamente,
+`PadraicUnlockRequirements` — *«Complétez l'histoire de Kali pour débloquer le deuxième
+personnage.»* Quindi il pannello si localizza benissimo, finché non arriviamo noi.
 
-Prima di arrivarci ho perso mezza giornata a indagare, quindi ecco cosa è già stato
-escluso, per non rifarlo:
+**Attenzione a come si prova.** Cambiare lingua dal menù a gioco avviato non aggiorna
+quella schermata: restano i testi della lingua precedente, e per un po' ho scambiato
+quei residui per un difetto del francese. Si riconosce dalla filigrana in basso a
+destra, che resta nella lingua di prima. **Ogni prova va fatta riavviando il gioco
+nella lingua da testare.**
+
+Cosa è già stato escluso, per non rifarlo:
 
 - Il termine `KaliDescription` è tradotto e viene richiesto due volte; la patch su
   `TermData.GetTranslation` risponde con l'italiano entrambe le volte (verificato
@@ -209,10 +212,14 @@ escluso, per non rifarlo:
 - `PadraicDescription` non viene **mai** richiesta, in sei avvii.
 - Una patch su `TMP_Text.set_text` non intercetta nessuna scrittura di quei testi.
 
-Esiste una traduzione russa a pagamento che invece le traduce, e lo fa sostituendo
-`data.unity3d` (AssetRipper per estrarre, UABEA per reinserire). Cioè ricostruendo gli
-asset: l'unica via, e non è la nostra. Questo progetto non modifica file del gioco, per
-non farsi cancellare dalla verifica di Steam e per non redistribuire materiale protetto.
+Quindi il sospetto non è più su cosa rispondiamo alle letture — quello funziona — ma su
+**cosa cambiamo nella sorgente**: `AddLanguage` allarga di una casella l'array di ogni
+termine, `UpdateDictionary(true)` lo ricostruisce, e impostiamo
+`OnMissingTranslation = Fallback`. Una di queste tre cose disturba il pannello.
+
+Il prossimo passo è isolarla: **avviare il gioco moddato direttamente in francese.** Se
+si rompe anche il francese, la causa è la registrazione della lingua e non la
+traduzione, e va cercata fra quelle tre righe di `LanguageRegistration.Register`.
 
 ## Le due cose che servono da un umano
 
