@@ -81,12 +81,15 @@
   },
 
   "clan_nicknames": {
-    "_source": "Not in the Coteries script, but the Italian Compendio (the V5 Companion) lists both Ravnos nicknames as Corvi and Canaglie. The game uses the two interchangeably, both linked to the same glossary entry; the Italian keeps them distinct the way the English does.",
+    "_source": "Not in the Coteries script, but the Italian Compendio (the V5 Companion) lists both Ravnos nicknames as Corvi and Canaglie. The game uses the two interchangeably, both linked to the same glossary entry; the Italian keeps them distinct the way the English does. Daredevils and The Haunted, the other two monikers the clan card lists, have no Italian attestation found so far; Spericolati and Braccati are our own renderings and should be checked against the Compendio.",
     "_confidence": "sourced",
     "Raven": "Corvo",
     "Ravens": "Corvi",
     "Rogue": "Canaglia",
     "Rogues": "Canaglie",
+    "Daredevil": "Spericolato",
+    "Daredevils": "Spericolati",
+    "The Haunted": "I Braccati",
     "Diva": "Diva",
     "Stray": "Randagio",
     "Strays": "Randagi",
