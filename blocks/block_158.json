@@ -1,0 +1,27 @@
+{
+ "Quest/MQ/PRECAUTIONARY_TITLE": "Misure precauzionali",
+ "Quest/MQ/PRECAUTIONARY_DESCRIPTION": "<i>La sopravvivenza è il gioco che giochiamo tutti</i> — o almeno così predicava sempre Reynard alla nostra banda. Per questo abbiamo nascosto scorte un po’ ovunque. Se gli avvertimenti di D’Angelo reggono, procurarsi qualche rifornimento potrebbe tornare utile.",
+ "Quest/MQ/STRANGER_TITLE": "Stranger in the Night",
+ "Quest/MQ/STRANGER_DESCRIPTION": "A New York non sai mai quando ti imbatterai nel re di tutti i coglioni. Ma sinceramente sembra che succeda ogni maledetta volta che metti piede fuori.",
+ "Quest/MQ/LUCKBEALADY_TITLE": "Luck Be A Lady Tonight",
+ "Quest/MQ/LUCKBEALADY_DESCRIPTION": "Che probabilità ci sono di imbattersi in un baro da strada proprio in mezzo a New York, e per giunta il giorno dopo Natale? Praticamente nessuna, direi. Ma quando è il destino a dare le carte, non puoi che puntare tutto.",
+ "Quest/MQ/DREADGAME_TITLE": "Un gioco pericoloso",
+ "Quest/MQ/DREADGAME_DESCRIPTION": "Pádraic guida come se puntasse al suo record personale. Non che mi lamenti, ma è stranamente sbadato. Cioè, stiamo parlando del signor Perbene: cosa mai potrebbe andare storto?",
+ "Quest/MQ/BLOODANDCIGS_TITLE": "Sangue e sigarette",
+ "Quest/MQ/BLOODANDCIGS_DESCRIPTION": "Non so più cosa fare. Pensare è un vicolo cieco, ma schiarirmi le idee sembra altrettanto impossibile. Devo almeno provare a rimettermi in sesto, o tanto vale che mi tagli la testa da sola prima che ci pensi lo Sceriffo.",
+ "Quest/MQ/PROMISEMONSTER_TITLE": "La promessa e il mostro",
+ "Quest/MQ/PROMISEMONSTER_DESCRIPTION": "Per poco non dimenticavo di aver promesso a D’Angelo che l’avrei preso con me lasciando New York. Meglio fare un salto al suo <i>ufficio</i>. Tanto glielo devo.",
+
+ "Quest/INT/RAV1_TITLE": "Intermezzo",
+ "Quest/INT/RAV2_TITLE": "Intermezzo",
+ "Quest/INT/RAV3_TITLE": "Intermezzo",
+ "Quest/INT/RAV4_TITLE": "Intermezzo",
+ "Quest/INT/RAV5_TITLE": "Intermezzo",
+ "Quest/INT/RAV6_TITLE": "Intermezzo",
+ "Quest/INT/MAL7_TITLE": "Intermezzo",
+ "Quest/INT/MAL8_TITLE": "Intermezzo",
+ "Quest/INT/MAL9_TITLE": "Intermezzo",
+ "Quest/INT/MAL10_TITLE": "Intermezzo",
+ "Quest/INT/MAL11_TITLE": "Intermezzo",
+ "Quest/INT/MAL12_TITLE": "Intermezzo"
+}
