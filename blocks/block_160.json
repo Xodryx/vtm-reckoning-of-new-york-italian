@@ -1,0 +1,91 @@
+{
+ "Glossary/Sire/Label": "Sire",
+ "Glossary/Sire/Description": "Il generatore di un vampiro; il Fratello che lo ha portato nell’esistenza non-morta.",
+
+ "Glossary/Cryptolect/Label": "Criptoletto",
+ "Glossary/Cryptolect/Description": "Un cifrario specifico, unico per ogni bande Ravnos, che permette ai suoi membri di comunicare in codice.\n\nLa coterie di Kali usa un codice hobo modificato, riconoscibile per l’aggiunta di tre linee sopra un punto, così che solo chi è dentro possa capire il messaggio dietro i simboli alterati.",
+
+ "Glossary/Kindred/Label": "Fratelli",
+ "Glossary/Kindred/Description": "Il termine con cui la Camarilla indica un singolo vampiro o l’intera comunità vampirica. Gli Anarchici usano allo stesso modo il termine «Leccasangue».",
+
+ "Glossary/Court/Label": "Corte",
+ "Glossary/Court/Description": "Il sistema sociale dei Fratelli della Camarilla di una città, simile al sistema feudale dei mortali. In cima sta il Principe. Sotto di lui, i membri del Consiglio dei Primogeniti. L’ordine nel dominio è mantenuto da uno Sceriffo. Le riunioni si tengono in santuari segreti detti Elysium.",
+
+ "Glossary/Jyhad/Label": "La Lotta Eterna",
+ "Glossary/Jyhad/Description": "Una guerra segreta e senza fine tra le generazioni dei Fratelli. Mossa da vendette personali e ideali utopici, questa lotta eterna ha tessuto l’arazzo della storia dei Fratelli e lasciato cicatrici sul mondo dei mortali.\n\nIn questo conflitto autodistruttivo innumerevoli vampiri anziani hanno manipolato Fratelli minori, usandoli come pedine dei propri fini.",
+
+ "Glossary/Hunger/Label": "La Fame",
+ "Glossary/Hunger/Description": "In parte appetito, in parte brama e in parte dipendenza, la Fame è la spinta a nutrirsi, e prende il posto di ogni altro impulso e piacere. La Fame chiama i vampiri di continuo, sussurrando e urlando in egual misura il proprio bisogno e desiderio di sangue.",
+
+ "Glossary/Masquerade/Label": "La Masquerade",
+ "Glossary/Masquerade/Description": "<i>Non rivelerai la tua vera natura a chi non è del Sangue. Farlo significa rinunciare a ogni tuo diritto sul Sangue.</i>\n\nUna tradizione rispettata universalmente sia dalla Camarilla sia dagli Anarchici: i mortali non devono mai venire a conoscenza del soprannaturale, se i Fratelli vogliono sopravvivere nella moderna era della tecnologia. Una nutrita sciatta, un gesto avventato ripreso in diretta o una confessione fuori tempo a un amante mortale possono significare la rovina di tutti i coinvolti.",
+
+ "Glossary/Coterie/Label": "Coterie",
+ "Glossary/Coterie/Description": "Un piccolo gruppo di Fratelli, uniti dal bisogno di sostegno e talvolta da interessi comuni. Spesso chiamato squadra o banda.",
+
+ "Glossary/BanuHaqim/Label": "Banu Haqim",
+ "Glossary/BanuHaqim/Description": "I Giudici Banu Haqim sono lacerati tra la loro sete ereditaria di Sangue vampirico e la loro passione per la giustizia. Severi arbitri, sono ferocemente devoti a un codice morale e Abbracciano mortali capaci di valutare e affrontare le minacce, far rispettare leggi e tradizioni e punire i trasgressori.\n\nAppellativi:\n<b>Il Clan della Caccia, Assassini, Figli di Haqim, Saraceni, Mediatori, Giustizieri</b>",
+
+ "Glossary/Brujah/Label": "Brujah",
+ "Glossary/Brujah/Description": "I Brujah sono un clan di radicali e piantagrane, che Abbraccia chi è disposto a rimettere qualcuno al proprio posto se la situazione lo richiede. La maggior parte si considera guerrieri con una causa, e questi Ribelli sono guidati dalle proprie passioni, dalla propria forza e dalla dedizione ai propri ideali — qualunque essi siano.\n\nAppellativi:\n<b>Il Clan dei Dotti, Plebaglia, Punk, Hipster, Prometei, Ribelli, Re Filosofi, Elleni</b>",
+
+ "Glossary/Caitiff/Label": "Caitiff",
+ "Glossary/Caitiff/Description": "I Caitiff sono vampiri senza clan. Guardati con diffidenza dai loro pari, vengono disprezzati per la mancanza di lignaggio ma anche temuti per la loro imprevedibilità. Buoni a fare tutto e maestri di niente, ogni Pander si apre la propria strada nella società dei dannati, libero tanto dagli antenati quanto dalle aspettative.\n\nAppellativi:\n<b>I Senza Clan, Pander, Orfani, Spazzatura, Feccia, Freestyler</b>",
+
+ "Glossary/Gangrel/Label": "Gangrel",
+ "Glossary/Gangrel/Description": "Spesso più vicini alle bestie che agli altri vampiri, i Gangrel si considerano predatori all’apice. Questi Ferini si aggirano nelle terre selvagge con la stessa facilità con cui percorrono la giungla urbana, e nessun clan di vampiri eguaglia la loro capacità di resistere, sopravvivere e prosperare in qualsiasi ambiente. Spesso ferocemente territoriali, i loro poteri mutaforma fanno esitare perfino i non-morti.\n\nAppellativi:\n<b>Il Clan della Bestia, Animali, Ferini, Barbari, Reietti, Lupi, Randagi</b>",
+
+ "Glossary/Hecata/Label": "Hecata",
+ "Glossary/Hecata/Description": "Accozzaglia di stirpi vampiriche dedite alla negromanzia, il clan Hecata è unito dalla ricerca di un unico soggetto: la Morte. Sono resuscitatori, studiosi dell’aldilà che vendono i propri servigi al miglior offerente o usano le proprie capacità per fini personali. Pochi riescono a nascondersi da chi evoca e comanda gli spiriti stessi dei defunti.\n\nAppellativi:\n<b>Il Clan della Morte, Necromanti, Profanatori di Tombe, La Famiglia, Stecchiti, Cadaveri, Fratelli del Diavolo, Lazzareni</b>",
+
+ "Glossary/Lasombra/Label": "Lasombra",
+ "Glossary/Lasombra/Description": "Creature sottilmente in contrasto con la realtà ordinaria, dai vampiri Lasombra ci si aspetta che trionfino a ogni costo. La spietatezza è una qualità ricercata nella progenie, il che rende più che meritata la loro fama di intrusi traditori. Quasi nessuno di loro cerca i riflettori: preferiscono agire da burattinai, poteri dietro il proverbiale trono. Per un’Ombra, il fine giustifica qualunque mezzo.\n\nAppellativi:\n<b>Il Clan della Notte, Magistri, Custodi, Ombre, Mistici dell’Abisso, Voltagabbana, Traditori</b>",
+
+ "Glossary/Malkavian/Label": "Malkavian",
+ "Glossary/Malkavian/Description": "Derisi come Lunatici dagli altri vampiri, i Malkavian hanno un Sangue che permette loro di percepire e predire verità nascoste agli altri. Come i «folli sapienti» della poesia, la loro prospettiva frantumata nasce dal vedere troppo del mondo tutto in una volta, dal comprendere troppo a fondo e dal provare emozioni semplicemente troppo forti da sopportare.\n\nAppellativi:\n<b>Il Clan della Luna, Lunatici, Pazzi, Giullari, Oracoli, Dervisci, Visionari, Figli di Malkav</b>",
+
+ "Glossary/Nosferatu/Label": "Nosferatu",
+ "Glossary/Nosferatu/Description": "I Nosferatu portano la loro maledizione all’esterno. Con i corpi orribilmente contorti e deformati dall’Abbraccio, si annidano ai margini della maggior parte delle città, facendo da spie e da mediatori di informazioni. Grazie agli animali e alla propria capacità soprannaturale di nascondersi, nulla sfugge agli occhi dei cosiddetti Topi di Fogna.\n\nAppellativi:\n<b>Il Clan dei Nascosti, Orrori, Topi di Fogna, Lebbrosi, Alveari, Croste, Vagabondi, Orlok</b>",
+
+ "Glossary/TheMinistry/Label": "Il Ministero",
+ "Glossary/TheMinistry/Description": "Il Ministero ha sempre qualcosa da offrire. Questo clan dai modi settari recluta chi sa usare la tentazione come un’arma. Abbracciano coloro che hanno la volontà e i mezzi per sedurre, irretire e infine liberare i propri bersagli da ciò che cercano: i beni della vittima, la sua lealtà o perfino la sua fede. Per i Serpenti, ogni cosa ha un prezzo.\n\nAppellativi:\n<b>Il Clan della Fede, Setiti, Seguaci di Set, Il Clan delle Menzogne, Tifonisti, Serpenti, Liberatori, Giudasiani</b>",
+
+ "Glossary/Ravnos/Label": "Ravnos",
+ "Glossary/Ravnos/Description": "Maestri del depistaggio, i Ravnos preferiscono non combattere né sanguinare per qualcosa che possono ottenere con mezzi più sottili. Sanno ammaliare e svanire nello spazio di un respiro mortale, e chi è stato ingannato una volta impara in fretta a mettere in dubbio i propri sensi in compagnia dei Corvi. Sempre in movimento, i Ravnos non possono mai riposare a lungo nello stesso luogo, o la loro maledizione li incendierà nel sonno.\n\nAppellativi:\n<b>Canaglie, Corvi, Spericolati, I Braccati</b>",
+
+ "Glossary/Salubri/Label": "Salubri",
+ "Glossary/Salubri/Description": "Un tempo noto per la propria saggezza e conoscenza, oggi il clan esiste a malapena. La sua eredità è fatta di tragedia e di una dolorosa lezione sulla lotta eterna. I suoi infanti sono pochi nel mondo moderno: secondo le loro usanze Abbracciano di norma solo dopo aver raggiunto la Golconda, anche se si tratta di pura congettura, visto lo stato attuale delle cose tra i Fratelli.\n\nAppellativi:\n<b>Ciclopi, Ladri d’Anime, Dajjal, Progenie di Saulot</b>",
+
+ "Glossary/Thin-Blood/Label": "Sangue Debole",
+ "Glossary/Thin-Blood/Description": "Né del tutto vampiri né del tutto mortali, la natura sempre mutevole dei Crepuscolari suscita in egual misura pietà, invidia e paura. Considerati poco più che spazzatura dalla maggior parte dei vampiri, i Sangue Debole si stanno unendo, sfruttando contro i propri oppressori la resistenza alla luce del sole e la strana, volubile adattabilità dei propri poteri.\n\nAppellativi:\n<b>Crepuscolari, Mercuriani, I Giovani, Scarti, Camaleonti, Aborti</b>",
+
+ "Glossary/Toreador/Label": "Toreador",
+ "Glossary/Toreador/Description": "Noti per la loro natura seducente, il contegno ammaliante e una grazia eloquente spinta fino all’ossessione, i vampiri Toreador Abbracciano artisti e amanti nei propri ranghi, nel tentativo eterno di smuovere il proprio cuore ormai morto. Soprannaturalmente aggraziate e affascinanti, le Dive sono sempre in cerca del brivido successivo, e si lasciano dietro schiere di amanti e vittime scartate.\n\nAppellativi:\n<b>Il Clan delle Dive, Degenerati, Artisti, Cortigiane, Edonisti, Sensuali, Arikeliti</b>",
+
+ "Glossary/Tremere/Label": "Tremere",
+ "Glossary/Tremere/Description": "L’arcano Clan Tremere fu un tempo una casata di maghi mortali che cercavano l’immortalità e trovarono solo la non-morte. Da vampiri hanno perfezionato i modi di piegare il proprio Sangue alla propria volontà, usando le loro stregonerie per dominare tanto il mondo dei mortali quanto quello dei vampiri. Il loro potere li rende preziosi, ma pochi vampiri si fidano dei loro intrighi.\n\nAppellativi:\n<b>Il Clan Spezzato, Usurpatori, Stregoni, Ermetici, Taumaturghi, Trasgressori, Maghi del Sangue</b>",
+
+ "Glossary/Tzimisce/Label": "Tzimisce",
+ "Glossary/Tzimisce/Description": "Per gli Tzimisce il possesso è tutto. Mirano a dominare e a possedere l’oggetto della propria bramosia, custodendolo gelosamente come il drago da cui prendono il nome custodisce il proprio tesoro. Terre, persone, culti, aziende, bande: tutto può finire tra gli artigli avidi di un Drago. Questo desiderio implacabile si estende anche al loro stesso corpo, che rimodellano spesso in forme perfette, orrende o del tutto aliene, tanto meglio se ostentano il loro dominio assoluto su ciò che è loro.\n\nAppellativi:\n<b>Draghi, Il Clan Antico, Voivodi, Stoker</b>",
+
+ "Glossary/Ventrue/Label": "Ventrue",
+ "Glossary/Ventrue/Description": "Non è per caso che i Ventrue sono chiamati il Clan dei Re. Scegliendo con cura la propria progenie tra i mortali che hanno familiarità con il potere, la ricchezza e l’influenza, i Ventrue si considerano gli aristocratici del mondo vampirico. Dai loro membri ci si aspetta che assumano il comando ogni volta che è possibile, e sono disposti a reggere le tempeste pur di guidare stando in prima linea.\n\nAppellativi:\n<b>Il Clan dei Re, Sangue Blu, Tiranni, Signori della Guerra, Patrizi, Borgia</b>",
+
+ "Glossary/Caine/Label": "Caino",
+ "Glossary/Caine/Description": "Figura mitica considerata il primo e più potente dei vampiri, lo stesso Caino dei racconti biblici. Alcuni vampiri si definiscono Cainiti, cioè membri della stirpe di Caino.",
+
+ "Glossary/Duskborn/Label": "Crepuscolari",
+ "Glossary/Duskborn/Description": "Vedi: Sangue Debole",
+
+ "Glossary/TheCullingOfThin-bloods/Label": "Il Massacro dei Sangue Debole",
+ "Glossary/TheCullingOfThin-bloods/Description": "Negli ultimi mesi del 2024 la popolazione Crepuscolare di New York è calata di un terzo. Notevoli furono anche le tattiche brutali usate per infliggere loro la morte ultima. Il calo è attribuito a un’ondata senza precedenti di operazioni dei Cacciatori in città.",
+
+ "Glossary/TheCamarilla/Label": "La Camarilla",
+ "Glossary/TheCamarilla/Description": "Una setta vampirica influente e altamente organizzata, dedita innanzitutto a mantenere la Masquerade, a schermare la propria esistenza dai vivi e a consentire ai vampiri anziani di conservare il controllo sugli affari dei mortali.",
+
+ "Glossary/Scourge/Label": "Frusta",
+ "Glossary/Scourge/Description": "Un esecutore, subordinato direttamente allo Sceriffo, con la passione per l’eliminazione di Caitiff e Sangue Debole.",
+
+ "Glossary/TheCouncilOfSeven/Label": "Il Consiglio dei Sette",
+ "Glossary/TheCouncilOfSeven/Description": "I sette membri attivi più anziani e di rango più alto della Piramide del clan Tremere."
+}

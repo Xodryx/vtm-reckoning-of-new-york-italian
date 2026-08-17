@@ -1,0 +1,168 @@
+{
+ "Glossary/FinalDeath/Label": "Morte ultima",
+ "Glossary/FinalDeath/Description": "Quando un vampiro passa dalla non-morte alla morte vera, da cui non si può tornare indietro.\n\nFuoco, luce del sole, decapitazione, smembramento o distruzione totale del corpo sono le vie per incontrare la morte ultima. Un vampiro con meno di un anno di non-vita diventa un cadavere in decomposizione, mentre i vampiri più vecchi si riducono a scheletri o perfino a polvere.",
+
+ "Glossary/Vitae/Label": "Vitae",
+ "Glossary/Vitae/Description": "Termine arcaico per il Sangue di un vampiro.",
+
+ "Glossary/TheEmbrace/Label": "L’Abbraccio",
+ "Glossary/TheEmbrace/Description": "L’atto con cui un mortale viene trasformato in vampiro. Un Fratello prosciuga la vittima e ne sostituisce il sangue con un po’ del proprio, trasmettendole il proprio clan e la propria maledizione. Un vampiro appena Abbracciato è sempre di una generazione superiore al suo sire.",
+
+ "Glossary/TheIvoryTower/Label": "La Torre d’Avorio",
+ "Glossary/TheIvoryTower/Description": "Termine gergale per la Camarilla, che ne irride il distacco e il presunto elitarismo, sottolineandone il ritiro dalle realtà che la più ampia comunità vampirica si trova ad affrontare.",
+
+ "Glossary/Clan/Label": "Clan",
+ "Glossary/Clan/Description": "Una stirpe di vampiri che condivide caratteristiche comuni trasmesse attraverso il Sangue dal sire all’infante. Nelle notti moderne esistono tredici clan distinti, oltre ai Caitiff, ai Sangue Debole e a innumerevoli stirpi minori.",
+
+ "Glossary/Sheriff/Label": "Sceriffo",
+ "Glossary/Sheriff/Description": "Un Fratello che mantiene l’ordine nel dominio del Principe, spesso agendo più da sicario che da tutore della pace. Poiché la Camarilla guarda con fastidio a idee moderne come il giusto processo, quasi tutte le esecuzioni avvengono senza processo né alcuna possibilità di difesa per l’accusato.",
+
+ "Glossary/ThePrimogenCouncil/Label": "Il Consiglio dei Primogeniti",
+ "Glossary/ThePrimogenCouncil/Description": "Composto da rappresentanti, di norma dei clan maggiori e delle fazioni chiave del dominio. Tra i suoi membri possono figurare anziani di clan, chi controlla i territori di caccia più vasti o individui che si sono guadagnati il favore del Principe. Comunicano direttamente con il Principe, offrendogli il proprio consiglio.",
+
+ "Glossary/Regent/Label": "Reggente",
+ "Glossary/Regent/Description": "Il Reggente è responsabile dell’istruzione di tutti gli altri Tremere del dominio. Anche se non insegna loro di persona, deve assicurarsi che ogni Tremere venga educato. Gli altri suoi compiti riguardano la protezione del clan nel dominio e, a volte, la sua rappresentanza nel Consiglio dei Primogeniti.",
+
+ "Glossary/Chantry/Label": "Cappella",
+ "Glossary/Chantry/Description": "Nome tradizionale del quartier generale dei Tremere in una città: in parte riparo, in parte biblioteca e in parte laboratorio.",
+
+ "Glossary/Prince/Label": "Principe",
+ "Glossary/Prince/Description": "Un vampiro della Camarilla che rivendica il controllo territoriale entro il dominio della setta — che si tratti di un singolo quartiere o di un’intera città — e che deve essere abbastanza imponente o abbastanza scaltro da essere riconosciuto come guida. Oppure può essere semplicemente arrendevole, e passare tutto il suo principato manovrato dalla propria corte.",
+
+ "Glossary/TheAnarchMovement/Label": "Il Movimento Anarchico",
+ "Glossary/TheAnarchMovement/Description": "Chiamata in origine Rivolta Anarchica, questa setta è antica quanto la rivoluzione contro la Camarilla stessa. Tutti i vampiri che sfuggono al controllo della Torre sono considerati «svincolati», e il Movimento Anarchico è una porzione piccola ma visibile degli svincolati che, invece di nascondersi, hanno deciso di reagire.",
+
+ "Glossary/Baron/Label": "Barone",
+ "Glossary/Baron/Description": "Titolo informale per il capo anarchico di un dominio. Il modo in cui acquisisce ed esercita il potere varia da dominio a dominio e da gruppo a gruppo. Può trattarsi di carismatici capibanda, di brutali signori della guerra o di un rappresentante eletto, ma il tipo di Barone di cui più si diffida è quello che rivendica il seggio unico di un’intera città, come il suo omologo della Camarilla: il Principe.",
+
+ "Glossary/Neonate/Label": "Neonato",
+ "Glossary/Neonate/Description": "Un giovane Fratello, Abbracciato di recente ma già affrancato dalla protezione del proprio sire.",
+
+ "Glossary/Fledgling/Label": "Infante",
+ "Glossary/Fledgling/Description": "Un vampiro appena creato, ancora sotto la protezione del proprio sire.",
+
+ "Glossary/CirculatorySystem/Label": "Sistema Circolatorio",
+ "Glossary/CirculatorySystem/Description": "Il Sistema Circolatorio è un servizio internazionale di traffico di sangue per Fratelli, che trasporta vasi da un dominio all’altro con annate rare o ricercate.\n\nIl sangue che tratta è esclusivamente mortale, anche se non sono mancate discrete richieste di una fonte più potente. Del benessere a lungo termine dei propri vasi importa loro poco, a meno che non siano in gioco i profitti.\n\nMolti Fratelli chiudono un occhio sulle magagne del Sistema per via degli studi che rende possibili, e delle possibilità nuove o preziose che questi studi schiudono sul Sangue.",
+
+ "Glossary/Raven/Label": "Corvo",
+ "Glossary/Raven/Description": "Vedi: Ravnos",
+
+ "Glossary/Elysium/Label": "Elysium",
+ "Glossary/Elysium/Description": "Un luogo dove i vampiri possono riunirsi senza timore di subire danni. Le funzioni della corte in un Elysium sono tenute rigorosamente lontane dai mortali e avvolte nel segreto, ma l’edificio dell’Elysium può benissimo essere un museo pubblico, una galleria o un locale. Il Berghain è un Elysium anarchico. Il Louvre è un Elysium della Camarilla.",
+
+ "Glossary/Haven/Label": "Rifugio",
+ "Glossary/Haven/Description": "Il luogo in cui un vampiro dimora durante il giorno.",
+
+ "Glossary/Hound/Label": "Segugio",
+ "Glossary/Hound/Description": "Un vice, subordinato direttamente allo Sceriffo.",
+
+ "Glossary/TheKiss/Label": "Il Bacio",
+ "Glossary/TheKiss/Description": "L’atto di bere sangue, di norma da un mortale. Il Bacio provoca sensazioni di estasi in chi lo riceve.",
+
+ "Glossary/Hunter/Label": "Cacciatore",
+ "Glossary/Hunter/Description": "Mortali che hanno scoperto l’esistenza delle creature soprannaturali intorno a loro e, anziché cedere alla disperazione, hanno deciso di agire.\n\nI cacciatori lavorano di norma in <i>cellule</i>: gruppi piccoli e affiatati, uniti per protezione, per collaborare o per una causa comune.",
+
+ "Glossary/HunterOffensive/Label": "L’offensiva dei cacciatori",
+ "Glossary/HunterOffensive/Description": "Una coalizione senza precedenti di cacciatori provenienti da tutti gli Stati Uniti, uniti sotto un unico capo, con fondi illimitati e uno scopo comune: ripulire New York dal suo <i>sudiciume</i>.",
+
+ "Glossary/SpecialAffairsDivision/Label": "Divisione Affari Speciali",
+ "Glossary/SpecialAffairsDivision/Description": "Chiamata anche SAD, questa divisione dell’FBI è votata a neutralizzare la minaccia dei Fratelli. Per arrivare ai propri bersagli la SAD non usa solo la propria influenza nelle forze dell’ordine, ma anche i suoi vasti fascicoli sulle attività anti-Fratelli, oltre a una certa finezza e a un buon lavoro investigativo.\n\nI beni requisiti ai Fratelli le garantiscono una notevole indipendenza economica dalle altre entità globali coinvolte in ciò che i vampiri chiamano «la Seconda Inquisizione».",
+
+ "Glossary/Setite/Label": "Setita",
+ "Glossary/Setite/Description": "Vedi: Il Ministero",
+
+ "Glossary/BloodSorcery/Label": "Stregoneria del Sangue",
+ "Glossary/BloodSorcery/Description": "A differenza delle altre Discipline, la Stregoneria del Sangue è un potere che non si sviluppa in modo organico: si acquisisce con l’insegnamento o con la ricerca. Quest’arte è esclusiva dei Tremere e dei Banu Haqim, che ancora litigano su chi l’abbia creata per primo: è stata la «Taumaturgia», come la chiamano i Tremere, o il «Quietus», secondo i Banu Haqim?\n\nI Tremere possono usare le proprie capacità per infliggere attacchi potenti al corpo dell’avversario, o per facilitarsi la nutrizione richiamandone il sangue fino alla propria bocca senza toccarlo. Allo stesso modo i Banu Haqim possono usare la loro Stregoneria del Sangue per trasformare la vitae in veleno e usarla come arma, o per carpire segreti dal sangue altrui.",
+
+ "Glossary/Thaumaturgy/Label": "Taumaturgia",
+ "Glossary/Thaumaturgy/Description": "Vedi: Stregoneria del Sangue",
+
+ "Glossary/Torpor/Label": "Torpore",
+ "Glossary/Torpor/Description": "Il torpore è uno stato in cui i vampiri sono morti a ciò che li circonda e ridotti all’aspetto di un cadavere raggrinzito, incapaci di usare Discipline o di reagire ad altri stimoli. Non si tratta però della morte ultima: si risveglieranno nei tempi dettati dalla loro Umanità.",
+
+ "Glossary/Harpy/Label": "Arpia",
+ "Glossary/Harpy/Description": "L’Araldo del dominio, o Arpia, conosce tutti e tutti i loro segreti, e li condivide con gli altri… al prezzo giusto. «Arpia» era in origine un epiteto negativo, ma qualcuno lo porta con orgoglio, sapendo che il ruolo di mediatore di informazioni è apprezzato in qualsiasi corte.",
+
+ "Glossary/Domain/Label": "Il Dominio",
+ "Glossary/Domain/Description": "<i>Il tuo dominio è affare tuo soltanto. Tutti gli altri ti devono rispetto mentre vi si trovano. Nessuno può contestare la tua parola entro il tuo dominio.</i>\n\nL’area di influenza di un determinato vampiro. I Principi rivendicano come propri domini intere città — chiamate <i>regnum</i> — e a volte permettono a vampiri minori di rivendicare domini al loro interno.",
+
+ "Glossary/BloodBond/Label": "Legame di Sangue",
+ "Glossary/BloodBond/Description": "Un rapporto imposto per via mistica tra un vampiro e un altro essere, mortale o Fratello. Bere per tre volte il Sangue di un vampiro direttamente dalla vena crea in chi beve una lealtà intensa, simile all’infatuazione o all’ossessione. Il Legame allenta la presa col tempo, ma si rinsalda a ogni nuova bevuta dal vampiro donatore.",
+
+ "Glossary/Autarkis/Label": "Autarkis",
+ "Glossary/Autarkis/Description": "Fratelli che restano svincolati dalle sette politiche, o perché rifiutano che altre sette entrino nel proprio dominio o perché semplicemente si rifiutano di schierarsi con una causa che non sia la propria. Le loro ambizioni riguardano di solito la protezione della propria non-vita o del proprio lignaggio, e degli altri si curano ben poco.",
+
+ "Glossary/Zapathasura/Label": "Zapathasura",
+ "Glossary/Zapathasura/Description": "L’Antidiluviano dei Ravnos, risvegliatosi durante l’evento che aprì la Guerra di Gehenna, chiamato la Settimana degli Incubi. Nel risvegliarsi riuscì a prosciugare a distanza la vitae del proprio clan, spingendone molti membri in una frenesia di cannibalismo e distruzione e decimando di fatto la propria stirpe. Incontrò la fine in Bangladesh, per mano di varie fazioni, sotto il sole di mezzogiorno. La sua morte per luce solare ha alterato per sempre il clan, lasciandogli il fuoco nelle vene.",
+
+ "Glossary/TheArtHole/Label": "The Art Hole",
+ "Glossary/TheArtHole/Description": "Vedi: Elysium",
+
+ "Glossary/WeekOfNightmares/Label": "La Settimana degli Incubi",
+ "Glossary/WeekOfNightmares/Description": "Il nome dato dai vampiri alla settimana in cui si risvegliò Zapathasura, Antidiluviano del clan Ravnos.\n\nÈ considerata in genere l’inizio delle Notti Finali, il tempo dei segni e dei presagi che conducono alla Gehenna.",
+
+ "Glossary/Antediluvians/Label": "Antidiluviani",
+ "Glossary/Antediluvians/Description": "I fondatori dei tredici clan vampirici originari, noti anche come la Terza Generazione. Per gli ultimi mille anni molti Fratelli hanno dato per scontato che gli Antidiluviani dormissero; solo pochi credevano che continuassero la propria lotta a colpi di sotterfugi, cospirazioni e inganni, ben nascosti dietro le quinte della storia segreta.",
+
+ "Glossary/Childe/Label": "Infante",
+ "Glossary/Childe/Description": "Un vampiro creato tramite l’Abbraccio: l’infante è la progenie del proprio sire. Il termine viene spesso usato in senso dispregiativo, per indicare inesperienza.\n\nPlurale: infanti.",
+
+ "Glossary/TheBlackHand/Label": "La Mano Nera",
+ "Glossary/TheBlackHand/Description": "Vedi: Il Sabbat",
+
+ "Glossary/TheSabbat/Label": "Il Sabbat",
+ "Glossary/TheSabbat/Description": "Suprematisti vampirici che si considerano al di sopra dei mortali e di qualsiasi nozione di umanità. Sono una setta che al solo nominarla suscita terrore, e la loro ideologia è del tutto disumana. Il loro scopo è distruggere gli Antidiluviani e assoggettare i mortali a un mondo con i vampiri al vertice.\n\nNoti come:\n<b>La Spada di Caino, La Mano Nera</b>",
+
+ "Glossary/Famulus/Label": "Famulus",
+ "Glossary/Famulus/Description": "Un animale, o un insieme di creature, legati a un Fratello da un Legame di Sangue tramite la disciplina dell’Animalismo.",
+
+ "Glossary/TheOldClan/Label": "Vedi: Tzimisce",
+
+ "Glossary/Snake/Label": "Serpente",
+ "Glossary/Snake/Description": "Vedi: Il Ministero",
+
+ "Glossary/Stray/Label": "Randagio",
+ "Glossary/Stray/Description": "Vedi: Gangrel",
+
+ "Glossary/BloodHunt/Label": "Caccia di Sangue",
+ "Glossary/BloodHunt/Description": "La Caccia di Sangue è una chiamata alle armi che autorizza gli altri membri della società dei Fratelli a dare la caccia a uno di loro e a ucciderlo senza pietà. In quel frangente tutto è concesso, diablerie compresa, e può essere indetta soltanto dal più anziano, che spesso è il Principe.",
+
+ "Glossary/TheBeast/Label": "La Bestia",
+ "Glossary/TheBeast/Description": "Il predatore innato in agguato nella coscienza dei vampiri, che ricorda loro la fame senza fine e la smania di divorare ancora.",
+
+ "Glossary/Ghoul/Label": "Ghoul",
+ "Glossary/Ghoul/Description": "Un servitore creato dando un po’ di vitae vampirica a un mortale senza prima prosciugarlo del sangue (cosa che ne farebbe invece un vampiro).",
+
+ "Glossary/Rogue/Label": "Canaglia",
+ "Glossary/Rogue/Description": "Vedi: Ravnos",
+
+ "Glossary/Trickster/Label": "Imbroglione",
+ "Glossary/Trickster/Description": "Vedi: Ravnos",
+
+ "Glossary/Generation/Label": "Generazione",
+ "Glossary/Generation/Description": "La distanza tra un Fratello e il primo vampiro: il numero indica di quante generazioni è lontano dal progenitore originario. La Generazione, però, non dice l’età di un vampiro: uno di decima Generazione potrebbe essere stato abbracciato centinaia di anni fa e, all’inverso, un vampiro di Generazione bassa potrebbe aver abbracciato un infante nell’ultimo anno.\n\nL’unico atto capace di abbassare la propria generazione è noto come diablerie.",
+
+ "Glossary/Diablerie/Label": "Diablerie",
+ "Glossary/Diablerie/Description": "Un atto condannato dalla maggior parte dei vampiri, perché non comporta solo prosciugare un altro vampiro fino all’ultima goccia, ma anche sottrargli l’essenza stessa, lo spirito, mettendo al contempo a rischio la propria identità.",
+
+ "Glossary/Traditions/Label": "Tradizioni",
+ "Glossary/Traditions/Description": "Sei antiche Tradizioni costituiscono l’impalcatura del governo tra i Fratelli della Camarilla. Sono aperte a interpretazioni diverse in ogni dominio e alcune contano più di altre, ma tutti i Fratelli della Camarilla le conoscono.\n\nLa Prima Tradizione: La Masquerade\nLa Seconda Tradizione: Il Dominio\nLa Terza Tradizione: La Progenie\nLa Quarta Tradizione: La Responsabilità\nLa Quinta Tradizione: L’Ospitalità\nLa Sesta Tradizione: La Distruzione",
+
+ "Glossary/Progeny/Label": "La Progenie",
+ "Glossary/Progeny/Description": "<i>Genererai un altro solo con il permesso del tuo anziano. Se ne creerai uno senza il consenso del tuo Anziano, tu e la tua Progenie sarete entrambi uccisi.</i>\n\nPrima che un nuovo vampiro possa essere generato, occorre il permesso del Principe. La sovrappopolazione è un rischio per la Masquerade, e altri Fratelli possono trasformarsi in fretta in una seria minaccia.",
+
+ "Glossary/Accounting/Label": "La Responsabilità",
+ "Glossary/Accounting/Description": "<i>Coloro che crei sono figli tuoi. Finché la tua Progenie non sarà Affrancata, comanderai su di essa in ogni cosa. I suoi peccati sono tuoi da sopportare.</i>\n\nGli infanti ribelli vengono puniti, perché senza quella punizione sono i loro sire a essere distrutti per le azioni altrui. Chi supera la prova entrerà nella Camarilla insieme al proprio sire; chi non la supera viene scacciato tra gli Anarchici, per essere braccato, distrutto o calpestato.",
+
+ "Glossary/Hospitality/Label": "L’Ospitalità",
+ "Glossary/Hospitality/Description": "<i>Onora il dominio altrui. Quando giungerai in una città straniera, ti presenterai a colui che vi regna. Senza la parola di accoglienza, tu non sei nulla.</i>\n\nTenere il conto di chi si trova in città è diventato difficile nell’epoca moderna dei rifugiati e dei cittadini globali. Alcuni Principi erigono muri o cercano di controllare i confini con mezzi politici, altri rinunciano a far rispettare questa legge.",
+
+ "Glossary/Destruction/Label": "La Distruzione",
+ "Glossary/Destruction/Description": "<i>Ti è proibito distruggere un altro della tua stirpe. Il diritto di distruzione appartiene solo al tuo Anziano. Solo l’Anziano tra voi potrà indire la Caccia di Sangue.</i>\n\nLa Caccia di Sangue è la punizione estrema nella società dei vampiri. Di norma la distruzione di un altro Fratello è considerata un peccato capitale, ma chiunque può dare la caccia e uccidere chi è stato designato bersaglio della <i>lex talionis</i>, la legge del taglione. Nella Caccia di Sangue tutto è concesso e, se chi uccide il bersaglio lo prosciuga fino all’ultima goccia e ne rivendica una parte del potere — il crimine terribile della diablerie — così sia.",
+
+ "Glossary/TheEternalStruggle/Label": "La Lotta Eterna",
+ "Glossary/TheEternalStruggle/Description": "Una guerra segreta e senza fine tra le generazioni dei Fratelli. Mossa da vendette personali e ideali utopici, questa lotta eterna ha tessuto l’arazzo della storia dei Fratelli e lasciato cicatrici sul mondo dei mortali.\n\n\nIn questo conflitto autodistruttivo innumerevoli vampiri anziani hanno manipolato Fratelli minori, usandoli come pedine dei propri fini.",
+
+ "Glossary/Vicissitude/Label": "Vicissitudine",
+ "Glossary/Vicissitude/Description": "Molti Draghi sono specialisti della Vicissitudine, un potere che consente loro di rimodellare il proprio corpo così come quello dei propri sudditi e delle vittime riluttanti. Possono scolpire o deformare pelle, muscoli e perfino ossa, con esiti a volte di una bellezza inquietante, ma più spesso mostruosi. I Fratelli che praticano la Vicissitudine creano modifiche di ogni genere, da strumenti corporei pratici fino a ornamenti <i>espressivi</i>."
+}
