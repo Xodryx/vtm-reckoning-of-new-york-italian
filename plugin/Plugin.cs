@@ -21,7 +21,10 @@ namespace RonyItalian
     public class Plugin : BasePlugin
     {
         public const string Guid = "dev.xodryx.rony.italian";
-        public const string Version = "0.1.0";
+        // Stays below 1.0 until a person has played through and checked the text: the
+        // translation is complete, which is not the same as verified, and this number is
+        // the only thing a player sees before downloading.
+        public const string Version = "0.9.0";
 
         internal static ManualLogSource Logger;
         internal static TranslationStore Translations = TranslationStore.Empty();
