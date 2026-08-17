@@ -55,13 +55,54 @@ first one is the one to take:
 | **`RonyItalian-ita-…-con-bepinex.zip`** | Everything included. Unpack it into the game folder and you are done. |
 | **`RonyItalian-ita-….zip`** | 459 KB, the translation alone, for anyone who already runs BepInEx 6 for IL2CPP. |
 
-Unpack into the folder that holds `VtM Reckoning of New York.exe`; the folders merge with
-what is already there. The game then starts in Italian on its own. **The first launch
-takes about half a minute** while BepInEx generates the game's interop assemblies, and
-the window looks frozen for all of it.
+### Where the files go
 
-To uninstall, delete `RonyItalian.dll` and `italian.json` from `BepInEx/plugins`. Nothing
+Everything goes in the **game folder** — the one holding `VtM Reckoning of New York.exe`,
+not a subfolder of it. On a default Steam install that is:
+
+```
+C:\Program Files (x86)\Steam\steamapps\common\Vampire The Masquerade - Reckoning of New York\
+```
+
+If Steam is installed elsewhere, right-click the game in your library →
+**Manage** → **Browse local files**, and Steam opens the right folder for you.
+
+Unpack the archive there and let Windows merge the folders when it asks. `BepInEx` will
+already exist if you had it; the plugin drops into the `plugins` folder inside it:
+
+```
+Vampire The Masquerade - Reckoning of New York\
+├── VtM Reckoning of New York.exe        ← this is how you know you are in the right place
+├── VtM Reckoning of New York_Data\
+├── GameAssembly.dll
+├── winhttp.dll                          ← from the archive (BepInEx)
+├── doorstop_config.ini                  ← from the archive (BepInEx)
+├── dotnet\                              ← from the archive (BepInEx)
+└── BepInEx\
+    ├── core\                            ← from the archive (BepInEx)
+    └── plugins\
+        ├── RonyItalian.dll              ← the translation
+        └── italian.json                 ← the translation
+```
+
+Only the last two lines are this project. Everything else in that list comes from
+BepInEx, and is already in place if you took the smaller archive.
+
+The game then starts in Italian on its own. **The first launch takes about half a minute**
+while BepInEx generates the game's interop assemblies, and the window looks frozen for all
+of it.
+
+To uninstall, delete `RonyItalian.dll` and `italian.json` from `BepInEx\plugins`. Nothing
 else is touched, so Steam's file verification has nothing to restore.
+
+### If the text stays English
+
+- Check that both files really are in `BepInEx\plugins`, not in `BepInEx` itself and not
+  in a nested `BepInEx\BepInEx`. Unpacking into the wrong folder is the usual cause.
+- Open `BepInEx\LogOutput.log`: the plugin's lines start with
+  `Reckoning of New York - Italian`. If there are none, BepInEx is not loading it.
+- If you installed BepInEx yourself, make sure it is **6 for IL2CPP**. Version 5, the one
+  the main site offers first, does not work with this game.
 
 ## Building
 
