@@ -1,0 +1,39 @@
+{
+ "ActorsCRD/Rosa1": "Rosa",
+ "ActorsCRD/Ponytail1": "Radek",
+ "ActorsCRD/Oldtimer1": "Mirek",
+ "ActorsCRD/Bookworm1": "Aleksandra",
+ "ActorsCRD/Boots1": "Emilia",
+ "ActorsCRD/Stalker1": "Stalker",
+ "ActorsCRD/NosyNeighbor1": "Vicino ficcanaso",
+ "ActorsCRD/Lookout1": "Palo",
+
+ "VariaCRD/CRD_RosaName": "Rosalind Davis",
+ "VariaCRD/CRD_ChooseBuild": "Rosalind Davis — Stile di gioco",
+ "VariaCRD/CRD_Build_Str_Label": "Atletica",
+ "VariaCRD/CRD_Build_Str_Label2": "Impulsiva, diretta",
+ "VariaCRD/CRD_Build_Str_Desc": "Scegli questa impostazione se vuoi:\n- trovare percorsi alternativi che richiedono prestanza fisica\n- ricorrere a soluzioni di forza nei dialoghi e nell’esplorazione\n- essere più efficace nel corpo a corpo",
+ "VariaCRD/CRD_Build_Int_Label": "Analitica",
+ "VariaCRD/CRD_Build_Int_Label2": "Inventiva, chiacchierona",
+ "VariaCRD/CRD_Build_Int_Desc": "Scegli questa impostazione se vuoi:\n- trovare percorsi alternativi che richiedono competenze tecniche\n- notare più dettagli e scoprire di più sugli indizi trovati\n- cavarti dai guai parlando",
+
+ "VariaCRD/CRD_Quest1_Name": "Sull’orlo",
+ "VariaCRD/CRD_Quest1_Desc": "Rosa entra nel cortile del casamento sospetto, e le prime strategie d’indagine cominciano subito a delinearsi.",
+ "VariaCRD/CRD_Quest2_Name": "Prospettive cupe",
+ "VariaCRD/CRD_Quest2_Desc": "L’incontro soprannaturale, per quanto utile a raccogliere indizi, ha lasciato Rosa profondamente scossa. Ciò nonostante, la aspetta ancora il resoconto con Radek.",
+
+ "VariaCRD/CRDZone/Krakow": "Cracovia",
+ "VariaCRD/CRDZone/Podgorze": "Podgórze",
+ "VariaCRD/CRDZone/Tenement": "Casamento 11",
+ "VariaCRD/CRDZone/HH": "Quartier generale dei cacciatori",
+ "VariaCRD/CRDZone/DemoEnd": "Qui finisce la demo.",
+
+ "VariaCRD/CRD_Meanwhile": "Cracovia\nPodgórze",
+ "VariaCRD/CRD_Meanwhile2": "Cracovia\nCasamento 11",
+ "VariaCRD/CRD_Meanwhile_Nosy": "Cracovia\nAppartamento del vecchio",
+ "VariaCRD/CRD_Meanwhile_Suspicious": "Cracovia\nAppartamento sospetto",
+ "VariaCRD/CRD_Meanwhile_HH": "Cracovia\nQuartier generale dei cacciatori",
+ "VariaCRD/CRD_Meanwhile_Combat1": "Scontro\nPadrone di casa",
+ "VariaCRD/CRD_Meanwhile_Combat2": "Scontro\nPalo",
+ "VariaCRD/CRD_Meanwhile_Combat3": "Scontro\nTeppista"
+}

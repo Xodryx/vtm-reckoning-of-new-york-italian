@@ -73,6 +73,22 @@ namespace RonyItalian
 
                 log.LogInfo($"registered {LanguageName} on {sources.Count} source(s); "
                             + $"english={EnglishIndex}, italian={ItalianIndex}");
+
+                // ItalianIndex is read off sources[0] and used to gate the TermData patch.
+                // If a source indexes Italian differently, that patch silently declines to
+                // answer for every term in it, and the term reads as English or as the raw
+                // key on screen. Report it rather than let it look like a missing string.
+                for (int i = 0; i < sources.Count; i++)
+                {
+                    var index = sources[i].GetLanguageIndex(LanguageName, true, false);
+                    var terms = sources[i].mTerms?.Count ?? -1;
+                    log.LogInfo($"  source {i}: italian={index}, terms={terms}");
+                    if (index != ItalianIndex)
+                    {
+                        log.LogWarning($"  source {i} indexes Italian at {index}, not "
+                                       + $"{ItalianIndex}: its terms will not be translated");
+                    }
+                }
                 _done = ItalianIndex >= 0;
             }
             catch (Exception e)
