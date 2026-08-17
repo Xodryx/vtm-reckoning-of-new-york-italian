@@ -92,8 +92,30 @@ The game then starts in Italian on its own. **The first launch takes about half 
 while BepInEx generates the game's interop assemblies, and the window looks frozen for all
 of it.
 
-To uninstall, delete `RonyItalian.dll` and `italian.json` from `BepInEx\plugins`. Nothing
-else is touched, so Steam's file verification has nothing to restore.
+### Uninstalling
+
+Delete these two files:
+
+```
+BepInEx\plugins\RonyItalian.dll
+BepInEx\plugins\italian.json
+```
+
+The game is back in English at the next launch. Nothing else has to be undone, because
+**no game file was ever modified** — Steam's file verification has nothing to restore,
+and your saves are untouched.
+
+To remove BepInEx as well, if the all-in-one archive is what put it there, delete what
+came with it:
+
+```
+BepInEx\      dotnet\      licenses\
+winhttp.dll   doorstop_config.ini   .doorstop_version
+changelog.txt LICENZE.txt  LEGGIMI.txt
+```
+
+That leaves the folder exactly as Steam installed it. Keep `BepInEx\` if you use other
+mods — deleting the two plugin files is enough on its own.
 
 ### If the text stays English
 
