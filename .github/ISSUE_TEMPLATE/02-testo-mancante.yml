@@ -1,0 +1,79 @@
+name: Testo in inglese, vuoto, o una chiave grezza
+description: Un'etichetta che non è tradotta, non c'è, o mostra qualcosa tipo UI/Settings/...
+labels: ["testo mancante"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Tre difetti che sembrano uguali e hanno cause diverse, per questo la prima
+        domanda conta più di tutte le altre.
+
+        Alcune di queste cose sono **del gioco, non della traduzione**: certe etichette
+        non sono localizzate affatto e mostrano l'inglese anche in francese. Le
+        aggiustiamo lo stesso, ma sapere quale caso è cambia il rimedio.
+
+  - type: dropdown
+    id: sintomo
+    attributes:
+      label: Cosa vedi esattamente
+      options:
+        - Testo in inglese dove il resto è in italiano
+        - Non c'è niente, la riga è vuota
+        - Una chiave tipo UI/Settings/Video/... o Dialogue/...
+        - Testo in un'altra lingua ancora (francese, polacco)
+    validations:
+      required: true
+
+  - type: input
+    id: dove
+    attributes:
+      label: In quale schermata
+      placeholder: Impostazioni → Video, la riga "Modalità schermo"
+    validations:
+      required: true
+
+  - type: textarea
+    id: testo
+    attributes:
+      label: Il testo che vedi
+      description: Se è inglese o una chiave, copialo. Se la riga è vuota, scrivi "vuota".
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: Screenshot
+      description: Trascina qui l'immagine.
+    validations:
+      required: false
+
+  - type: textarea
+    id: log
+    attributes:
+      label: Log diagnostico
+      description: |
+        Facoltativo ma risolutivo, e costa due minuti. In
+        `BepInEx/config/dev.xodryx.rony.italian.cfg` metti:
+
+        ```
+        LogLocalizationDetail = true
+        ```
+
+        Riavvia, vai fino alla schermata del problema, chiudi il gioco e incolla qui le
+        righe di `BepInEx/LogOutput.log` che cominciano per
+        `Reckoning of New York - Italian`.
+
+        Quelle che dicono `chiesto ma non tradotto:` sono l'oro: contengono la chiave che
+        il gioco cerca davvero, che a volte non è quella che ci si aspetta.
+      render: text
+    validations:
+      required: false
+
+  - type: input
+    id: versione
+    attributes:
+      label: Versione della traduzione
+      placeholder: "0.9.2"
+    validations:
+      required: false

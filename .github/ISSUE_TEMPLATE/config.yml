@@ -1,0 +1,13 @@
+# Blank issues stay off on purpose. The three forms ask for the things that decide how
+# long a fix takes -- the exact Italian text, whether a label is blank or English, the
+# log -- and a free-form issue almost never carries them.
+blank_issues_enabled: false
+
+contact_links:
+  - name: Come si installa, e cosa fare se resta in inglese
+    url: https://github.com/Xodryx/vtm-reckoning-of-new-york-italian#installing
+    about: Istruzioni, dove vanno i file, disinstallazione e i tre controlli più comuni.
+
+  - name: Correggere una frase da solo
+    url: https://github.com/Xodryx/vtm-reckoning-of-new-york-italian#contributing-a-translation
+    about: BepInEx/plugins/italian.json è un file di testo e il gioco lo rilegge a ogni avvio.

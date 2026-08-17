@@ -5,6 +5,11 @@ plugin. The game ships English and French only; this adds **Italiano** as a thir
 in the language selector and serves the translated text at runtime. **No game file is
 modified.**
 
+| | |
+|---|---|
+| ![The main menu in Italian](docs/main-menu.jpg) | ![Italiano in the game's own language setting](docs/settings-language.jpg) |
+| The main menu | **Italiano**, in the game's own language setting |
+
 > ### Translated — 11,141 of 11,141 lines
 >
 > Every line is translated: the eight nights, the endings, the optional missions, the

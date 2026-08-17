@@ -1,0 +1,67 @@
+name: Non funziona
+description: Il gioco non parte, la traduzione non si carica, resta tutto in inglese
+labels: ["tecnico"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Prima di aprire la segnalazione, tre controlli che risolvono la gran parte dei
+        casi — sono nel README ma è più rapido averli qui.
+
+  - type: checkboxes
+    id: controlli
+    attributes:
+      label: Controlli fatti
+      options:
+        - label: "`RonyItalian.dll` e `italian.json` sono in `BepInEx/plugins`, non altrove e non in un `BepInEx/BepInEx` annidato"
+        - label: "Se ho installato BepInEx per conto mio, è la versione **6 per IL2CPP**, non la 5"
+        - label: "Ho aspettato il primo avvio fino in fondo: ci mette una trentina di secondi e sembra bloccato"
+
+  - type: textarea
+    id: problema
+    attributes:
+      label: Cosa succede
+      placeholder: Il gioco si apre ma resta tutto in inglese, e nel menu lingue non c'è l'italiano.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: pacchetto
+    attributes:
+      label: Quale pacchetto hai scaricato
+      options:
+        - Quello con BepInEx incluso (-with-bepinex)
+        - Solo la traduzione, BepInEx ce l'avevo già
+    validations:
+      required: true
+
+  - type: input
+    id: versione
+    attributes:
+      label: Versione della traduzione
+      placeholder: "0.9.2"
+    validations:
+      required: true
+
+  - type: textarea
+    id: log
+    attributes:
+      label: Contenuto di BepInEx/LogOutput.log
+      description: |
+        **Questo è quello che serve davvero.** Incollalo per intero, o almeno le prime
+        quaranta righe: dicono quale BepInEx sta girando, se il plugin è stato caricato,
+        quante traduzioni ha letto e quali patch è riuscito ad applicare.
+
+        Se il file non esiste, BepInEx non sta partendo affatto — scrivilo, è già una
+        diagnosi.
+      render: text
+    validations:
+      required: true
+
+  - type: input
+    id: sistema
+    attributes:
+      label: Sistema e provenienza del gioco
+      placeholder: Windows 11, copia Steam
+    validations:
+      required: false

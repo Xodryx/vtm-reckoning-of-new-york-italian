@@ -1,0 +1,80 @@
+name: Errore di traduzione
+description: Una frase tradotta male, che suona storta, o con il genere sbagliato
+labels: ["traduzione"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Grazie. Questa è la segnalazione più utile che esista per questo progetto: la
+        traduzione non è stata riletta da nessuno giocando, e gli errori di registro o di
+        concordanza non si possono trovare con un controllo automatico.
+
+        **La cosa che ci serve di più è il testo esatto che hai letto a schermo.** Con
+        quello lo troviamo nel file in un secondo; senza, bisogna cercare a mano fra
+        11.141 battute.
+
+  - type: textarea
+    id: testo
+    attributes:
+      label: Il testo italiano che hai letto
+      description: Copialo o trascrivilo com'è, anche solo la parte che non va.
+      placeholder: "Sei stato tu a chiedermi di venire."
+    validations:
+      required: true
+
+  - type: textarea
+    id: problema
+    attributes:
+      label: Cosa non va
+      placeholder: Kali è una donna, dovrebbe essere "sei stata tu".
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposta
+    attributes:
+      label: Come lo scriveresti tu
+      description: Facoltativo, ma se hai una resa migliore è la via più rapida.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: personaggio
+    attributes:
+      label: Chi parla, o a chi è rivolta la frase
+      description: |
+        Serve per le concordanze: l'inglese alla seconda persona non marca il genere,
+        quindi è lì che si nascondono quasi tutti gli errori di questo tipo.
+      options:
+        - Kali (donna)
+        - Pádraic (uomo)
+        - Un altro personaggio
+        - Non è una battuta di dialogo (menu, glossario, diario)
+        - Non saprei
+    validations:
+      required: true
+
+  - type: input
+    id: dove
+    attributes:
+      label: Dove succede
+      placeholder: Notte 2, missione "A for Anarchy", parlando con D'Angelo
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: Screenshot
+      description: Trascina qui l'immagine. Vale più di qualunque descrizione.
+    validations:
+      required: false
+
+  - type: input
+    id: versione
+    attributes:
+      label: Versione della traduzione
+      description: La trovi nel nome del file scaricato, o nella prima riga di BepInEx/LogOutput.log.
+      placeholder: "0.9.2"
+    validations:
+      required: false
