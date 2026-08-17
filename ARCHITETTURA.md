@@ -3,15 +3,17 @@
 Stato: **funzionante**, verificato in gioco il 16 agosto 2026. Versione `0.1.0`.
 
 Il plugin aggiunge l'italiano al selettore lingue e serve il testo tradotto mentre
-il gioco lo chiede. **Non riscrive i dati del gioco e non tocca nessun file nella
-cartella di installazione.**
+il gioco lo chiede. **Non riscrive la tabella delle traduzioni e non tocca nessun file
+nella cartella di installazione.**
 
 ## Il principio: servire in lettura, non scrivere
 
 La strada intuitiva — riversare le traduzioni nella tabella `I2Languages` — è stata
-provata e **scartata**: scrivere ~22.000 stringhe negli array Il2Cpp fa crashare il
-processo a livello nativo, in modo riproducibile. Con 11.000 righe di traduzione
-finale ci saremmo arrivati comunque.
+scartata. La prima prova, che scriveva direttamente negli array Il2Cpp, faceva
+crashare il processo a livello nativo in modo riproducibile. *(Nota emersa dopo:
+passando invece per `TermData.SetTranslation` la scrittura funziona — 11.152 celle per
+sorgente, nessun crash. Non serve comunque, ed è codice rischioso senza un beneficio
+dimostrato.)*
 
 Il plugin tiene quindi le traduzioni in un `Dictionary` suo e risponde nei postfix
 Harmony delle letture. Vantaggi collaterali non da poco:
@@ -20,8 +22,14 @@ Harmony delle letture. Vantaggi collaterali non da poco:
 - i dati del gioco restano intatti, quindi niente effetti collaterali;
 - una traduzione mancante ripiega sull'inglese senza celle nulle.
 
-L'unica modifica ai dati del gioco è l'aggiunta della lingua, indispensabile perché
-la voce compaia nel selettore.
+Le eccezioni al principio sono due, entrambe inevitabili e circoscritte:
+
+1. **L'aggiunta della lingua**, indispensabile perché la voce compaia nel selettore.
+2. **Le due descrizioni della selezione del personaggio** (`CharacterPanelText.cs`):
+   quelle etichette non hanno nessun componente di localizzazione e nessuno ci scrive,
+   quindi non c'è nessuna lettura da intercettare. È l'unico punto in cui il plugin
+   scrive nella scena, ha un interruttore suo (`FixCharacterPanel`) e non tocca
+   comunque nessun dato di localizzazione. Il perché sta in `STATO.md`.
 
 ## I file
 
@@ -32,6 +40,10 @@ la voce compaia nel selettore.
 | `LanguageRegistration.cs` | aggiunge "Italiano" a tutte le sorgenti |
 | `Patches.cs` | gli agganci Harmony |
 | `LanguageMemory.cs` | ricorda la lingua, che il gioco non sa salvare |
+| `CurrentLanguage.cs` | la lingua in corso, senza interrogare il gioco a ogni battuta |
+| `SceneTranslation.cs` | risposta comune ai percorsi di lettura di I2 |
+| `CharacterPanelText.cs` | riempie le due etichette che il gioco non scrive mai |
+| `Diagnostics.cs` | le poche righe di log che valgono il loro rumore |
 
 ## Gli agganci, e perché ciascuno esiste
 
@@ -41,20 +53,36 @@ la voce compaia nel selettore.
 | `LocalizationSystem.Initialize` (postfix) | primo punto in cui il sistema è utilizzabile. `InitializeLanguages`, malgrado il nome, non viene **mai** chiamato all'avvio |
 | `I2LocalizationDatabase.GetValue` (postfix) | percorso di lettura del wrapper del gioco: serve la traduzione, altrimenti ripiega sull'inglese |
 | `TermData.GetTranslation` (postfix) | **secondo** percorso di lettura, per l'interfaccia che usa I2 direttamente |
+| `LanguageSourceData.TryGetTranslation` (postfix) | **terzo** percorso, quello dei componenti `Localize` in scena. Consegna per riferimento: vedi sotto |
+| `LocalizationManager.GetTranslation` / `GetTermTranslation` (postfix) | lo stesso terzo percorso preso in cima, dove la risposta torna **per valore** ed è quindi l'unica che arriva davvero |
+| `Localize.OnLocalize` (postfix) | dopo che I2 ha finito con un componente: è il momento in cui riempire le etichette che nessuno scrive |
 | `LocalizationSystem.SetCurrentLanguage` (postfix) | annota la lingua scelta |
 | `OptionSetting.GetSettingValueFrom` (postfix) | ripristina la lingua all'avvio — è la strada che il gioco percorre davvero |
 | `LanguageSetting.GetDefaultValue` (postfix) | ripristino su un profilo che non ha mai salvato una lingua |
 | `AutoSkipController.ResetTime` (finalizer) | rete diagnostica: se quel metodo torna a sollevare eccezioni, vogliamo la chiave nel log |
 
-### I due percorsi di lettura
+### I tre percorsi di lettura
 
-Non è un dettaglio: **l'interfaccia usa entrambi contemporaneamente.** Nella
-schermata Impostazioni, "Lingua" arriva dal wrapper del gioco mentre
-`UI/Settings/Video/Title` arriva da I2 diretto. Agganciando solo il primo, metà
-schermata mostrava le **chiavi grezze** al posto del testo.
+Non è un dettaglio: **l'interfaccia li usa contemporaneamente.** Nella schermata
+Impostazioni, "Lingua" arriva dal wrapper del gioco mentre `UI/Settings/Video/Title`
+arriva da I2 diretto. Agganciando solo il primo, metà schermata mostrava le **chiavi
+grezze** al posto del testo.
+
+Il terzo è quello dei componenti `I2.Loc.Localize` appoggiati direttamente agli
+oggetti della scena: non passa né dal wrapper del gioco né da `TermData`, ma da
+`LocalizationManager.GetTranslation` → `TryGetTranslation` → quella della sorgente.
 
 `TermData` porta con sé la propria chiave nel campo `Term`, quindi la stessa
-ricerca funziona su entrambi i percorsi.
+ricerca funziona su tutti i percorsi.
+
+### Una postfix deve scrivere nel valore di ritorno
+
+Costata mezza giornata, quindi vale scriverla. `LanguageSourceData.TryGetTranslation`
+consegna la traduzione in un **parametro per riferimento**. Una postfix Harmony che
+scrive lì dentro non arriva al chiamante nativo: il log annuncia la consegna, e a
+schermo non cambia niente. Tutte le patch che funzionano scrivono in `__result`.
+Per questo il terzo percorso è agganciato anche in cima, su `GetTranslation`, che
+restituisce una stringa.
 
 ### Il ripiego sull'inglese non è cosmetico
 

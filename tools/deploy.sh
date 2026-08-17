@@ -25,7 +25,14 @@ if pgrep -f "VtM Reckoning of New York.exe" > /dev/null 2>&1; then
 fi
 
 echo "Compilazione..."
-dotnet build "$PROJECT_DIR/plugin/RonyItalian.csproj" -c Release -v minimal | tail -3
+# Piping the build straight into tail -3 hid the compiler errors and left a silent
+# exit that looked exactly like a build which had installed nothing.
+if ! build_output="$(dotnet build "$PROJECT_DIR/plugin/RonyItalian.csproj" -c Release -v minimal 2>&1)"; then
+    echo "$build_output" >&2
+    echo "ERRORE: compilazione fallita, non è stato installato niente." >&2
+    exit 1
+fi
+echo "$build_output" | tail -3
 
 install_verified() {
     local source="$1" destination="$2" label="$3"

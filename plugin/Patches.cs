@@ -3,6 +3,7 @@ using DrawDistance.Localization;
 using DrawDistance.Settings;
 using HarmonyLib;
 using I2.Loc;
+using UnityEngine;
 
 namespace RonyItalian
 {
@@ -116,6 +117,78 @@ namespace RonyItalian
     }
 
     /// <summary>
+    /// The third read path, and the only one the scenes themselves use.
+    ///
+    /// Part of the interface is not built by the game's code at all: it is I2's own
+    /// Localize component sitting on the object, and that resolves its term straight
+    /// through the source, without passing through I2LocalizationDatabase.GetValue or
+    /// the term's own GetTranslation. Worse, it picks the column from
+    /// LocalizationManager.CurrentLanguage — I2's idea of the language, a plain string
+    /// that the game never syncs with its own Language enum. So it reads column 0 and
+    /// renders English no matter what the player chose, which is why the character
+    /// selection screen stayed English while everything around it was Italian.
+    ///
+    /// Answering here fixes it without touching either of those two mechanisms.
+    /// </summary>
+    [HarmonyPatch(typeof(LanguageSourceData), nameof(LanguageSourceData.TryGetTranslation))]
+    internal static class SourceTryGetTranslationPatch
+    {
+        private static void Postfix(string term, ref string Translation,
+                                    string overrideLanguage, ref bool __result)
+        {
+            if (term == null || !SceneTranslation.WantsItalian(overrideLanguage))
+            {
+                return;
+            }
+
+            if (!Plugin.Translations.TryGet(term, out var italian))
+            {
+                return;
+            }
+
+            Translation = italian;
+            __result = true;
+            Diagnostics.SceneTermServed(term, "source.TryGetTranslation");
+        }
+    }
+
+    /// <summary>
+    /// The same scene path, taken at the top, where the answer comes back by value.
+    ///
+    /// The chain is LocalizationManager.GetTranslation -> the static TryGetTranslation
+    /// -> the source's own. Patching the innermost call is right about the path and
+    /// useless in practice: it hands its answer back through a by-reference parameter,
+    /// and a postfix writing into one of those does not reach a caller in native code.
+    /// The log will happily report a translation that never arrived anywhere.
+    ///
+    /// This one returns a string, exactly like the other two read patches, and that
+    /// does arrive.
+    /// </summary>
+    [HarmonyPatch(typeof(LocalizationManager), nameof(LocalizationManager.GetTranslation),
+        new[] { typeof(string), typeof(bool), typeof(int), typeof(bool), typeof(bool),
+                typeof(GameObject), typeof(string), typeof(bool) })]
+    internal static class ManagerGetTranslationPatch
+    {
+        /// <summary>__0 is the term, __6 the language a caller explicitly asked for.</summary>
+        private static void Postfix(string __0, string __6, ref string __result)
+        {
+            SceneTranslation.Serve(__0, __6, ref __result, "LocalizationManager.GetTranslation");
+        }
+    }
+
+    /// <summary>The other name I2 offers for the same lookup; components use either.</summary>
+    [HarmonyPatch(typeof(LocalizationManager), nameof(LocalizationManager.GetTermTranslation),
+        new[] { typeof(string), typeof(bool), typeof(int), typeof(bool), typeof(bool),
+                typeof(GameObject), typeof(string), typeof(bool) })]
+    internal static class ManagerGetTermTranslationPatch
+    {
+        private static void Postfix(string __0, string __6, ref string __result)
+        {
+            SceneTranslation.Serve(__0, __6, ref __result, "LocalizationManager.GetTermTranslation");
+        }
+    }
+
+    /// <summary>
     /// Remembers the chosen language, because the game cannot: OptionSetting.GetSaveData()
     /// throws and takes the whole SettingsSystem.Save() down with it, so nothing the
     /// player picks is ever written to disk. That is a fault of the unmodified game.
@@ -125,7 +198,9 @@ namespace RonyItalian
     {
         private static void Postfix(Language language)
         {
+            CurrentLanguage.Set(language);
             LanguageMemory.Remember(language);
+            Diagnostics.LanguageChanged(language);
         }
     }
 
@@ -169,6 +244,23 @@ namespace RonyItalian
             {
                 __result = preferred;
             }
+        }
+    }
+
+    /// <summary>
+    /// Where I2 finishes localizing a component: the moment its label is settled.
+    ///
+    /// This is both the report on what each component owns and wrote, and the hook the
+    /// character panel needs — the two labels the game never writes have to be filled
+    /// after everything else on that screen is done.
+    /// </summary>
+    [HarmonyPatch(typeof(Localize), nameof(Localize.OnLocalize))]
+    internal static class LocalizeOnLocalizePatch
+    {
+        private static void Postfix(Localize __instance)
+        {
+            Diagnostics.LocalizeRan(__instance);
+            CharacterPanelText.OnLocalized(__instance);
         }
     }
 

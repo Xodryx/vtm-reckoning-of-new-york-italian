@@ -42,6 +42,8 @@ namespace RonyItalian
                 + "plugin's logging, for comparing against the unmodified game.");
 
             LanguageMemory.Initialize(Config, Log);
+            CharacterPanelText.Initialize(Config);
+            Diagnostics.Initialize(Config);
 
             if (!Enabled.Value)
             {

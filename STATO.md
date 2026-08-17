@@ -5,9 +5,10 @@ Aggiornato il 17 agosto 2026. **11.141 battute tradotte su 11.141 (100%)**,
 Di *Reckoning of New York* sono 10.394: le altre 747 sono il demo di Cracovia,
 che non è di questo gioco (vedi sotto).
 
-**C'è un bug aperto, ed è nostro**: il plugin rompe la schermata di selezione del
-personaggio. Non è la traduzione — succede anche in francese. Vedi la sezione apposita:
-il metodo per isolarlo è già scritto, non ricominciare da zero.
+**Non ci sono bug aperti.** La schermata di selezione del personaggio, che ci ha
+tenuti impegnati a lungo, è risolta: non era colpa nostra ed era un difetto del gioco
+non modificato. Vedi la sezione apposita — contiene anche due conclusioni sbagliate che
+avevo scritto qui, tenute apposta per non ripercorrerle.
 
 Questo documento serve a riprendere il lavoro senza rileggere tutto il resto.
 
@@ -180,83 +181,85 @@ prova degli sviluppatori (`Dialogue_0`…`Dialogue_16`, `Dialogue_ImVampire`,
 `Lorem Ipsum` dell'interfaccia. Stanno nei blocchi con il valore originale, così
 il conteggio è onesto e a runtime non cambia nulla.
 
-## BUG APERTO: il plugin rompe la selezione del personaggio
+## Risolto: le descrizioni della selezione del personaggio
 
-In quella schermata la descrizione di Kali resta inglese e al posto di quella di
-Pádraic compare la chiave `UI/MainMenu/Rony/PadraicDescription`. **È colpa nostra.**
+Si vedeva la descrizione di Kali in inglese e, al posto di quella di Pádraic, la chiave
+`UI/MainMenu/Rony/PadraicDescription` stampata così com'è.
 
-Nel gioco **non modificato in francese quella schermata funziona**: la descrizione di
-Kali è in francese e al posto della chiave compare, correttamente,
-`PadraicUnlockRequirements` — *«Complétez l'histoire de Kali pour débloquer le deuxième
-personnage.»* Quindi il pannello si localizza benissimo, finché non arriviamo noi.
+**Non era colpa nostra: è un difetto del gioco non modificato.** Le due etichette
+`Description` di quel pannello non hanno nessun componente `I2.Loc.Localize` addosso e
+nessun codice ci scrive dentro. Mostrano quello che era stato scritto a mano nel prefab
+in editor: l'inglese sotto Kali, la chiave sotto Pádraic. Un giocatore inglese vede la
+chiave grezza esattamente come la vedevamo noi.
 
-**Attenzione a come si prova.** Cambiare lingua dal menù a gioco avviato non aggiorna
-quella schermata: restano i testi della lingua precedente, e per un po' ho scambiato
-quei residui per un difetto del francese. Si riconosce dalla filigrana in basso a
-destra, che resta nella lingua di prima. **Ogni prova va fatta riavviando il gioco
-nella lingua da testare.**
+Conferma di contorno, nello stesso pannello: le etichette dei suggerimenti di
+navigazione nei prefab «Template» contengono `Parcourir`, `Confirmer`, `Retour` —
+francese cotto dentro, in una sessione che non è mai stata in francese. I prefab di
+questo gioco si portano dietro il testo dell'ultima anteprima fatta in editor, in lingue
+assortite.
 
-Cosa è già stato escluso, per non rifarlo:
+### Cosa si è imparato per strada
 
-- Il termine `KaliDescription` è tradotto e viene richiesto due volte; la patch su
-  `TermData.GetTranslation` risponde con l'italiano entrambe le volte (verificato
-  registrando valore in ingresso e in uscita).
-- Le due sorgenti indicizzano l'italiano allo stesso modo (`italian=2` entrambe).
-- Riempire la colonna italiana con `SetTranslation` prima che qualsiasi schermata
-  esista **funziona** — 11.152 celle per sorgente, nessun crash, contrariamente a
-  quanto teme il commento in `TranslationStore.cs`, che si riferisce a un tentativo di
-  scrittura diretta sull'array. A schermo però non cambia niente, quindi è stato tolto:
-  è codice rischioso senza un beneficio dimostrato.
-- `PadraicDescription` non viene **mai** richiesta, in sei avvii.
-- Una patch su `TMP_Text.set_text` non intercetta nessuna scrittura di quei testi.
+- **I2 ha tre vie di lettura, non due.** Coprivamo `I2LocalizationDatabase.GetValue` e
+  `TermData.GetTranslation`; mancava del tutto quella che usano i componenti `Localize`
+  piazzati in scena, cioè `LanguageSourceData.TryGetTranslation` e sopra di essa
+  `LocalizationManager.GetTranslation` / `GetTermTranslation`. Ora sono coperte tutte.
+- **Una postfix che scrive in un parametro per riferimento non arriva al chiamante
+  nativo.** La prima patch consegnava l'italiano nel parametro `Translation` di
+  `TryGetTranslation`, il log confermava la consegna, e a schermo non cambiava niente.
+  Le patch che funzionano scrivono tutte nel valore di ritorno (`__result`). Da
+  ricordare: **il log può annunciare una traduzione che non è andata da nessuna parte.**
+- **Le firme esatte si estraggono dai metadati interop**, senza decompilatori:
+  `grep -a -o -E "NativeMethodInfoPtr_[A-Za-z0-9_]+" BepInEx/interop/NOME.dll | sort -u`
+  restituisce nome, visibilità, tipo di ritorno e parametri di ogni metodo.
+- La prova decisiva è stata far elencare al plugin le etichette del pannello con il loro
+  contenuto: `LogLocalizationDetail = true` nel config. Le vicine tenevano italiano,
+  quelle due no.
 
-**Il test di isolamento è già stato fatto, ed è netto.** Avviando il gioco *moddato*
-direttamente in francese (riavvio pulito, non cambio a caldo) la schermata è rotta
-esattamente come in italiano. Quindi:
+### La correzione
 
-- non c'entra il testo italiano,
-- non c'entrano le patch di lettura, che rispondono correttamente,
-- **la causa è il solo fatto che registriamo una lingua in più.**
+`plugin/CharacterPanelText.cs` riempie le due etichette quando il titolo del pannello
+viene localizzato. Il testo non è indovinato: il gioco **chiede** i termini giusti
+mentre apre il pannello — `KaliDescription` per lei, `PadraicUnlockRequirements` finché
+lui è bloccato e `PadraicDescription` dopo — e poi non li scrive da nessuna parte. Noi
+seguiamo quello che chiede, quindi continuerà a funzionare quando lo sbloccherai.
 
-Il colpevole è dentro `LanguageRegistration.Register`, e i candidati sono tre:
+**È l'unico punto in cui il plugin scrive nella scena invece di rispondere a una
+lettura.** Non era evitabile: non c'è nessuna lettura da intercettare, perché nessuno
+legge quelle etichette. Ha un interruttore suo, `FixCharacterPanel`, e nessun file del
+gioco viene toccato — la regola grossa resta intatta.
 
-1. `source.AddLanguage(...)` — allarga di una casella l'array `Languages` di **ogni**
-   termine, portandolo da 2 a 3, con `null` nella nuova.
-2. `source.UpdateDictionary(true)` — ricostruisce l'indice interno della sorgente.
-3. `source.OnMissingTranslation = MissingTranslationAction.Fallback` — cambia il
-   comportamento di I2 sui termini senza traduzione.
+### Due conclusioni sbagliate che avevo scritto qui
 
-L'ipotesi più promettente è la prima: se il gioco (o il wrapper `DrawDistance.Localization`)
-si è costruito la propria mappa lingua→colonna **prima** che noi allargassimo gli array,
-dopo la registrazione quel pannello legge una colonna sbagliata — e trova `null` sia in
-italiano sia in francese. Spiegherebbe perché le nostre patch restituiscono il valore
-giusto e a schermo arriva altro: il pannello sta chiedendo un indice diverso.
+Restano scritte perché non vengano ripercorse.
 
-### Come riprendere l'indagine
+1. *«Il testo è cotto nella scena.»* Giusta nella sostanza, l'avevo scartata per la
+   ragione sbagliata: il francese funziona **altrove**, non su quelle etichette.
+2. *«È la registrazione della lingua a rompere il pannello, e il colpevole è
+   `AddLanguage`.»* Falsa. `AddLanguage`, `UpdateDictionary(true)` e
+   `OnMissingTranslation = Fallback` non c'entrano niente, e il test a interruttori che
+   avevo progettato qui non serve a nulla. Nasceva da uno screenshot in francese
+   interpretato male.
 
-Un interruttore per volta, riavviando **in francese** (così il francese fa da metro: se
-torna a posto, quella riga è la colpevole).
+Vale ancora, invece, l'avvertenza sul metodo: **cambiare lingua a gioco avviato non
+aggiorna quella schermata**, restano i testi della lingua precedente e sembrano un
+difetto della lingua nuova. Si riconosce dalla filigrana in basso a destra, che resta
+indietro. Ogni prova va fatta riavviando.
 
-- Base di partenza: `BepInEx/config/dev.xodryx.rony.italian.cfg`, `Enabled = false`.
-  Il plugin non fa niente e la schermata deve funzionare. Conferma che il banco di
-  prova è sano.
-- Poi riattivare e disabilitare **una alla volta** le tre righe qui sopra. Conviene
-  aggiungere tre voci di config temporanee invece di ricompilare ogni volta.
-- Se il colpevole è `AddLanguage`, la via d'uscita non è rinunciare alla lingua nel
-  selettore, ma **registrarla prima** che il gioco costruisca le proprie mappe: la patch
-  su `CreateLanguagesData` c'è già proprio per questo, quindi andrà capito chi si
-  costruisce l'indice ancora prima.
-
-**Come NON provarlo:** cambiare lingua dal menù a gioco avviato non aggiorna quella
-schermata. Restano i testi della lingua precedente e sembrano un difetto della lingua
-nuova — ci ho perso mezza giornata. Si riconosce dalla filigrana in basso a destra, che
-resta indietro.
+E questo è vero ma inutile: riempire la colonna italiana con `SetTranslation` funziona
+davvero — 11.152 celle per sorgente, nessun crash, al contrario di quel che teme il
+commento in `TranslationStore.cs`, che si riferisce a una scrittura diretta sull'array.
+Non serve a niente, ed è stato tolto.
 
 ## Cosa manca, in ordine
 
-1. **Il bug della selezione del personaggio** (sopra). È l'unica cosa rotta di cui
-   siamo responsabili, ed è la priorità: non è la traduzione, è la registrazione della
-   lingua, e il metodo per isolarla è già scritto.
+1. **`ContinuePrompt` resta in inglese.** L'etichetta *«Press any button to
+   continue...»* del pannello di caricamento si localizza **prima** che il plugin
+   registri l'italiano: nel log la sua riga `Localize on .../ContinuePrompt` compare
+   sopra `registered Italiano`. Non è un problema di traduzione ma di tempi, e si
+   risolve rifacendo localizzare quel pannello dopo la registrazione — I2 espone
+   `LocalizationManager.LocalizeAll` apposta. Piccolo, ma è la prima cosa che si vede
+   avviando il gioco.
 2. **Una vera prova di release.** `tools/release.sh` costruisce lo zip, controlla i
    blocchi prima di compilare e con `--with-bepinex` include BepInEx rifiutandosi di
    farlo se manca il testo della licenza. Provato solo con archivi BepInEx finti, mai
