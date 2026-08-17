@@ -120,18 +120,50 @@ Compila, installa e **verifica gli md5**, interrompendosi se non coincidono. Si
 rifiuta di partire a gioco aperto. Non è pignoleria: una build vecchia rimasta in
 `BepInEx/plugins/` è costata tre esecuzioni di conclusioni sbagliate.
 
+## Il controllo automatico
+
+`.github/workflows/check.yml` esegue `tools/apply.py --check` a ogni push, e poi
+rigenera `translations/italian.json` verificando con `git diff --exit-code` che il
+file committato sia davvero quello che i blocchi producono. Il secondo passo serve
+quanto il primo: i blocchi sono la fonte di verità, ma è il file generato che finisce
+in gioco, e senza controllo può restare indietro senza che nessuno se ne accorga.
+
+**Il problema era che `apply.py` aveva bisogno di `dump/`**, che non è versionato
+perché contiene il testo inglese del gioco, protetto da copyright. Un runner GitHub
+non ce l'ha e non può averlo. La soluzione è
+`reference/english_fingerprints.json`: per ogni chiave l'*impronta* della riga
+inglese — nomi dei tag, nomi dei segnaposto, numero di gruppi fra parentesi, a capo,
+lunghezza. È struttura, non prosa: 75 tag distinti e una manciata di numeri, da cui
+nessuna frase è ricostruibile. `apply.py` la rigenera dal dump a ogni scrittura,
+quindi non può andare fuori sincrono, e la usa al posto del dump quando il dump non
+c'è.
+
+## La release
+
+`tools/release.sh` costruisce lo zip. **Gira in locale e non può essere spostato in
+CI**: il plugin compila contro i ~152 assembly interop che BepInEx genera dai
+metadati IL2CPP del gioco al primo avvio. Quegli assembly derivano da una copia del
+gioco, quindi nessun runner ospitato può produrre questa DLL. Il tag `v*` può
+attivare la creazione della release su GitHub, ma il file va costruito e caricato
+da chi ha il gioco.
+
+**Sì, possiamo redistribuire BepInEx**: è LGPL-2.1, che consente di ridistribuire i
+binari non modificati a patto che il testo della licenza li accompagni e la fonte
+sia dichiarata. Lo script lo fa con `--with-bepinex <zip>`: scompatta l'archivio
+ufficiale, scrive `BEPINEX.txt` con attribuzione e link al sorgente, e **si rifiuta
+di impacchettare se nell'archivio non trova il testo della licenza**, così una
+release non può violare la LGPL per distrazione. Senza quell'opzione lo zip contiene
+solo `RonyItalian.dll` e `italian.json`, e BepInEx se lo installa l'utente.
+
+Due cose da ricordare, che valgono comunque:
+
+- **BepInEx 6 IL2CPP pesa ~34 MB**, contro i ~640 KB della build Mono di *Shadows
+  of New York*.
+- **Il primo avvio impiega una trentina di secondi** a generare gli assembly
+  interop, con la finestra apparentemente ferma. È scritto nel `LEGGIMI.txt` che
+  lo script mette nello zip, altrimenti sembrerà bloccato.
+
 ## Cosa manca
 
-1. Il grosso della traduzione: 31 stringhe su 11.141. Il flusso di lavoro è pronto
-   e descritto in `FLUSSO.md`.
-2. Un controllo CI che esegua `tools/apply.py --check` a ogni push, così un
-   marcatore rotto non entra nel repo.
-3. Una pipeline di release che costruisca lo zip al push di un tag `v*`, come su
-   *Shadows of New York*. Due differenze da tenere presenti:
-   - **BepInEx 6 IL2CPP pesa ~34 MB**, contro i ~640 KB della build Mono di
-     *Shadows*. E il primo avvio impiega una trentina di secondi a generare gli
-     assembly interop, con la finestra apparentemente ferma: va scritto nelle
-     istruzioni, o sembrerà bloccato.
-   - **Da verificare se possiamo redistribuire BepInEx.** In caso contrario lo zip
-     conterrà solo `RonyItalian.dll` e `italian.json`, e l'utente dovrà installare
-     BepInEx da sé — più scomodo, ma è il vincolo.
+Solo le 747 battute del demo di Cracovia, che non sono di questo gioco: vedi
+`STATO.md`.

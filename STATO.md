@@ -147,8 +147,26 @@ fallisce con un errore di pathspec. Scrivi il messaggio in un file e usa `git co
    polacco: *«Halo! Co to za łażenie ludziom po balkonach?»*); e `VariaCRD/CRDZone/DemoEnd`
    dice testualmente *«This concludes the demo.»*. `TMP` sta per *temporary*.
    Nessun giocatore di RoNY lo vedrà mai. **In attesa di una decisione dell'utente.**
-2. Un controllo CI che esegua `tools/apply.py --check` a ogni push.
-3. La pipeline di release. Vincoli in `ARCHITETTURA.md`.
+2. **Una vera prova di release.** `tools/release.sh` è scritto e provato — costruisce
+   lo zip, controlla i blocchi prima di compilare, e con `--with-bepinex` include
+   BepInEx rifiutandosi di farlo se manca il testo della licenza. Non è mai stato
+   provato con l'archivio vero di BepInEx (i test usavano zip finti), e nessuno ha
+   ancora installato il pacchetto su una macchina pulita seguendo il `LEGGIMI.txt`.
+   Va fatto prima di pubblicare qualsiasi cosa.
+
+Il controllo CI c'è (`.github/workflows/check.yml`) e la pipeline di release è
+`tools/release.sh`; il perché di certe scelte sta in `ARCHITETTURA.md`. Due vincoli
+che è meglio non riscoprire da capo:
+
+- **`apply.py` non aveva modo di girare senza `dump/`**, che resta fuori dal repo
+  perché è testo protetto. Ora si appoggia a `reference/english_fingerprints.json`,
+  che porta solo l'*impronta* di ogni riga inglese — tag, segnaposto, conteggi,
+  lunghezza — e viene rigenerata dal dump a ogni scrittura, così non va fuori
+  sincrono. È questo che permette alla CI di fare lo stesso controllo.
+- **La DLL non è compilabile su GitHub.** Il plugin referenzia i ~152 assembly
+  interop che BepInEx genera dai metadati IL2CPP del gioco: derivano da una copia del
+  gioco, quindi nessun runner ospitato può produrli. La release si costruisce in
+  locale, punto.
 
 **Lasciate volutamente in inglese** (o in polacco), come le 19 descrizioni di
 missione che il gioco spedisce col nome della propria chiave: le 26 battute di

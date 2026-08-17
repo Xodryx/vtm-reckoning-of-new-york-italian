@@ -12,9 +12,15 @@ Markers are checked because breaking one is silent: a mangled <link="Sire"> stop
 the glossary from opening, and a lost {[button]} prints a literal placeholder.
 Length is checked because the game is fully voiced in English: a subtitle much
 longer than its line drifts out of sync with the speech.
+
+The checks need to know the shape of each English line, but the English text is
+copyrighted and never versioned, so this keeps a fingerprint of it instead --
+tag names, placeholder names, bracket and newline counts, length. That is
+structure, not prose: no sentence can be reconstructed from it. With the dump
+present the fingerprints are rebuilt from it on every write; without the dump,
+the committed copy is used, which is what lets CI run the same check.
 """
 import argparse
-import collections
 import glob
 import json
 import os
@@ -24,6 +30,7 @@ import sys
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BLOCKS_DIR = os.path.join(PROJECT_DIR, "blocks")
 TERMS_FILE = os.path.join(PROJECT_DIR, "dump", "i2_terms.json")
+FINGERPRINTS_FILE = os.path.join(PROJECT_DIR, "reference", "english_fingerprints.json")
 OUTPUT_FILE = os.path.join(PROJECT_DIR, "translations", "italian.json")
 README_FILE = os.path.join(PROJECT_DIR, "README.md")
 
@@ -47,17 +54,64 @@ ERROR_RATIO = 1.60
 MIN_LENGTH_FOR_RATIO = 40
 
 
-def load_english():
-    """Key -> English text, straight from the game's own table."""
-    if not os.path.exists(TERMS_FILE):
-        sys.exit(f"manca {TERMS_FILE}\n"
-                 f"generalo con: python tools/extract_i2.py \"<gioco>/...\\data.unity3d\" dump")
+def fingerprint(text):
+    """The shape of a string: what must match, and how long it is.
 
-    with open(TERMS_FILE, encoding="utf-8") as fh:
-        source = json.load(fh)
+    n length, s whether it holds anything but whitespace, p placeholders,
+    t rich text tags, b bracket groups, l newlines. Short names because there is
+    one of these per line and there are eleven thousand lines.
+    """
+    # Strip placeholders before counting brackets: {[X]} is also a bracket group.
+    return {
+        "n": len(text),
+        "s": 1 if text.strip() else 0,
+        "p": sorted(PLACEHOLDER.findall(text)),
+        "t": sorted(TAG.findall(text)),
+        "b": len(BRACKET.findall(PLACEHOLDER.sub("", text))),
+        "l": text.count("\n"),
+    }
 
-    return {term["Term"]: (term["Languages"][0] if term["Languages"] else "")
-            for term in source["Terms"]}
+
+def load_fingerprints():
+    """Key -> fingerprint of the English line, and whether it came from the dump.
+
+    Prefers the game's own table. Falls back to the committed fingerprints, which
+    is the only thing available on a machine without a copy of the game -- CI, for
+    one.
+    """
+    if os.path.exists(TERMS_FILE):
+        with open(TERMS_FILE, encoding="utf-8") as fh:
+            source = json.load(fh)
+        return {term["Term"]: fingerprint(term["Languages"][0] if term["Languages"] else "")
+                for term in source["Terms"]}, True
+
+    if os.path.exists(FINGERPRINTS_FILE):
+        with open(FINGERPRINTS_FILE, encoding="utf-8") as fh:
+            stored = json.load(fh)
+        return stored["keys"], False
+
+    sys.exit(f"manca {TERMS_FILE}\n"
+             f"generalo con: python tools/extract_i2.py \"<gioco>/...\\data.unity3d\" dump\n"
+             f"oppure committa {FINGERPRINTS_FILE}")
+
+
+def write_fingerprints(fingerprints):
+    """Keeps the committed fingerprints in step with the game's table."""
+    payload = {
+        "_comment": [
+            "Marker fingerprint of every English line, so the checks in tools/apply.py",
+            "can run where dump/ is not available -- CI, or a fresh clone. The English",
+            "text itself is copyrighted and stays out of the repository; this is only",
+            "its shape, and no sentence can be reconstructed from it.",
+            "Rebuilt automatically by tools/apply.py whenever dump/ is present.",
+            "n length, s non-blank, p placeholders, t tags, b bracket groups, l newlines.",
+        ],
+        "keys": fingerprints,
+    }
+    os.makedirs(os.path.dirname(FINGERPRINTS_FILE), exist_ok=True)
+    with open(FINGERPRINTS_FILE, "w", encoding="utf-8", newline="\n") as fh:
+        json.dump(payload, fh, ensure_ascii=False, indent=1, sort_keys=True)
+        fh.write("\n")
 
 
 def load_blocks():
@@ -94,49 +148,41 @@ def load_blocks():
     return entries, origin, errors, paths
 
 
-def markers(text):
-    """The marker fingerprint of a string, as (placeholders, tags, bracket count)."""
-    placeholders = collections.Counter(PLACEHOLDER.findall(text))
-    tags = collections.Counter(TAG.findall(text))
-    # Strip placeholders first: {[X]} would otherwise also count as a bracket.
-    brackets = len(BRACKET.findall(PLACEHOLDER.sub("", text)))
-    return placeholders, tags, brackets
-
-
 def check_entry(key, italian, english, origin):
-    """Returns (errors, warnings) for one translated line."""
+    """Returns (errors, warnings) for one translated line.
+
+    english is the fingerprint of the English line, not the line itself.
+    """
     errors, warnings = [], []
     where = f"{origin} :: {key}"
+    mine = fingerprint(italian)
 
-    en_placeholders, en_tags, en_brackets = markers(english)
-    it_placeholders, it_tags, it_brackets = markers(italian)
-
-    if en_placeholders != it_placeholders:
+    if english["p"] != mine["p"]:
         errors.append(f"{where}: segnaposto alterati\n"
-                      f"    inglese:  {sorted(en_placeholders.elements())}\n"
-                      f"    italiano: {sorted(it_placeholders.elements())}")
+                      f"    inglese:  {english['p']}\n"
+                      f"    italiano: {mine['p']}")
 
-    if en_tags != it_tags:
+    if english["t"] != mine["t"]:
         errors.append(f"{where}: tag alterati\n"
-                      f"    inglese:  {sorted(en_tags.elements())}\n"
-                      f"    italiano: {sorted(it_tags.elements())}")
+                      f"    inglese:  {english['t']}\n"
+                      f"    italiano: {mine['t']}")
 
-    if en_brackets != it_brackets:
-        errors.append(f"{where}: {en_brackets} gruppi fra parentesi quadre in inglese, "
-                      f"{it_brackets} in italiano")
+    if english["b"] != mine["b"]:
+        errors.append(f"{where}: {english['b']} gruppi fra parentesi quadre in inglese, "
+                      f"{mine['b']} in italiano")
 
-    if english.count("\n") != italian.count("\n"):
-        warnings.append(f"{where}: {english.count(chr(10))} a capo in inglese, "
-                        f"{italian.count(chr(10))} in italiano")
+    if english["l"] != mine["l"]:
+        warnings.append(f"{where}: {english['l']} a capo in inglese, "
+                        f"{mine['l']} in italiano")
 
-    if len(english) >= MIN_LENGTH_FOR_RATIO:
-        ratio = len(italian) / len(english)
+    if english["n"] >= MIN_LENGTH_FOR_RATIO:
+        ratio = mine["n"] / english["n"]
         if ratio > ERROR_RATIO:
             errors.append(f"{where}: troppo lunga, {ratio:.2f}x l'inglese "
-                          f"({len(english)} -> {len(italian)} caratteri)")
+                          f"({english['n']} -> {mine['n']} caratteri)")
         elif ratio > WARN_RATIO:
             warnings.append(f"{where}: {ratio:.2f}x l'inglese "
-                            f"({len(english)} -> {len(italian)} caratteri)")
+                            f"({english['n']} -> {mine['n']} caratteri)")
 
     return errors, warnings
 
@@ -164,13 +210,15 @@ def main():
     parser.add_argument("--report", action="store_true", help="elenca le battute piu' lunghe")
     args = parser.parse_args()
 
-    english_by_key = load_english()
+    english_by_key, from_dump = load_fingerprints()
     entries, origin, errors, paths = load_blocks()
 
     if not paths:
         sys.exit(f"nessun blocco in {BLOCKS_DIR}")
 
     print(f"{len(paths)} blocco/i, {len(entries)} voce/i")
+    if not from_dump:
+        print(f"dump/ assente, uso le impronte in {os.path.basename(FINGERPRINTS_FILE)}")
 
     warnings = []
     translated = {}
@@ -198,9 +246,9 @@ def main():
             print(f"  {error}")
         sys.exit("\nnon scrivo niente finche' ci sono errori")
 
-    total = sum(1 for text in english_by_key.values() if text.strip())
-    done_chars = sum(len(english_by_key[key]) for key in translated)
-    total_chars = sum(len(text) for text in english_by_key.values() if text.strip())
+    total = sum(1 for shape in english_by_key.values() if shape["s"])
+    done_chars = sum(english_by_key[key]["n"] for key in translated)
+    total_chars = sum(shape["n"] for shape in english_by_key.values() if shape["s"])
 
     print(f"\ntradotte {len(translated)} su {total} ({len(translated) / total:.1%})")
     print(f"caratteri {done_chars:,} su {total_chars:,} ({done_chars / total_chars:.1%})")
@@ -210,13 +258,13 @@ def main():
         # "Credits" -> "Titoli di coda", which is fine and would just bury the signal.
         ranked = sorted(
             ((key, italian) for key, italian in translated.items()
-             if len(english_by_key[key]) >= MIN_LENGTH_FOR_RATIO),
-            key=lambda kv: len(kv[1]) / len(english_by_key[kv[0]]),
+             if english_by_key[key]["n"] >= MIN_LENGTH_FOR_RATIO),
+            key=lambda kv: len(kv[1]) / english_by_key[kv[0]]["n"],
             reverse=True)
 
         print(f"\nbattute lunghe (da {MIN_LENGTH_FOR_RATIO} caratteri) col rapporto piu' alto:")
         for key, italian in ranked[:10]:
-            ratio = len(italian) / len(english_by_key[key])
+            ratio = len(italian) / english_by_key[key]["n"]
             print(f"  {ratio:.2f}x  {key}")
         if not ranked:
             print("  nessuna")
@@ -226,11 +274,16 @@ def main():
         return
 
     os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
-    with open(OUTPUT_FILE, "w", encoding="utf-8") as fh:
+    # newline="\n" to match .gitattributes: writing CRLF here on Windows makes git
+    # rewrite the file on every commit, and makes the CI diff check platform-dependent.
+    with open(OUTPUT_FILE, "w", encoding="utf-8", newline="\n") as fh:
         json.dump(translated, fh, ensure_ascii=False, indent=1, sort_keys=True)
         fh.write("\n")
 
     update_readme(len(translated), total)
+
+    if from_dump:
+        write_fingerprints(english_by_key)
 
     print(f"\nscritto {OUTPUT_FILE}")
     print("installa con: bash tools/deploy.sh")

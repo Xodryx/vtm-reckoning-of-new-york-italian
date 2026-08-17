@@ -1,0 +1,36 @@
+name: check
+
+# The blocks are the source of truth; translations/italian.json is generated from
+# them. This guards both: that no block breaks a marker, and that the generated
+# file committed alongside them is the one the blocks actually produce.
+#
+# The runner has no copy of the game, so dump/ is absent by design -- it holds the
+# game's English text, which is copyrighted and never versioned. apply.py falls
+# back to reference/english_fingerprints.json, which carries the shape of each
+# English line without the line itself.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  blocks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Check every block
+        run: python tools/apply.py --check
+
+      - name: Check the generated translation is up to date
+        run: |
+          python tools/apply.py
+          git diff --exit-code -- translations/italian.json README.md \
+            || { echo; echo "translations/italian.json non corrisponde ai blocchi."; \
+                 echo "Esegui 'python tools/apply.py' e committa il risultato."; exit 1; }

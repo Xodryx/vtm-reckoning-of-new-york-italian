@@ -17,3 +17,6 @@ plugin/obj/
 
 __pycache__/
 *.pyc
+
+# Release output, rebuilt by tools/release.sh.
+dist/
