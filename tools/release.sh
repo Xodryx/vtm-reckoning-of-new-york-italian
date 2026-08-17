@@ -6,6 +6,7 @@
 #
 #     bash tools/release.sh
 #     bash tools/release.sh --with-bepinex ~/Downloads/BepInEx-Unity.IL2CPP-win-x64.zip
+#     bash tools/release.sh --publish            # tag, release e allegati, in un colpo
 #
 # Without --with-bepinex the zip holds only the plugin and the translation, and the
 # player installs BepInEx themselves. With it, BepInEx travels along, which every one
@@ -20,10 +21,16 @@ set -euo pipefail
 
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 DIST_DIR="$PROJECT_DIR/dist"
+REPO="Xodryx/vtm-reckoning-of-new-york-italian"
 BEPINEX_ZIP=""
+PUBLISH=0
 
 while [ $# -gt 0 ]; do
     case "$1" in
+        --publish)
+            PUBLISH=1
+            shift
+            ;;
         --with-bepinex)
             BEPINEX_ZIP="${2:-}"
             if [ -z "$BEPINEX_ZIP" ]; then
@@ -56,6 +63,23 @@ if [ -n "$BEPINEX_ZIP" ]; then
     ARCHIVE="$DIST_DIR/RonyItalian-ita-v$VERSION-con-bepinex.zip"
 else
     ARCHIVE="$DIST_DIR/RonyItalian-ita-v$VERSION.zip"
+fi
+
+# Publishing checks come before the build, so a bad state costs a second, not a package.
+if [ "$PUBLISH" = "1" ]; then
+    if [ -n "$(git -C "$PROJECT_DIR" status --porcelain)" ]; then
+        echo "ERRORE: ci sono modifiche non committate. Non pubblico." >&2
+        exit 1
+    fi
+    # The tag and the version compiled into the plugin must be the same thing, or the
+    # log says one number and the file name another.
+    if git -C "$PROJECT_DIR" rev-parse -q --verify "refs/tags/v$VERSION" > /dev/null; then
+        if [ "$(git -C "$PROJECT_DIR" rev-list -n1 "v$VERSION")" != "$(git -C "$PROJECT_DIR" rev-parse HEAD)" ]; then
+            echo "ERRORE: il tag v$VERSION esiste ma non punta a HEAD." >&2
+            echo "O sposti il tag, o alzi Version in plugin/Plugin.cs." >&2
+            exit 1
+        fi
+    fi
 fi
 
 echo "Controllo dei blocchi..."
@@ -252,3 +276,44 @@ rm -rf "$STAGE"
 echo
 echo "Creato $ARCHIVE"
 python -c "import sys, zipfile; print('\n'.join('  ' + n for n in zipfile.ZipFile(sys.argv[1]).namelist()[:12]))" "$ARCHIVE"
+
+if [ "$PUBLISH" = "1" ]; then
+    # Every archive built for this version, whichever runs produced them: forgetting an
+    # attachment is the mistake this whole flag exists to prevent.
+    ASSETS=("$DIST_DIR"/RonyItalian-ita-v"$VERSION"*.zip)
+    if [ ! -e "${ASSETS[0]}" ]; then
+        echo "ERRORE: in dist/ non c'è nessun pacchetto per la versione $VERSION." >&2
+        exit 1
+    fi
+
+    # Read from the git credential helper and never echo it.
+    TOKEN="$(printf 'protocol=https
+host=github.com
+
+' | git credential fill 2>/dev/null         | sed -n 's/^password=//p')"
+    if [ -z "$TOKEN" ]; then
+        echo "ERRORE: nessuna credenziale GitHub disponibile. Fai un push a mano una volta." >&2
+        exit 1
+    fi
+
+    if ! git -C "$PROJECT_DIR" rev-parse -q --verify "refs/tags/v$VERSION" > /dev/null; then
+        git -C "$PROJECT_DIR" tag -a "v$VERSION" -m "$VERSION"
+    fi
+    git -C "$PROJECT_DIR" push origin "v$VERSION" > /dev/null 2>&1 || true
+
+    NOTES_FILE="$PROJECT_DIR/tools/release-notes.md"
+    if [ ! -f "$NOTES_FILE" ]; then
+        echo "ERRORE: manca $NOTES_FILE." >&2
+        exit 1
+    fi
+
+    RELEASE_ID="$(python "$PROJECT_DIR/tools/publish.py" release         "$REPO" "$VERSION" "$NOTES_FILE" "$TOKEN")"
+    echo "Release v$VERSION: id $RELEASE_ID"
+
+    for asset in "${ASSETS[@]}"; do
+        echo -n "  $(basename "$asset") "
+        python "$PROJECT_DIR/tools/publish.py" asset "$REPO" "$RELEASE_ID" "$asset" "$TOKEN"
+    done
+
+    echo "https://github.com/$REPO/releases/tag/v$VERSION"
+fi
