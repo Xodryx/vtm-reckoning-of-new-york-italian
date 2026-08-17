@@ -1,7 +1,7 @@
 # Stato del lavoro
 
-Aggiornato il 17 agosto 2026. **9.669 battute tradotte su 11.141 (86,8%)**,
-821.677 caratteri su 932.478 (88,1%). Il conteggio nel README lo aggiorna da sé
+Aggiornato il 17 agosto 2026. **10.394 battute tradotte su 11.141 (93,3%)**,
+880.280 caratteri su 932.478 (94,4%). Il conteggio nel README lo aggiorna da sé
 `apply.py`.
 
 Questo documento serve a riprendere il lavoro senza rileggere tutto il resto.
@@ -12,11 +12,28 @@ Questo documento serve a riprendere il lavoro senza rileggere tutto il resto.
 già in italiano, il flusso di traduzione ha la validazione automatica. Da qui in
 avanti è solo traduzione: non c'è più reverse engineering da fare.
 
-**Tutto il contenuto narrativo è tradotto**: le otto notti, l'epilogo, i due
-finali alternativi, le missioni facoltative, gli agguati, il diario, il registro
-delle missioni e le voci interne. Quello che resta sono code piccole — gli
-intermezzi e una lunga fila di gruppi da poche battute — più `CardinalTMP`, che
-non è contenuto di questo gioco (vedi sotto).
+**Di *Reckoning of New York* non resta più niente da tradurre.** Le 747 battute
+che il contatore segna come mancanti sono tutte del demo di Cracovia (vedi sotto),
+più undici chiavi che nell'originale sono vuote.
+
+**Attenzione a come si conta ciò che manca.** `next_block.py` raggruppa sul
+secondo pezzo della chiave e mostra i primi trenta gruppi: un gruppo da una o due
+voci resta invisibile sotto quella soglia anche se il suo insieme è enorme. È così
+che per settimane sono rimasti fuori radar il glossario in gioco (86 voci
+`Glossary/<Termine>/Label` e `/Description`, cioè tutte le finestrelle che si
+aprono cliccando i `<link>` del testo), gli 87 cartellini dei parlanti in
+`ActorsDatabase` (quelli che stampavano *Sheriff*, *Harpy* e *Hound* sopra ogni
+battuta) e i 49 obiettivi Steam. Per sapere davvero cosa manca conviene contare
+per primo livello di chiave, non fidarsi dell'elenco:
+
+    python -c "import json,collections; d=json.load(open('dump/i2_terms.json',encoding='utf-8'))['Terms']; it=json.load(open('translations/italian.json',encoding='utf-8')); print(collections.Counter(t['Term'].split('/')[0] for t in d if t['Term'] not in it))"
+
+**Nel dump c'è anche il francese ufficiale.** `dump/i2_terms.json` porta due lingue,
+inglese e francese, e il francese marca il genere dove l'inglese lo nasconde: è così
+che si è stabilito che il narratore del primo intermezzo è un uomo e che quella del
+terzo è una donna. **Non è però una fonte autorevole**: nell'undicesimo intermezzo
+rende Torque al femminile, mentre l'inglese dice *«He can play it cool»* e *«his
+yellow eyes»*. Va usato come indizio da verificare, mai come traduzione da copiare.
 
 | Fatto | |
 |---|---|
@@ -30,11 +47,16 @@ non è contenuto di questo gioco (vedi sotto).
 | Notte 6, missioni | **complete**: `DEATHAFTER`, `ETERSUNSHINE` in doppia versione, `CONVERS` |
 | Notte 7, missioni | **complete**: `BURNINGMAN` (433, la più lunga del gioco), `SHADOWDAY`, `WEEKNIGHTMARES`, `BURNED` |
 | Notte 8 ed epilogo | **completo**: `FROMASHES` |
-| Finali alternativi | **completi**: `BEAST_ENDING`, `FALSE_ENDING` |
+| Finali alternativi | **completi**: `BEAST_ENDING`, `FALSE_ENDING`, `HUNTED_ENDING` |
+| Intermezzi | **completi**: `R_INTERMISSION_1`…`_12` |
 | Missioni facoltative | **complete**: `MQ_LUCKBEALADY`, `MQ_DREADGAME`, `MQ_BLOODANDCIGS`, `MQ_PROMISEMONSTER` |
 | Agguati e incontri | **completi**: i tre `R_AMBUSH_*`, i quattro `FO_*` |
 | Diario e registro | **completi**: `Journal/CONTACTS`, `Journal/LOGBOOK`, `Quest/MSQ`, `Quest/MSQ-2`, `Quest/ZONE` |
-| Voci interne | **complete**: le sei tracce `InnerVoices/*` |
+| Voci interne | **complete**: tutte le tracce `InnerVoices/*`, VOICES e THEONEVOICE |
+| Glossario in gioco | **completo**: 86 voci, le finestrelle dei `<link>` |
+| Cartellini dei parlanti | **completi**: `ActorsDatabase`, 87 voci |
+| Obiettivi Steam | **completi**: `Achievements`, 24 titoli con descrizione |
+| Cartelli a schermo | **completi**: `TextPanels`, il conto alla rovescia e gli stacchi |
 
 ## Come si riprende
 
@@ -104,6 +126,12 @@ fallisce con un errore di pathspec. Scrivi il messaggio in un file e usa `git co
   sono `kamminarronnkonnbronntonnerronntuonn`, il centro del primo tuono di
   *Finnegans Wake*. Pádraic è «un patito di James Joyce» per esplicita ammissione
   del diario: la parola è intraducibile in ogni lingua, inglese compreso.
+- **I titoli di canzone restano in inglese**, come `Burning Man` e `Empire of the
+  Sun`: `Stranger in the Night` e `Luck Be A Lady Tonight` sono Sinatra, e in Italia
+  si conoscono con quel nome. Il francese ufficiale li traduce; noi no.
+- **I cartellini dei parlanti seguono le schede dei contatti.** `ActorsDatabase`
+  e `Journal/CONTACTS` nominano le stesse persone: dove la scheda dice *Giocatore
+  di strada* o *Profeta di sventura*, il cartellino dice lo stesso.
 - **I nominativi radio dei cacciatori si traducono**: `Lightbringer` è
   *Portaluce*. Sono nomi parlanti, non cognomi: nella quinta notte la voce alla
   radio dice che «la luce scaccerà le tenebre», e in inglese il gioco si sente.
@@ -111,22 +139,23 @@ fallisce con un errore di pathspec. Scrivi il messaggio in un file e usa `git co
 
 ## Cosa manca, in ordine
 
-1. **La traduzione**: 1.472 battute, ma **solo ~790 sono di questo gioco**. Sono
-   tutte code piccole e senza ordine narrativo: gli intermezzi (`R_INTERMISSION_1`
-   … `_12`, 11-23 battute l'uno), qualche coda di missione (`R_NIGHT3_MSQ_WHEREVER`,
-   `R_NIGHT2_MSQ_LASTRESORT`, `M_NIGHT7_MSQ2_OLDBOY`), `Quest/MQ` e `Quest/INT`, poi
-   una fila lunga di gruppi da meno di dieci battute. Conviene raccoglierne
-   parecchi in un blocco solo: `next_block.py <gruppo> -n N` senza `--write` stampa
-   l'inglese senza creare lo scheletro, così si compone un file unico a mano.
-2. **`CardinalTMP/*` (713 battute) non è contenuto di *Reckoning of New York*** e
-   l'ho lasciato da parte in attesa di una decisione dell'utente. È materiale di un
-   altro progetto Draw Distance rimasto nella tabella: i personaggi sono Rosa e
-   Radek, l'ambientazione è **piazza Podgórze a Cracovia**, e certe righe non sono
-   nemmeno in inglese (`CRD_NEIGHBOR/LINE-3` è polacco: *«Halo! Co to za łażenie
-   ludziom po balkonach?»*). `TMP` sta per *temporary*. Non lo vedrà mai nessun
-   giocatore: tradurlo è un quinto del lavoro rimasto speso a vuoto.
-3. Un controllo CI che esegua `tools/apply.py --check` a ogni push.
-4. La pipeline di release. Vincoli in `ARCHITETTURA.md`.
+1. **Il demo di Cracovia: 747 battute, e non è *Reckoning of New York*.** Sono
+   `CardinalTMP/*` (714), `VariaCRD/*` (25) e `ActorsCRD/*` (8), tutte dello stesso
+   materiale: un altro progetto Draw Distance rimasto nella tabella. I personaggi
+   sono Rosalind Davis, Rosa, Radek, Mirek; l'ambientazione è **piazza Podgórze a
+   Cracovia**; certe righe non sono nemmeno in inglese (`CRD_NEIGHBOR/LINE-3` è
+   polacco: *«Halo! Co to za łażenie ludziom po balkonach?»*); e `VariaCRD/CRDZone/DemoEnd`
+   dice testualmente *«This concludes the demo.»*. `TMP` sta per *temporary*.
+   Nessun giocatore di RoNY lo vedrà mai. **In attesa di una decisione dell'utente.**
+2. Un controllo CI che esegua `tools/apply.py --check` a ogni push.
+3. La pipeline di release. Vincoli in `ARCHITETTURA.md`.
+
+**Lasciate volutamente in inglese** (o in polacco), come le 19 descrizioni di
+missione che il gioco spedisce col nome della propria chiave: le 26 battute di
+prova degli sviluppatori (`Dialogue_0`…`Dialogue_16`, `Dialogue_ImVampire`,
+`Przykra sprawa kurde faja`), i segnaposto `ActorsDatabase/Actor_1` e il
+`Lorem Ipsum` dell'interfaccia. Stanno nei blocchi con il valore originale, così
+il conteggio è onesto e a runtime non cambia nulla.
 
 ## Le due cose che servono da un umano
 
@@ -145,10 +174,20 @@ davvero bloccato senza di te.
    italiani, sono quelli da controllare: compaiono ovunque e un errore si propaga
    per tutte le 11.000 righe.
 
+   **Si è aggiunto un gruppo intero: `clan_monikers`.** Ogni scheda di clan del
+   glossario in gioco si chiude con una riga di appellativi — una novantina di
+   termini, dal *Clan della Caccia* dei Banu Haqim ai *Voivodi* Tzimisce. Il manuale
+   italiano li ha tutti, ma non è stato raggiungibile: `worldofdarkness.it` non
+   risolve e la scansione su AnyFlip risponde 403. *Clan dei Re* e *Sangue Blu* sono
+   confermati da fonti secondarie; **tutto il resto è una nostra resa** e sta lì
+   marcato `unverified`. È il singolo blocco di terminologia più grosso che manca
+   di riscontro.
+
    Le ricerche in rete hanno già confermato *Corvi* e *Canaglie* per i Ravnos
    (Compendio italiano), *Mesmerismo*, *Rivelare il Temperamento*, *Passaggio
-   Inosservato*, *Percepire l'Invisibile* e *Melpominee* invariato. Restano dubbi
-   solo quelli qui sopra.
+   Inosservato*, *Percepire l'Invisibile*, *Melpominee* invariato, *Vicissitudine*
+   e le sei Tradizioni (*La Masquerade, Il Dominio, La Progenie, La Responsabilità,
+   L'Ospitalità, La Distruzione*).
 
 Il precedente vale come monito: tre nomi di Discipline su cinque erano sbagliati
 finché non li abbiamo verificati su una fonte. *Animalismo*, *Offuscamento* e
