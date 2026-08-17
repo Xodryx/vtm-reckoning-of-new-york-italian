@@ -192,8 +192,8 @@ venisse riparato, `"it"` ci entrerebbe senza attriti.
 
 ## 5. Verifica a runtime: l'italiano funziona
 
-Provato sulla copia di lavoro in `C:\Users\Rodrigo\Documents\RoNY-game-copy\`,
-con BepInEx 6 e il plugin sonda in `plugin/`. Risultato: **"Italiano" compare nel
+Provato su una copia di lavoro del gioco, con BepInEx 6 e il plugin sonda in
+`plugin/`. Risultato: **"Italiano" compare nel
 selettore lingue e le stringhe iniettate si vedono a schermo.**
 
 La trappola che è costata tre giri, e che va ricordata perché non è deducibile

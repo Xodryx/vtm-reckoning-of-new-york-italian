@@ -88,7 +88,9 @@ python "$PROJECT_DIR/tools/apply.py" --check > /dev/null
 echo "Compilazione..."
 # Piping straight into tail -3 hides the compiler errors behind a silent exit that looks
 # exactly like a build which succeeded. Same trap that was sitting in deploy.sh.
-if ! build_output="$(dotnet build "$PROJECT_DIR/plugin/RonyItalian.csproj" -c Release -v minimal 2>&1)"; then
+GAME_DIR="${GAME_DIR:-$HOME/Documents/RoNY-game-copy}"
+if ! build_output="$(dotnet build "$PROJECT_DIR/plugin/RonyItalian.csproj" -c Release -v minimal \
+    -p:GameDir="$(cygpath -w "$GAME_DIR" 2>/dev/null || echo "$GAME_DIR")" 2>&1)"; then
     echo "$build_output" >&2
     echo "ERRORE: compilazione fallita, nessun pacchetto è stato creato." >&2
     exit 1

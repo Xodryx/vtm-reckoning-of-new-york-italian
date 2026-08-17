@@ -27,7 +27,10 @@ fi
 echo "Compilazione..."
 # Piping the build straight into tail -3 hid the compiler errors and left a silent
 # exit that looked exactly like a build which had installed nothing.
-if ! build_output="$(dotnet build "$PROJECT_DIR/plugin/RonyItalian.csproj" -c Release -v minimal 2>&1)"; then
+# Build against the same copy we install into, so the interop assemblies the plugin
+# compiles against are the ones it will meet at runtime.
+if ! build_output="$(dotnet build "$PROJECT_DIR/plugin/RonyItalian.csproj" -c Release -v minimal \
+    -p:GameDir="$(cygpath -w "$GAME_DIR" 2>/dev/null || echo "$GAME_DIR")" 2>&1)"; then
     echo "$build_output" >&2
     echo "ERRORE: compilazione fallita, non è stato installato niente." >&2
     exit 1

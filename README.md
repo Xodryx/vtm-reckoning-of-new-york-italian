@@ -5,7 +5,7 @@ plugin. The game ships English and French only; this adds **Italiano** as a thir
 in the language selector and serves the translated text at runtime. **No game file is
 modified.**
 
-> ### Work in progress — 11,141 of 11,141 lines
+> ### Translated — 11,141 of 11,141 lines
 >
 > Every line is translated: the eight nights, the endings, the optional missions, the
 > in-game glossary, the journal, the achievements and the interface.
@@ -47,8 +47,21 @@ the more common BepInEx 5.
 
 ## Installing
 
-Not yet — there is no release worth installing. When there is, it will be
-[here](../../releases/latest).
+Download it from the [latest release](../../releases/latest). Two packages, and the
+first one is the one to take:
+
+| | |
+|---|---|
+| **`RonyItalian-ita-…-con-bepinex.zip`** | Everything included. Unpack it into the game folder and you are done. |
+| **`RonyItalian-ita-….zip`** | 459 KB, the translation alone, for anyone who already runs BepInEx 6 for IL2CPP. |
+
+Unpack into the folder that holds `VtM Reckoning of New York.exe`; the folders merge with
+what is already there. The game then starts in Italian on its own. **The first launch
+takes about half a minute** while BepInEx generates the game's interop assemblies, and
+the window looks frozen for all of it.
+
+To uninstall, delete `RonyItalian.dll` and `italian.json` from `BepInEx/plugins`. Nothing
+else is touched, so Steam's file verification has nothing to restore.
 
 ## Building
 
@@ -74,7 +87,23 @@ Requires the .NET 6 SDK or later, Python 3.10+, and a copy of the game.
    bash tools/deploy.sh
    ```
 
-   Set `GAME_DIR` if your working copy is not at `~/Documents/RoNY-game-copy`.
+   Set `GAME_DIR` if your working copy is not at `~/Documents/RoNY-game-copy`. The
+   project file defaults to a standard Steam install; the scripts override it.
+
+To publish a release: `bash tools/release.sh --publish`, optionally with
+`--with-bepinex <zip>` to build the all-in-one package too. It refuses to run on
+uncommitted changes or on a tag that disagrees with the version in `Plugin.cs`.
+
+### Without a copy of the game
+
+`refs/` holds reference stubs — assembly names and signatures, no behaviour — for the
+twelve game types the plugin touches. `bash tools/build-refs.sh` builds them, and the
+plugin then compiles against those alone. That is what
+[the build workflow](.github/workflows/build.yml) does on every push.
+
+It is a compile check and nothing more. A stub that has drifted from the real API
+compiles happily and fails when the game loads it, which no runner can see, so the DLL
+that ships is always built locally against the real assemblies.
 
 ## Contributing a translation
 
@@ -90,8 +119,15 @@ regenerate it from your own copy in step 3 above.
 
 [ARCHITETTURA.md](ARCHITETTURA.md) documents the plugin, in Italian, including the
 things that cost the most to find out — the game keeps two separate language sources
-that both have to be updated, the interface reads text through two different paths, and
-an untranslated line does not merely render blank but stops the dialogue outright.
+that both have to be updated, the interface reads text through three different paths,
+an untranslated line does not merely render blank but stops the dialogue outright, and a
+Harmony postfix that answers through a by-reference parameter never reaches a native
+caller, so it reports a translation that arrived nowhere.
+
+A few labels are not localized at all and show whatever was typed into the prefab: both
+character descriptions on the selection screen, and one notification. The unmodified
+game does that in every language. [STATO.md](STATO.md) records how they were found and
+what the plugin does about them.
 
 [RICOGNIZIONE.md](RICOGNIZIONE.md) is the technical survey the project started from.
 

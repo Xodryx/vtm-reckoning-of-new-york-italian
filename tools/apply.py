@@ -36,7 +36,7 @@ README_FILE = os.path.join(PROJECT_DIR, "README.md")
 
 # The progress line in the README, kept in step automatically so it cannot drift
 # from what is actually translated.
-PROGRESS_LINE = re.compile(r"^(> ### Work in progress — )[\d,]+( of )[\d,]+( lines)$",
+PROGRESS_LINE = re.compile(r"^(> ### Translated — )[\d,]+( of )[\d,]+( lines)$",
                            re.MULTILINE)
 
 # Substituted at runtime; must survive untouched.
@@ -188,7 +188,7 @@ def check_entry(key, italian, english, origin):
 
 
 def update_readme(done, total):
-    """Rewrites the progress line in the README. Silent if it is not there."""
+    """Rewrites the progress line in the README."""
     if not os.path.exists(README_FILE):
         return
 
@@ -198,7 +198,13 @@ def update_readme(done, total):
     updated, count = PROGRESS_LINE.subn(
         lambda m: f"{m.group(1)}{done:,}{m.group(2)}{total:,}{m.group(3)}", text)
 
-    if count and updated != text:
+    if not count:
+        # Rewording that heading used to make this quietly stop working, leaving a
+        # figure in the README that nothing kept honest.
+        print("ATTENZIONE: nel README non trovo la riga del conteggio, non l'ho aggiornata")
+        return
+
+    if updated != text:
         with open(README_FILE, "w", encoding="utf-8", newline="\n") as fh:
             fh.write(updated)
         print(f"aggiornato README.md: {done:,} su {total:,}")
