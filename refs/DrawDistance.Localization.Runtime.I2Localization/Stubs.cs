@@ -20,6 +20,12 @@ namespace DrawDistance.Localization
         public I2LocalizationDatabase(IntPtr pointer) : base(pointer) { }
         public LanguageSourceAsset _databaseAsset => throw null;
         public string GetValue(string key, Language language) => throw null;
+
+        // A separate method, not a wrapper around the one above: patching only the
+        // plain overload left every lookup that passes parameters unanswered.
+        public string GetValue(string key, Language language,
+                               ILocalizationDatabase.ParameterGetter parameterGetter) => throw null;
+
         public Il2CppSystem.Collections.Generic.List<LanguageData> CreateLanguagesData() => throw null;
     }
 }

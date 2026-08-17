@@ -26,6 +26,13 @@ namespace DrawDistance.Localization
     public class ILocalizationDatabase : Il2CppObjectBase
     {
         public ILocalizationDatabase(IntPtr pointer) : base(pointer) { }
+
+        /// <summary>Only ever named, never called: it is what tells the two GetValue
+        /// overloads apart, and they are separate methods.</summary>
+        public class ParameterGetter : Il2CppObjectBase
+        {
+            public ParameterGetter(IntPtr pointer) : base(pointer) { }
+        }
     }
 
     public class LocalizationSystem : Il2CppObjectBase

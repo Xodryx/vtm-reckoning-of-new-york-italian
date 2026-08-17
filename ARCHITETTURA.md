@@ -68,7 +68,7 @@ nessun dato di localizzazione. Il perché sta in `STATO.md`.
 | `LanguageSetting.GetDefaultValue` (postfix) | ripristino su un profilo che non ha mai salvato una lingua |
 | `AutoSkipController.ResetTime` (finalizer) | rete diagnostica: se quel metodo torna a sollevare eccezioni, vogliamo la chiave nel log |
 
-### I tre percorsi di lettura
+### I quattro percorsi di lettura
 
 Non è un dettaglio: **l'interfaccia li usa contemporaneamente.** Nella schermata
 Impostazioni, "Lingua" arriva dal wrapper del gioco mentre `UI/Settings/Video/Title`

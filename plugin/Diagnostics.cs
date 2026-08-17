@@ -22,10 +22,36 @@ namespace RonyItalian
         /// <summary>Terms already reported, so a screen is described once and not per frame.</summary>
         private static readonly HashSet<string> Reported = new HashSet<string>();
 
-        /// <summary>Terms whose first service through the scene path is worth a line.</summary>
-        private const string InterestingPrefix = "UI/MainMenu/Rony/";
+        /// <summary>
+        /// Terms whose first service is worth a line. The screens that have gone wrong
+        /// so far: the character panel, and the settings, where an option can come out
+        /// blank while its term is translated.
+        /// </summary>
+        private static readonly string[] InterestingPrefixes =
+        {
+            "UI/MainMenu/Rony/",
+            "UI/Settings/",
+            "UI/Misc/",
+        };
+
+        private static bool Interesting(string term)
+        {
+            foreach (var prefix in InterestingPrefixes)
+            {
+                if (term.StartsWith(prefix, StringComparison.Ordinal))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>Untranslated keys are unfiltered, so they need a ceiling instead.</summary>
+        private const int MissingLimit = 60;
 
         private static ConfigEntry<bool> _verbose;
+        private static int _missing;
 
         internal static void Initialize(ConfigFile config)
         {
@@ -54,7 +80,7 @@ namespace RonyItalian
 
         internal static void SceneTermServed(string term, string via)
         {
-            if (!Verbose || !term.StartsWith(InterestingPrefix, StringComparison.Ordinal))
+            if (!Verbose || !Interesting(term))
             {
                 return;
             }
@@ -68,6 +94,39 @@ namespace RonyItalian
             }
 
             Plugin.Logger.LogInfo($"served via {via}: {term}");
+        }
+
+        /// <summary>
+        /// A term the game asked for that we have no translation for.
+        ///
+        /// The useful half of the picture. A screen can be missing text while every term
+        /// it seems to need is translated, because the key the game builds at runtime is
+        /// not the key in the table — and the only way to see that is to watch what it
+        /// asks for and fails to get.
+        /// </summary>
+        internal static void TermMissing(string key, string result)
+        {
+            // Deliberately unfiltered, unlike everything else here. Filtering by prefix
+            // is fine when you know what you are looking for; this is for the case where
+            // the key is not the shape you expected, which is exactly when a prefix
+            // filter hides the answer. Capped instead.
+            if (!Verbose || key == null || _missing >= MissingLimit)
+            {
+                return;
+            }
+
+            lock (Reported)
+            {
+                if (!Reported.Add($"missing\n{key}"))
+                {
+                    return;
+                }
+
+                _missing++;
+            }
+
+            Plugin.Logger.LogInfo(
+                $"chiesto ma non tradotto: '{key}' -> '{Excerpt(result ?? "<null>")}'");
         }
 
         /// <summary>
@@ -93,7 +152,7 @@ namespace RonyItalian
                 var final = localize.FinalTerm;
                 var looked = string.IsNullOrEmpty(final) ? term : final;
 
-                if (looked == null || !looked.StartsWith(InterestingPrefix, StringComparison.Ordinal))
+                if (looked == null || !Interesting(looked))
                 {
                     return;
                 }

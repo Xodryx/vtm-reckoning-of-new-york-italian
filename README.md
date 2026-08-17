@@ -182,7 +182,7 @@ regenerate it from your own copy in step 3 above.
 
 [ARCHITETTURA.md](ARCHITETTURA.md) documents the plugin, in Italian, including the
 things that cost the most to find out — the game keeps two separate language sources
-that both have to be updated, the interface reads text through three different paths,
+that both have to be updated, the interface reads text through four different paths, one of which is a second overload of the same method,
 an untranslated line does not merely render blank but stops the dialogue outright, and a
 Harmony postfix that answers through a by-reference parameter never reaches a native
 caller, so it reports a translation that arrived nowhere.

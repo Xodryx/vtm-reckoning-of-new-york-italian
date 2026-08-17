@@ -64,12 +64,55 @@ namespace RonyItalian
             if (key != null && Plugin.Translations.TryGet(key, out var italian))
             {
                 __result = italian;
+                Diagnostics.SceneTermServed(key, "database.GetValue");
                 return;
             }
+
+            Diagnostics.TermMissing(key, __result);
 
             if (string.IsNullOrEmpty(__result))
             {
                 // language is it, so this recursive call returns immediately from the guard.
+                __result = __instance.GetValue(key, Language.en) ?? string.Empty;
+            }
+        }
+    }
+
+    /// <summary>
+    /// The same read, with parameters, and it is a separate method.
+    ///
+    /// I2LocalizationDatabase.GetValue has two overloads and the one taking a
+    /// ParameterGetter does not go through the other, so patching only the plain one
+    /// left a whole path unanswered. Nothing on that path was ever reported as missing
+    /// either — it simply never reached us.
+    ///
+    /// What it looked like: the video settings showed "Modalità schermo" with nothing
+    /// beside it, while English showed "Windowed". Italian read its own cell, which is
+    /// empty because the translation lives in the plugin and not in the game's table.
+    /// </summary>
+    [HarmonyPatch(typeof(I2LocalizationDatabase), "GetValue",
+        new[] { typeof(string), typeof(Language), typeof(ILocalizationDatabase.ParameterGetter) })]
+    internal static class GetValueWithParametersPatch
+    {
+        private static void Postfix(I2LocalizationDatabase __instance, string key,
+                                    Language language, ref string __result)
+        {
+            if (language != Language.it)
+            {
+                return;
+            }
+
+            if (key != null && Plugin.Translations.TryGet(key, out var italian))
+            {
+                __result = italian;
+                Diagnostics.SceneTermServed(key, "database.GetValue(parametri)");
+                return;
+            }
+
+            Diagnostics.TermMissing(key, __result);
+
+            if (string.IsNullOrEmpty(__result))
+            {
                 __result = __instance.GetValue(key, Language.en) ?? string.Empty;
             }
         }

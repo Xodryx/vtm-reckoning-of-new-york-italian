@@ -229,7 +229,28 @@ lettura.** Non era evitabile: non c'è nessuna lettura da intercettare, perché 
 legge quelle etichette. Ha un interruttore suo, `FixCharacterPanel`, e nessun file del
 gioco viene toccato — la regola grossa resta intatta.
 
-### Il setaccio, e come si legge
+### Le vie di lettura sono quattro, e una ha due firme
+
+Costata due giri di caccia distinti, quindi vale scritta per intero.
+
+1. `I2LocalizationDatabase.GetValue(key, language)` — il wrapper del gioco.
+2. **`I2LocalizationDatabase.GetValue(key, language, parameterGetter)`** — la stessa
+   lettura con i parametri, ed è un **metodo a sé**: non passa dalla prima. Patchare solo
+   quella semplice lasciava scoperta un'intera strada. Sintomo: nelle impostazioni video
+   la modalità schermo era una riga vuota, mentre l'inglese mostrava *Windowed*.
+3. `TermData.GetTranslation` — l'interfaccia che usa I2 direttamente.
+4. `LanguageSourceData.TryGetTranslation`, e sopra di essa
+   `LocalizationManager.GetTranslation` / `GetTermTranslation` — i componenti `Localize`
+   in scena.
+
+**Il modo per trovarne altre**: `LogLocalizationDetail = true` registra i termini serviti
+*e* quelli chiesti senza traduzione. Quest'ultimo elenco è deliberatamente **senza filtro
+di prefisso**, con un tetto invece: filtrare per prefisso funziona quando sai che forma ha
+la chiave, ed è controproducente proprio quando la chiave non ha la forma che ti aspetti.
+Se un termine non compare né tra i serviti né tra i mancanti, non sta passando da nessuna
+patch: cerca un'altra firma.
+
+## Il setaccio, e come si legge
 
 `ReportUntranslatedLabels = true` nel config accende un rilevatore che segnala il testo
 a schermo che la traduzione non può raggiungere. Serve, ma **va letto con prudenza**:
