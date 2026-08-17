@@ -5,7 +5,7 @@ plugin. The game ships English and French only; this adds **Italiano** as a thir
 in the language selector and serves the translated text at runtime. **No game file is
 modified.**
 
-> ### Work in progress — 9,231 of 11,141 lines
+> ### Work in progress — 9,357 of 11,141 lines
 >
 > The plugin works end to end: Italian appears in the language selector, the choice
 > survives a restart, and translated lines show up in menus and dialogue. What is
