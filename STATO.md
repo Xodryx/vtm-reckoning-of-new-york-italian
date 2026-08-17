@@ -229,6 +229,28 @@ lettura.** Non era evitabile: non c'è nessuna lettura da intercettare, perché 
 legge quelle etichette. Ha un interruttore suo, `FixCharacterPanel`, e nessun file del
 gioco viene toccato — la regola grossa resta intatta.
 
+### Il setaccio, e come si legge
+
+`ReportUntranslatedLabels = true` nel config accende un rilevatore che segnala il testo
+a schermo che la traduzione non può raggiungere. Serve, ma **va letto con prudenza**:
+quasi tutto quello che trova è innocuo.
+
+Il gioco assegna ai componenti `I2.Loc.Localize` **il testo già risolto** invece della
+chiave, e i suoi prefab contengono testo di riempimento scritto in editor. Il risultato
+è che il setaccio vede fotogrammi intermedi che nessun giocatore vedrà mai: sulla stessa
+etichetta `QuestSubtitle` compaiono prima `Main Quest` e poi «Missione principale».
+**Regola: ogni stringa inglese trovata va cercata nella tabella dei termini prima di
+crederle.** Se la chiave esiste ed è tradotta, è un segnaposto e si ignora.
+
+Nella prima campagna su una sessione di gioco vera, di 56 segnalazioni **una sola** era
+reale: `New Glossary entry unlocked!`, il segnaposto della notifica condivisa
+`P_Notification_Codex`, che non esiste nella tabella dei termini e che il gioco a volte
+mostra senza scriverci sopra. Sta in `BakedText.cs`. Le altre 55 erano `Option Name`,
+`Person`, `Prop1`, gli slot di salvataggio: tutte spente, tutte riscritte dal codice.
+
+Un difetto vero ma non nostro, trovato per strada: `VersionNumber = 'v. ??? -'`. Il
+gioco non riempie mai il proprio numero di versione.
+
 ### Due conclusioni sbagliate che avevo scritto qui
 
 Restano scritte perché non vengano ripercorse.

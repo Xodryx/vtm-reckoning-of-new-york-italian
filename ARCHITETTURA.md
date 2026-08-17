@@ -22,14 +22,19 @@ Harmony delle letture. Vantaggi collaterali non da poco:
 - i dati del gioco restano intatti, quindi niente effetti collaterali;
 - una traduzione mancante ripiega sull'inglese senza celle nulle.
 
-Le eccezioni al principio sono due, entrambe inevitabili e circoscritte:
+Le eccezioni al principio sono tre, tutte inevitabili e circoscritte:
 
 1. **L'aggiunta della lingua**, indispensabile perché la voce compaia nel selettore.
 2. **Le due descrizioni della selezione del personaggio** (`CharacterPanelText.cs`):
    quelle etichette non hanno nessun componente di localizzazione e nessuno ci scrive,
-   quindi non c'è nessuna lettura da intercettare. È l'unico punto in cui il plugin
-   scrive nella scena, ha un interruttore suo (`FixCharacterPanel`) e non tocca
-   comunque nessun dato di localizzazione. Il perché sta in `STATO.md`.
+   quindi non c'è nessuna lettura da intercettare.
+3. **Le stringhe che esistono solo dentro un prefab** (`BakedText.cs`): non stanno nella
+   tabella dei termini, quindi non c'è nemmeno una chiave da tradurre. Si riconoscono
+   letteralmente dall'inglese e si sostituiscono. Per ora è una sola.
+
+Le ultime due scrivono nella scena invece di rispondere a una lettura, hanno ciascuna
+il proprio interruttore (`FixCharacterPanel`, `FixBakedText`) e non toccano comunque
+nessun dato di localizzazione. Il perché sta in `STATO.md`.
 
 ## I file
 
@@ -43,6 +48,8 @@ Le eccezioni al principio sono due, entrambe inevitabili e circoscritte:
 | `CurrentLanguage.cs` | la lingua in corso, senza interrogare il gioco a ogni battuta |
 | `SceneTranslation.cs` | risposta comune ai percorsi di lettura di I2 |
 | `CharacterPanelText.cs` | riempie le due etichette che il gioco non scrive mai |
+| `BakedText.cs` | sostituisce le stringhe che vivono solo dentro un prefab |
+| `UntranslatedReport.cs` | il setaccio che le trova: si accende dal config |
 | `Diagnostics.cs` | le poche righe di log che valgono il loro rumore |
 
 ## Gli agganci, e perché ciascuno esiste

@@ -262,6 +262,9 @@ namespace RonyItalian
         {
             Diagnostics.LocalizeRan(__instance);
             CharacterPanelText.OnLocalized(__instance);
+            BakedText.Apply(__instance);
+            UntranslatedReport.InspectLocalize(__instance);
+            UntranslatedReport.SweepAll();
         }
     }
 

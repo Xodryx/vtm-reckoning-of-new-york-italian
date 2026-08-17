@@ -45,6 +45,7 @@ namespace RonyItalian
             CharacterPanelText.Initialize(Config);
             Diagnostics.Initialize(Config);
             UntranslatedReport.Initialize(Config);
+            BakedText.Initialize(Config);
 
             if (!Enabled.Value)
             {
