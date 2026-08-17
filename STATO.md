@@ -1,8 +1,13 @@
 # Stato del lavoro
 
-Aggiornato il 17 agosto 2026. **10.394 battute tradotte su 11.141 (93,3%)**,
-880.280 caratteri su 932.478 (94,4%). Il conteggio nel README lo aggiorna da sé
-`apply.py`.
+Aggiornato il 17 agosto 2026. **11.141 battute tradotte su 11.141 (100%)**,
+932.478 caratteri su 932.478. Il conteggio nel README lo aggiorna da sé `apply.py`.
+Di *Reckoning of New York* sono 10.394: le altre 747 sono il demo di Cracovia,
+che non è di questo gioco (vedi sotto).
+
+**C'è un bug aperto, ed è nostro**: il plugin rompe la schermata di selezione del
+personaggio. Non è la traduzione — succede anche in francese. Vedi la sezione apposita:
+il metodo per isolarlo è già scritto, non ricominciare da zero.
 
 Questo documento serve a riprendere il lavoro senza rileggere tutto il resto.
 
@@ -138,9 +143,9 @@ fallisce con un errore di pathspec. Scrivi il messaggio in un file e usa `git co
   radio dice che «la luce scaccerà le tenebre», e in inglese il gioco si sente.
   L'acronimo `BFB` resta invece com'è, come la sigla di un'arma.
 
-## Cosa manca, in ordine
+## Il demo di Cracovia
 
-**Il demo di Cracovia è tradotto, ma sappi cos'è.** Le 747 battute di
+**È tradotto, ma sappi cos'è.** Le 747 battute di
 `CardinalTMP/*` (714), `VariaCRD/*` (25) e `ActorsCRD/*` (8) sono un altro progetto
 Draw Distance rimasto nella tabella: i personaggi sono Rosalind Davis, Rosa, Radek,
 Mirek; l'ambientazione è **piazza Podgórze a Cracovia**; e `VariaCRD/CRDZone/DemoEnd`
@@ -153,13 +158,6 @@ di Rosa resta **«inglese»** anche se il testo è italiano, perché il vicino �
 professore d'inglese in pensione e cambiarlo sfascerebbe la scena; e lo `statist` del
 palo — dal polacco *statysta*, «comparsa» — diventa **statista**, che in italiano è
 lo stesso identico falso amico.
-
-1. **Una vera prova di release.** `tools/release.sh` è scritto e provato — costruisce
-   lo zip, controlla i blocchi prima di compilare, e con `--with-bepinex` include
-   BepInEx rifiutandosi di farlo se manca il testo della licenza. Non è mai stato
-   provato con l'archivio vero di BepInEx (i test usavano zip finti), e nessuno ha
-   ancora installato il pacchetto su una macchina pulita seguendo il `LEGGIMI.txt`.
-   Va fatto prima di pubblicare qualsiasi cosa.
 
 Il controllo CI c'è (`.github/workflows/check.yml`) e la pipeline di release è
 `tools/release.sh`; il perché di certe scelte sta in `ARCHITETTURA.md`. Due vincoli
@@ -212,14 +210,58 @@ Cosa è già stato escluso, per non rifarlo:
 - `PadraicDescription` non viene **mai** richiesta, in sei avvii.
 - Una patch su `TMP_Text.set_text` non intercetta nessuna scrittura di quei testi.
 
-Quindi il sospetto non è più su cosa rispondiamo alle letture — quello funziona — ma su
-**cosa cambiamo nella sorgente**: `AddLanguage` allarga di una casella l'array di ogni
-termine, `UpdateDictionary(true)` lo ricostruisce, e impostiamo
-`OnMissingTranslation = Fallback`. Una di queste tre cose disturba il pannello.
+**Il test di isolamento è già stato fatto, ed è netto.** Avviando il gioco *moddato*
+direttamente in francese (riavvio pulito, non cambio a caldo) la schermata è rotta
+esattamente come in italiano. Quindi:
 
-Il prossimo passo è isolarla: **avviare il gioco moddato direttamente in francese.** Se
-si rompe anche il francese, la causa è la registrazione della lingua e non la
-traduzione, e va cercata fra quelle tre righe di `LanguageRegistration.Register`.
+- non c'entra il testo italiano,
+- non c'entrano le patch di lettura, che rispondono correttamente,
+- **la causa è il solo fatto che registriamo una lingua in più.**
+
+Il colpevole è dentro `LanguageRegistration.Register`, e i candidati sono tre:
+
+1. `source.AddLanguage(...)` — allarga di una casella l'array `Languages` di **ogni**
+   termine, portandolo da 2 a 3, con `null` nella nuova.
+2. `source.UpdateDictionary(true)` — ricostruisce l'indice interno della sorgente.
+3. `source.OnMissingTranslation = MissingTranslationAction.Fallback` — cambia il
+   comportamento di I2 sui termini senza traduzione.
+
+L'ipotesi più promettente è la prima: se il gioco (o il wrapper `DrawDistance.Localization`)
+si è costruito la propria mappa lingua→colonna **prima** che noi allargassimo gli array,
+dopo la registrazione quel pannello legge una colonna sbagliata — e trova `null` sia in
+italiano sia in francese. Spiegherebbe perché le nostre patch restituiscono il valore
+giusto e a schermo arriva altro: il pannello sta chiedendo un indice diverso.
+
+### Come riprendere l'indagine
+
+Un interruttore per volta, riavviando **in francese** (così il francese fa da metro: se
+torna a posto, quella riga è la colpevole).
+
+- Base di partenza: `BepInEx/config/dev.xodryx.rony.italian.cfg`, `Enabled = false`.
+  Il plugin non fa niente e la schermata deve funzionare. Conferma che il banco di
+  prova è sano.
+- Poi riattivare e disabilitare **una alla volta** le tre righe qui sopra. Conviene
+  aggiungere tre voci di config temporanee invece di ricompilare ogni volta.
+- Se il colpevole è `AddLanguage`, la via d'uscita non è rinunciare alla lingua nel
+  selettore, ma **registrarla prima** che il gioco costruisca le proprie mappe: la patch
+  su `CreateLanguagesData` c'è già proprio per questo, quindi andrà capito chi si
+  costruisce l'indice ancora prima.
+
+**Come NON provarlo:** cambiare lingua dal menù a gioco avviato non aggiorna quella
+schermata. Restano i testi della lingua precedente e sembrano un difetto della lingua
+nuova — ci ho perso mezza giornata. Si riconosce dalla filigrana in basso a destra, che
+resta indietro.
+
+## Cosa manca, in ordine
+
+1. **Il bug della selezione del personaggio** (sopra). È l'unica cosa rotta di cui
+   siamo responsabili, ed è la priorità: non è la traduzione, è la registrazione della
+   lingua, e il metodo per isolarla è già scritto.
+2. **Una vera prova di release.** `tools/release.sh` costruisce lo zip, controlla i
+   blocchi prima di compilare e con `--with-bepinex` include BepInEx rifiutandosi di
+   farlo se manca il testo della licenza. Provato solo con archivi BepInEx finti, mai
+   con quello ufficiale, e mai installato su una macchina pulita seguendo il
+   `LEGGIMI.txt`. Da fare prima di pubblicare qualsiasi cosa.
 
 ## Le due cose che servono da un umano
 
