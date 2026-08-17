@@ -12,9 +12,10 @@ Questo documento serve a riprendere il lavoro senza rileggere tutto il resto.
 già in italiano, il flusso di traduzione ha la validazione automatica. Da qui in
 avanti è solo traduzione: non c'è più reverse engineering da fare.
 
-**Di *Reckoning of New York* non resta più niente da tradurre.** Le 747 battute
-che il contatore segna come mancanti sono tutte del demo di Cracovia (vedi sotto),
-più undici chiavi che nell'originale sono vuote.
+**La traduzione è completa: 11.141 su 11.141.** Comprese le 747 battute del demo di
+Cracovia, che non è contenuto di questo gioco (vedi sotto) ma è stato tradotto per
+completezza. Le uniche chiavi non tradotte sono le undici che nell'originale sono
+vuote. Il conto del solo *Reckoning of New York* è **10.394**.
 
 **Attenzione a come si conta ciò che manca.** `next_block.py` raggruppa sul
 secondo pezzo della chiave e mostra i primi trenta gruppi: un gruppo da una o due
@@ -139,15 +140,21 @@ fallisce con un errore di pathspec. Scrivi il messaggio in un file e usa `git co
 
 ## Cosa manca, in ordine
 
-1. **Il demo di Cracovia: 747 battute, e non è *Reckoning of New York*.** Sono
-   `CardinalTMP/*` (714), `VariaCRD/*` (25) e `ActorsCRD/*` (8), tutte dello stesso
-   materiale: un altro progetto Draw Distance rimasto nella tabella. I personaggi
-   sono Rosalind Davis, Rosa, Radek, Mirek; l'ambientazione è **piazza Podgórze a
-   Cracovia**; certe righe non sono nemmeno in inglese (`CRD_NEIGHBOR/LINE-3` è
-   polacco: *«Halo! Co to za łażenie ludziom po balkonach?»*); e `VariaCRD/CRDZone/DemoEnd`
-   dice testualmente *«This concludes the demo.»*. `TMP` sta per *temporary*.
-   Nessun giocatore di RoNY lo vedrà mai. **In attesa di una decisione dell'utente.**
-2. **Una vera prova di release.** `tools/release.sh` è scritto e provato — costruisce
+**Il demo di Cracovia è tradotto, ma sappi cos'è.** Le 747 battute di
+`CardinalTMP/*` (714), `VariaCRD/*` (25) e `ActorsCRD/*` (8) sono un altro progetto
+Draw Distance rimasto nella tabella: i personaggi sono Rosalind Davis, Rosa, Radek,
+Mirek; l'ambientazione è **piazza Podgórze a Cracovia**; e `VariaCRD/CRDZone/DemoEnd`
+dice testualmente *«This concludes the demo.»*. `TMP` sta per *temporary*. Nessun
+giocatore di RoNY lo vedrà mai: è tradotto perché il contatore fosse pieno e onesto.
+
+Tre scelte prese lì dentro, che valgono se quel materiale tornasse mai utile: il
+**polacco resta polacco** (Rosa ne capisce sì e no una parola, e lo dice); la lingua
+di Rosa resta **«inglese»** anche se il testo è italiano, perché il vicino è un
+professore d'inglese in pensione e cambiarlo sfascerebbe la scena; e lo `statist` del
+palo — dal polacco *statysta*, «comparsa» — diventa **statista**, che in italiano è
+lo stesso identico falso amico.
+
+1. **Una vera prova di release.** `tools/release.sh` è scritto e provato — costruisce
    lo zip, controlla i blocchi prima di compilare, e con `--with-bepinex` include
    BepInEx rifiutandosi di farlo se manca il testo della licenza. Non è mai stato
    provato con l'archivio vero di BepInEx (i test usavano zip finti), e nessuno ha

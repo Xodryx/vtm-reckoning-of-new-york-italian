@@ -5,12 +5,18 @@ plugin. The game ships English and French only; this adds **Italiano** as a thir
 in the language selector and serves the translated text at runtime. **No game file is
 modified.**
 
-> ### Work in progress — 10,583 of 11,141 lines
+> ### Work in progress — 11,141 of 11,141 lines
 >
-> The plugin works end to end: Italian appears in the language selector, the choice
-> survives a restart, and translated lines show up in menus and dialogue. What is
-> missing is the translation itself. Anything not yet translated stays in English, so
-> the game remains fully playable at every point.
+> Every line is translated: the eight nights, the endings, the optional missions, the
+> in-game glossary, the journal, the achievements and the interface.
+>
+> That total includes **747 lines that are not from this game**. The localization table
+> still carries an unreleased demo of another Draw Distance title — a different cast, set
+> in Podgórze in Kraków, with some lines in Polish and one that reads *"This concludes
+> the demo."* No player of *Reckoning of New York* can reach any of it. It is translated
+> for completeness, but the figure for this game alone is **10,394**.
+>
+> Translated is not the same as proofread. See below.
 
 > ### Made with AI — expect mistakes
 >
