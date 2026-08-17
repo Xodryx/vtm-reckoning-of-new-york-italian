@@ -58,7 +58,8 @@ nessun dato di localizzazione. Il perché sta in `STATO.md`.
 |---|---|
 | `I2LocalizationDatabase.CreateLanguagesData` (prefix) | registra l'italiano **prima** che la lista lingue venga costruita e messa in cache |
 | `LocalizationSystem.Initialize` (postfix) | primo punto in cui il sistema è utilizzabile. `InitializeLanguages`, malgrado il nome, non viene **mai** chiamato all'avvio |
-| `I2LocalizationDatabase.GetValue` (postfix) | percorso di lettura del wrapper del gioco: serve la traduzione, altrimenti ripiega sull'inglese |
+| `I2LocalizationDatabase.GetValue(chiave, lingua)` (postfix) | percorso di lettura del wrapper del gioco: serve la traduzione, altrimenti ripiega sull'inglese |
+| `I2LocalizationDatabase.GetValue(chiave, lingua, parametri)` (postfix) | **la stessa lettura con i parametri, ed è un metodo a sé**: non passa dalla prima. Vedi sotto |
 | `TermData.GetTranslation` (postfix) | **secondo** percorso di lettura, per l'interfaccia che usa I2 direttamente |
 | `LanguageSourceData.TryGetTranslation` (postfix) | **terzo** percorso, quello dei componenti `Localize` in scena. Consegna per riferimento: vedi sotto |
 | `LocalizationManager.GetTranslation` / `GetTermTranslation` (postfix) | lo stesso terzo percorso preso in cima, dove la risposta torna **per valore** ed è quindi l'unica che arriva davvero |
@@ -78,6 +79,17 @@ grezze** al posto del testo.
 Il terzo è quello dei componenti `I2.Loc.Localize` appoggiati direttamente agli
 oggetti della scena: non passa né dal wrapper del gioco né da `TermData`, ma da
 `LocalizationManager.GetTranslation` → `TryGetTranslation` → quella della sorgente.
+
+Il quarto **non è un percorso diverso ma la stessa `GetValue` con un'altra firma**,
+quella che accetta un `ParameterGetter`. Non chiama la prima: è un metodo indipendente.
+Averla trascurata lasciava scoperta un'intera strada, e nel modo peggiore — il termine
+non risultava né servito né mancante, perché non arrivava affatto. A schermo: nelle
+impostazioni video la modalità schermo era una riga vuota, mentre l'inglese leggeva la
+propria cella e mostrava *Windowed*.
+
+**Regola generale**: prima di concludere che un testo non passa da nessuna traduzione,
+controllare che il metodo non abbia altre firme. `grep -a -o -E "NativeMethodInfoPtr_NOME[A-Za-z0-9_]*"`
+sull'assembly interop le elenca tutte.
 
 `TermData` porta con sé la propria chiave nel campo `Term`, quindi la stessa
 ricerca funziona su tutti i percorsi.
