@@ -24,7 +24,7 @@ namespace RonyItalian
         // Stays below 1.0 until a person has played through and checked the text: the
         // translation is complete, which is not the same as verified, and this number is
         // the only thing a player sees before downloading.
-        public const string Version = "0.9.0";
+        public const string Version = "0.9.1";
 
         internal static ManualLogSource Logger;
         internal static TranslationStore Translations = TranslationStore.Empty();

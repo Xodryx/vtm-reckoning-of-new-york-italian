@@ -125,6 +125,21 @@ if [ -n "$BEPINEX_ZIP" ]; then
     mkdir -p "$STAGE/licenses"
     cp "$LICENSE_DIR"/*.txt "$STAGE/licenses/"
 
+    # BepInEx opens a console window on every launch by default, and the archives carry
+    # no configuration, so a player installing this would get one for good. The same
+    # lines go to BepInEx/LogOutput.log regardless: the console is for whoever is
+    # working on the mod, not for whoever is playing it.
+    #
+    # Only the one key we mean is written. BepInEx fills the rest of the file in with
+    # its own defaults on first run, so this cannot go stale when BepInEx changes.
+    mkdir -p "$STAGE/BepInEx/config"
+    cat > "$STAGE/BepInEx/config/BepInEx.cfg" <<'BEPINEXCFG'
+[Logging.Console]
+
+## Enables showing a console for log output.
+Enabled = false
+BEPINEXCFG
+
     cat > "$STAGE/LICENZE.txt" <<'ATTRIBUTION'
 COMPONENTI DI TERZE PARTI INCLUSI IN QUESTO PACCHETTO
 
@@ -183,7 +198,11 @@ fi
 # wording for both was wrong in one of them: it told players of the bundled package to
 # go and install BepInEx, and players of the plain one nothing about removing it.
 if [ -n "$BEPINEX_ZIP" ]; then
-    BEPINEX_HINT=""
+    BEPINEX_HINT="- Se avevi già BepInEx installato, questo pacchetto ne sovrascrive la
+  configurazione (BepInEx/config/BepInEx.cfg) per spegnere la finestra nera
+  della console, che a chi gioca non serve. Il log resta in
+  BepInEx/LogOutput.log. Se ti servivano impostazioni tue, salvale prima.
+"
     UNINSTALL_EXTRA="Per togliere anche BepInEx, che era incluso in questo pacchetto: cancella la
 cartella BepInEx, la cartella dotnet, winhttp.dll, doorstop_config.ini,
 .doorstop_version, changelog.txt, LICENZE.txt e la cartella licenses.
