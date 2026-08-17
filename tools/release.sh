@@ -187,6 +187,21 @@ Traduzione amatoriale, senza alcun rapporto con Draw Distance né con Paradox
 Interactive. Il gioco non è incluso: serve una copia regolare.
 
 
+NON È ANCORA STATA RILETTA DA UNA PERSONA
+
+La traduzione è completa — tutte le 11.141 battute del gioco — ma non è ancora stata
+verificata da una rilettura umana giocandoci. Per questo la versione resta sotto la
+1.0: completo e verificato non sono la stessa cosa.
+
+Se trovi un errore, e soprattutto una frase rivolta a Kali con il genere sbagliato
+(l'inglese non lo marca, quindi è l'errore più facile da non vedere), segnalalo qui:
+
+  https://github.com/Xodryx/vtm-reckoning-of-new-york-italian
+
+Puoi anche correggerlo da solo: BepInEx/plugins/italian.json è un file di testo, si
+apre con un editor qualsiasi e il gioco lo rilegge a ogni avvio.
+
+
 COME SI INSTALLA
 
 1. Copia il contenuto di questo archivio nella cartella del gioco, quella che

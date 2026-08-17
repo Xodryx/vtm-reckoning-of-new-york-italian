@@ -326,6 +326,19 @@ riavviare il gioco tramite Steam, che lancia la *sua* copia e la prova non prova
 Non va nel pacchetto: un giocatore vero installa dentro la cartella di Steam, dove il
 problema non esiste.
 
+## Numerazione delle versioni
+
+**Le versioni pubblicate restano sotto la 1.0 finché la traduzione non è stata riletta
+da una persona giocandoci.** Decisione dell'utente, e ha ragione: il numero di versione
+è l'unica cosa che un giocatore vede prima di scaricare, e dare 1.0 a un testo mai
+verificato prometterebbe una solidità che non c'è. **Completo e verificato non sono la
+stessa cosa**, e qui siamo al primo.
+
+In pratica: `Version` in `plugin/Plugin.cs` resta `0.x` — da lì il numero si propaga da
+solo al nome dello zip e alla riga di log. La prima pubblica può essere `0.9.0`, poi
+`0.9.1`, `0.9.2` a ogni correzione. La `1.0.0` solo dopo una partita giocata per intero.
+Il `LEGGIMI.txt` lo dice esplicitamente al giocatore e spiega come segnalare gli errori.
+
 ## Le licenze del pacchetto con BepInEx
 
 Verificate una per una il 17 agosto 2026, interrogando ogni progetto a monte. **Non
