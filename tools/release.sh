@@ -60,7 +60,7 @@ LICENSE_DIR="$PROJECT_DIR/reference/licenses"
 # The two variants used to share a file name, so building one silently replaced the
 # other and there was no telling them apart afterwards either.
 if [ -n "$BEPINEX_ZIP" ]; then
-    ARCHIVE="$DIST_DIR/RonyItalian-ita-v$VERSION-con-bepinex.zip"
+    ARCHIVE="$DIST_DIR/RonyItalian-ita-v$VERSION-with-bepinex.zip"
 else
     ARCHIVE="$DIST_DIR/RonyItalian-ita-v$VERSION.zip"
 fi

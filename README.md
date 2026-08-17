@@ -52,7 +52,7 @@ first one is the one to take:
 
 | | |
 |---|---|
-| **`RonyItalian-ita-…-con-bepinex.zip`** | Everything included. Unpack it into the game folder and you are done. |
+| **`RonyItalian-ita-…-with-bepinex.zip`** | Everything included. Unpack it into the game folder and you are done. |
 | **`RonyItalian-ita-….zip`** | 459 KB, the translation alone, for anyone who already runs BepInEx 6 for IL2CPP. |
 
 ### Where the files go

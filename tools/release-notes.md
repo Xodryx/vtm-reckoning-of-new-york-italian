@@ -29,7 +29,7 @@ di sviluppo su <https://builds.bepinex.dev/projects/bepinex_be> (il file
 > con questo gioco **non funziona**. Deve essere la 6 per IL2CPP.
 
 Se preferisci non pensarci, quando è allegato c'è anche
-`RonyItalian-ita-v@VERSION@-con-bepinex.zip`, che include BepInEx già configurato: si
+`RonyItalian-ita-v@VERSION@-with-bepinex.zip`, che include BepInEx già configurato: si
 scompatta e basta.
 
 ## Come si installa
