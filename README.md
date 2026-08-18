@@ -199,6 +199,39 @@ what the plugin does about them.
 
 [RICOGNIZIONE.md](RICOGNIZIONE.md) is the technical survey the project started from.
 
+## Credits and thanks
+
+**[Draw Distance](https://drawdistance.net/)** wrote the game and every line this project
+translates. Their words are the whole of the work here; ours is only the Italian for
+them. The game runs on a framework they built themselves across three *Vampire* titles —
+thirty-seven assemblies of it — and reading through it was an education.
+
+**The official Italian translation of *Coteries of New York*** is where the terminology
+comes from. `Kindred` is *Fratelli*, `Final Death` is *Morte Ultima*, `Embrace` is
+*Abbraccio* — not because those readings were invented here, but because they were
+already settled by translators who did the work first, in the same setting, for the same
+publisher. Nothing in the glossary is guessed when a published Italian source exists.
+
+**[BepInEx](https://github.com/BepInEx/BepInEx)** and the fifteen projects it carries
+make this possible at all. Without a loader that can inject into an IL2CPP build, an
+Italian translation of this game would mean editing the game's own files, which is
+exactly what this project set out not to do. Full attribution and licences travel in the
+all-in-one package.
+
+**[I2 Localization](https://inter-illusion.com/)** is the localization system the game
+uses. Its habit of keeping multiple sources and several read paths cost days to
+understand, and its fallback behaviour is what lets a translation be served at runtime
+without touching a single game file.
+
+**[Xodryx](https://github.com/Xodryx)** directed the translation, made every call on
+register, tone and terminology, and — this is the part no tool can do — played the game
+and found the things that were wrong on screen while every automated check said the
+text was fine.
+
+The Italian text and the C# plugin were written by **Claude**, an AI assistant, under
+that direction. This is stated plainly at the top of this page as well, because a reader
+deciding whether to install it deserves to know before they download rather than after.
+
 ## Licence
 
 The plugin source is MIT. The translated text is a derivative work of the game's script
