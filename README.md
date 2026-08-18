@@ -16,22 +16,26 @@ the game through in Italian to proofread them — see
 
 ## Quick start
 
-1. Download **`RonyItalian-ita-…-with-bepinex.zip`** from the
-   [latest release](../../releases/latest). It carries everything, BepInEx included.
-2. Unpack it into the **game folder** — the one holding `VtM Reckoning of New York.exe`.
-   On a default Steam install that is
-   `C:\Program Files (x86)\Steam\steamapps\common\Vampire The Masquerade - Reckoning of New York\`.
-   Let Windows merge the folders when it asks.
-3. Start the game. **The first launch takes about half a minute** while BepInEx generates
-   the game's interop assemblies, and the window looks frozen for all of it. It then comes
-   up in Italian on its own, and later launches are normal speed.
+1. **Download** [`RonyItalian-ita-…-with-bepinex.zip`](../../releases/latest) from the
+   latest release. It carries everything, BepInEx included.
+2. **Unpack it into the game folder** — the one holding `VtM Reckoning of New York.exe`,
+   not a subfolder. Let Windows merge the folders when it asks. On a default Steam
+   install that folder is:
 
-Nothing is written over the game's own files, so there is nothing to repair afterwards:
-deleting two files puts it back in English.
+   ```
+   C:\Program Files (x86)\Steam\steamapps\common\Vampire The Masquerade - Reckoning of New York\
+   ```
 
-Already running BepInEx 6 for IL2CPP? Take the smaller archive instead —
-[Installing](#installing) has both. Text still in English?
-[Troubleshooting](#troubleshooting).
+3. **Start the game.** The first launch takes about half a minute and the window looks
+   frozen for all of it, while BepInEx generates the game's interop assemblies. It then
+   comes up in Italian on its own, and later launches are normal speed.
+
+No game file is overwritten, so there is nothing to repair afterwards: uninstalling is
+deleting two files.
+
+> Already running BepInEx 6 for IL2CPP? Take the smaller archive —
+> [Installing](#installing) has both. Text still in English?
+> [Troubleshooting](#troubleshooting).
 
 ## Status of the translation
 
@@ -55,8 +59,8 @@ is translated for completeness, but the figure for this game alone is **10,394**
 ### Made with AI — expect mistakes
 
 Both the Italian text and the C# plugin are written by an AI assistant (Claude), directed
-and reviewed by a human. **Nobody has played the game through in Italian to proofread the
-result.** Treat it as a draft that runs, not as a finished localisation.
+and reviewed by a human — reviewed at the desk, though, never by playing. Treat it as a
+draft that runs, not as a finished localisation.
 
 - **Terminology should be reliable.** Glossary terms are not invented: they come from the
   official Italian translation of *Coteries of New York*, the same setting and the same
@@ -121,9 +125,8 @@ Vampire The Masquerade - Reckoning of New York\
 Only the last two lines are this project. Everything else in that list comes from
 BepInEx, and is already in place if you took the smaller archive.
 
-The game then starts in Italian on its own. **The first launch takes about half a minute**
-while BepInEx generates the game's interop assemblies, and the window looks frozen for all
-of it.
+The game then starts in Italian on its own, after the slow first launch described in
+[Quick start](#quick-start).
 
 ## Troubleshooting
 
@@ -203,16 +206,16 @@ twelve game types the plugin touches. `bash tools/build-refs.sh` builds them, an
 plugin then compiles against those alone. That is what
 [the build workflow](.github/workflows/build.yml) does on every push.
 
-It is a compile check and nothing more. A stub that has drifted from the real API
-compiles happily and fails when the game loads it, which no runner can see, so the DLL
-that ships is always built locally against the real assemblies.
+It is a compile check and nothing more. A stub that has drifted from the real API still
+compiles happily, and fails only when the game loads it — which no runner can see. The
+DLL that ships is therefore always built locally, against the real assemblies.
 
 ## Contributing a translation
 
 See [FLUSSO.md](FLUSSO.md) for the working loop, in Italian. In short: pick a
 conversation with `tools/next_block.py`, fill in the block it writes, and run
-`tools/apply.py`, which refuses to merge anything with a broken marker or an
-overlong line.
+`tools/apply.py`. It refuses to merge anything with a broken marker or an overlong
+line.
 
 The English text of the game is **not** in this repository: it is copyrighted, and you
 regenerate it from your own copy, in step 3 of [Building](#building).
@@ -257,13 +260,11 @@ all-in-one package.
 
 **[I2 Localization](https://inter-illusion.com/)** is the localization system the game
 uses. Its habit of keeping multiple sources and several read paths cost days to
-understand, and its fallback behaviour is what lets a translation be served at runtime
+understand. Its fallback behaviour is what lets a translation be served at runtime
 without touching a single game file.
 
 The Italian text and the C# plugin were written by **Claude**, an AI assistant, directed
-and reviewed by a human. This is stated plainly at the top of this page as well, because
-a reader deciding whether to install it deserves to know before they download rather than
-after.
+and reviewed by a human.
 
 ## Licence
 
