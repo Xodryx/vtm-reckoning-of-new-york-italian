@@ -223,14 +223,10 @@ uses. Its habit of keeping multiple sources and several read paths cost days to
 understand, and its fallback behaviour is what lets a translation be served at runtime
 without touching a single game file.
 
-**[Xodryx](https://github.com/Xodryx)** directed the translation, made every call on
-register, tone and terminology, and — this is the part no tool can do — played the game
-and found the things that were wrong on screen while every automated check said the
-text was fine.
-
-The Italian text and the C# plugin were written by **Claude**, an AI assistant, under
-that direction. This is stated plainly at the top of this page as well, because a reader
-deciding whether to install it deserves to know before they download rather than after.
+The Italian text and the C# plugin were written by **Claude**, an AI assistant, directed
+and reviewed by a human. This is stated plainly at the top of this page as well, because
+a reader deciding whether to install it deserves to know before they download rather than
+after.
 
 ## Licence
 
