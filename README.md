@@ -5,42 +5,70 @@ plugin. The game ships English and French only; this adds **Italiano** as a thir
 in the language selector and serves the translated text at runtime. **No game file is
 modified.**
 
+The translation and the plugin were written by an AI assistant, and no human has played
+the game through in Italian to proofread them — see
+[Status of the translation](#status-of-the-translation) before you decide.
+
 | | |
 |---|---|
 | ![The main menu in Italian](docs/main-menu.jpg) | ![Italiano in the game's own language setting](docs/settings-language.jpg) |
 | The main menu | **Italiano**, in the game's own language setting |
+
+## Quick start
+
+1. Download **`RonyItalian-ita-…-with-bepinex.zip`** from the
+   [latest release](../../releases/latest). It carries everything, BepInEx included.
+2. Unpack it into the **game folder** — the one holding `VtM Reckoning of New York.exe`.
+   On a default Steam install that is
+   `C:\Program Files (x86)\Steam\steamapps\common\Vampire The Masquerade - Reckoning of New York\`.
+   Let Windows merge the folders when it asks.
+3. Start the game. **The first launch takes about half a minute** while BepInEx generates
+   the game's interop assemblies, and the window looks frozen for all of it. It then comes
+   up in Italian on its own, and later launches are normal speed.
+
+Nothing is written over the game's own files, so there is nothing to repair afterwards:
+deleting two files puts it back in English.
+
+Already running BepInEx 6 for IL2CPP? Take the smaller archive instead —
+[Installing](#installing) has both. Text still in English?
+[Troubleshooting](#troubleshooting).
+
+## Status of the translation
 
 > ### Translated — 11,141 of 11,141 lines
 >
 > Every line is translated: the eight nights, the endings, the optional missions, the
 > in-game glossary, the journal, the achievements and the interface.
 >
-> That total includes **747 lines that are not from this game**. The localization table
-> still carries an unreleased demo of another Draw Distance title — a different cast, set
-> in Podgórze in Kraków, with some lines in Polish and one that reads *"This concludes
-> the demo."* No player of *Reckoning of New York* can reach any of it. It is translated
-> for completeness, but the figure for this game alone is **10,394**.
->
-> Translated is not the same as proofread. See below.
+> Translated is not the same as proofread.
 
-> ### Made with AI — expect mistakes
->
-> Both the Italian text and the C# plugin are written by an AI assistant (Claude),
-> directed and reviewed by a human. **Nobody has played the game through in Italian to
-> proofread the result.** Treat it as a draft that runs, not as a finished localisation.
->
-> - **Terminology should be reliable.** Glossary terms are not invented: they come from
->   the official Italian translation of *Coteries of New York*, the same setting and the
->   same vocabulary. `Kindred` is *Fratelli*, `Final Death` is *Morte Ultima*.
-> - **Tone and register are where errors will be.** An automated check can verify that a
->   `<link="Sire">` marker survived; it cannot tell that a sarcastic line reads as
->   sincere.
-> - **Subtitles may drift from the voice acting.** The game is fully voiced in English
->   and Italian runs longer. Lines are checked against a length budget, but the budget is
->   an estimate, not the game's renderer.
->
-> Please [open an issue](../../issues) for anything that reads wrong. Mistakes nobody
-> reports simply stay in.
+<details>
+<summary>That total includes 747 lines that are not from this game</summary>
+
+The localization table still carries an unreleased demo of another Draw Distance title —
+a different cast, set in Podgórze in Kraków, with some lines in Polish and one that reads
+*"This concludes the demo."* No player of *Reckoning of New York* can reach any of it. It
+is translated for completeness, but the figure for this game alone is **10,394**.
+
+</details>
+
+### Made with AI — expect mistakes
+
+Both the Italian text and the C# plugin are written by an AI assistant (Claude), directed
+and reviewed by a human. **Nobody has played the game through in Italian to proofread the
+result.** Treat it as a draft that runs, not as a finished localisation.
+
+- **Terminology should be reliable.** Glossary terms are not invented: they come from the
+  official Italian translation of *Coteries of New York*, the same setting and the same
+  vocabulary. `Kindred` is *Fratelli*, `Final Death` is *Morte Ultima*.
+- **Tone and register are where errors will be.** An automated check can verify that a
+  `<link="Sire">` marker survived; it cannot tell that a sarcastic line reads as sincere.
+- **Subtitles may drift from the voice acting.** The game is fully voiced in English and
+  Italian runs longer. Lines are checked against a length budget, but the budget is an
+  estimate, not the game's renderer.
+
+Please [open an issue](../../issues) for anything that reads wrong. Mistakes nobody
+reports simply stay in.
 
 ## Compatibility
 
@@ -97,7 +125,22 @@ The game then starts in Italian on its own. **The first launch takes about half 
 while BepInEx generates the game's interop assemblies, and the window looks frozen for all
 of it.
 
-### Uninstalling
+## Troubleshooting
+
+If the text stays English:
+
+- Check that both files really are in `BepInEx\plugins`, not in `BepInEx` itself and not
+  in a nested `BepInEx\BepInEx`. Unpacking into the wrong folder is the usual cause.
+- Open `BepInEx\LogOutput.log`: the plugin's lines start with
+  `Reckoning of New York - Italian`. If there are none, BepInEx is not loading it.
+- If you installed BepInEx yourself, make sure it is **6 for IL2CPP**. Version 5, the one
+  the main site offers first, does not work with this game.
+
+If instead a single label is English, blank, or shows a raw key like `UI/Settings/…`, that
+is worth [an issue](../../issues/new/choose): the form asks for the one detail that makes
+it quick to fix.
+
+## Uninstalling
 
 Delete these two files:
 
@@ -121,15 +164,6 @@ changelog.txt LICENZE.txt  LEGGIMI.txt
 
 That leaves the folder exactly as Steam installed it. Keep `BepInEx\` if you use other
 mods — deleting the two plugin files is enough on its own.
-
-### If the text stays English
-
-- Check that both files really are in `BepInEx\plugins`, not in `BepInEx` itself and not
-  in a nested `BepInEx\BepInEx`. Unpacking into the wrong folder is the usual cause.
-- Open `BepInEx\LogOutput.log`: the plugin's lines start with
-  `Reckoning of New York - Italian`. If there are none, BepInEx is not loading it.
-- If you installed BepInEx yourself, make sure it is **6 for IL2CPP**. Version 5, the one
-  the main site offers first, does not work with this game.
 
 ## Building
 
@@ -181,16 +215,19 @@ conversation with `tools/next_block.py`, fill in the block it writes, and run
 overlong line.
 
 The English text of the game is **not** in this repository: it is copyrighted, and you
-regenerate it from your own copy in step 3 above.
+regenerate it from your own copy, in step 3 of [Building](#building).
 
 ## How it works
 
-[ARCHITETTURA.md](ARCHITETTURA.md) documents the plugin, in Italian, including the
-things that cost the most to find out — the game keeps two separate language sources
-that both have to be updated, the interface reads text through four different paths, one of which is a second overload of the same method,
-an untranslated line does not merely render blank but stops the dialogue outright, and a
-Harmony postfix that answers through a by-reference parameter never reaches a native
-caller, so it reports a translation that arrived nowhere.
+[ARCHITETTURA.md](ARCHITETTURA.md) documents the plugin, in Italian, including the things
+that cost the most to find out:
+
+- the game keeps two separate language sources, and both have to be updated;
+- the interface reads text through four different paths, one of them a second overload of
+  the same method;
+- an untranslated line does not merely render blank, it stops the dialogue outright;
+- a Harmony postfix that answers through a by-reference parameter never reaches a native
+  caller, so it reports a translation that arrived nowhere.
 
 A few labels are not localized at all and show whatever was typed into the prefab: both
 character descriptions on the selection screen, and one notification. The unmodified
