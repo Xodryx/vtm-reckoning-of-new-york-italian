@@ -1,0 +1,28 @@
+[h2]Segnalare un errore[/h2]
+
+È la cosa più utile che si possa fare per questa traduzione, visto che nessuno l'ha ancora riletta giocando.
+
+La cosa che serve davvero è [b]il testo italiano esatto che hai letto a schermo[/b]: con quello si trova la battuta in un secondo, senza si cerca a mano fra undicimila. Uno screenshot vale ancora di più. Se è una questione di concordanza — Kali è una donna, Pádraic un uomo, e l'inglese alla seconda persona non marca il genere — di' anche chi parla.
+
+Puoi scrivere nei commenti di questa guida, oppure usare i [url=https://github.com/Xodryx/vtm-reckoning-of-new-york-italian/issues/new/choose]moduli di segnalazione su GitHub[/url], che chiedono già le cose giuste.
+
+[h2]Crediti[/h2]
+
+[b]Draw Distance[/b] ha scritto il gioco e ogni riga che questa traduzione traduce. Le loro parole sono tutto il lavoro; qui c'è solo l'italiano per dirle.
+
+[b]La traduzione italiana ufficiale di [i]Coteries of New York[/i][/b] è da dove viene la terminologia. Niente è indovinato quando esiste già una resa italiana pubblicata, nella stessa ambientazione e per lo stesso editore.
+
+[b]BepInEx[/b] e i quindici progetti che porta con sé rendono possibile tutto questo. Senza un caricatore capace di inserirsi in un gioco compilato così, tradurlo vorrebbe dire modificarne i file — esattamente quello che questo progetto non voleva fare. Licenze e attribuzioni complete viaggiano dentro l'archivio.
+
+Il testo italiano e il plugin sono stati scritti da [b]Claude[/b], un'assistente IA, con direzione e revisione umana.
+
+[h2]Dove vive il progetto[/h2]
+
+[list]
+[*][url=https://www.nexusmods.com/vampirethemasqueradereckoningofnewyork/mods/2]Nexus Mods[/url] — la pagina della mod
+[*][url=https://github.com/Xodryx/vtm-reckoning-of-new-york-italian]GitHub[/url] — codice, documentazione tecnica e segnalazioni
+[/list]
+
+[hr][/hr]
+
+Questa è una traduzione amatoriale e non ufficiale. Non è affiliata né approvata da Draw Distance o Paradox Interactive, e il gioco resta loro.

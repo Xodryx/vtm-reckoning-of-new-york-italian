@@ -1,0 +1,18 @@
+Cancella questi due file:
+
+[code]BepInEx\plugins\RonyItalian.dll
+BepInEx\plugins\italian.json[/code]
+
+Al riavvio il gioco è di nuovo in inglese. Non c'è altro da annullare, e non serve verificare i file da Steam: [b]nessun file del gioco è mai stato modificato[/b], quindi non c'è niente da ripristinare. I salvataggi restano validi, anche quelli fatti giocando in italiano.
+
+[h2]Togliere anche BepInEx[/h2]
+
+Solo se l'hai installato con il pacchetto principale e non lo usi per altre mod. Nella cartella del gioco cancella:
+
+[code]BepInEx\      dotnet\      licenses\
+winhttp.dll   doorstop_config.ini   .doorstop_version
+changelog.txt LICENZE.txt  LEGGIMI.txt[/code]
+
+Così la cartella torna esattamente come l'aveva installata Steam.
+
+Se usi altre mod che girano su BepInEx, [b]non cancellare [i]BepInEx\[/i][/b]: bastano i due file della traduzione.

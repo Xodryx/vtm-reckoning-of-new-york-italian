@@ -1,0 +1,21 @@
+Tre controlli, in ordine di quanto spesso sono la causa.
+
+[h2]I file sono nel posto sbagliato[/h2]
+
+È il motivo nove volte su dieci. Dopo l'estrazione devi trovare [i]RonyItalian.dll[/i] e [i]italian.json[/i] esattamente qui:
+
+[code]<cartella del gioco>\BepInEx\plugins\[/code]
+
+Non dentro [i]BepInEx[/i] e basta, e non in un [i]BepInEx\BepInEx[/i] annidato — quello succede quando si estrae l'archivio dentro una cartella che si chiama già così. Nella cartella del gioco, accanto a [i]VtM Reckoning of New York.exe[/i], devono esserci anche [i]winhttp.dll[/i] e [i]doorstop_config.ini[/i]: se non ci sono, hai estratto un livello troppo in basso.
+
+[h2]BepInEx non sta partendo[/h2]
+
+Apri [i]BepInEx\LogOutput.log[/i] con un editor di testo. Le righe della traduzione cominciano per [i]Reckoning of New York - Italian[/i]. Se il file non esiste affatto, BepInEx non si sta avviando; se esiste ma quelle righe non ci sono, si avvia ma non carica il plugin.
+
+[h2]È la versione sbagliata di BepInEx[/h2]
+
+Riguarda solo chi l'ha installato per conto suo. Questo gioco è Unity IL2CPP e richiede [b]BepInEx 6, quello bleeding edge[/b]. Il BepInEx 5, che è il primo che il sito ufficiale propone ed è il più diffuso, con questo gioco non funziona e non dà errori chiari. Nel dubbio, disinstalla e usa il pacchetto principale, che include la versione giusta.
+
+[h2]Se niente di tutto questo aiuta[/h2]
+
+Scrivi nei commenti qui sotto oppure apri una segnalazione su GitHub. In entrambi i casi allega il contenuto di [i]BepInEx\LogOutput.log[/i]: dice quale BepInEx sta girando, se il plugin è stato caricato e quante battute ha letto. Senza quello si indovina; con quello di solito la diagnosi è immediata.

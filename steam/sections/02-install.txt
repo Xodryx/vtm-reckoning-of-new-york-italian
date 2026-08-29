@@ -1,0 +1,23 @@
+Serve un file solo, e si estrae in una cartella. Niente installatori, niente gestori di mod.
+
+[olist]
+[*]Scarica il pacchetto principale, quello con [b]BepInEx incluso[/b], da uno dei due:
+[list]
+[*][url=https://www.nexusmods.com/vampirethemasqueradereckoningofnewyork/mods/2]Nexus Mods[/url]
+[*][url=https://github.com/Xodryx/vtm-reckoning-of-new-york-italian/releases/latest]GitHub[/url]
+[/list]
+[*]Apri la cartella del gioco. Il modo più rapido: tasto destro sul gioco nella tua libreria Steam, [b]Gestisci[/b], [b]Sfoglia i file locali[/b]. Steam apre esattamente la cartella giusta, quella che contiene [i]VtM Reckoning of New York.exe[/i].
+
+Su un'installazione standard è questa:
+[code]C:\Program Files (x86)\Steam\steamapps\common\Vampire The Masquerade - Reckoning of New York\[/code]
+[*]Estrai lì dentro tutto il contenuto dell'archivio, [b]non in una sottocartella[/b]. Se Windows chiede se unire le cartelle, di' di sì.
+[*]Avvia il gioco.
+[/olist]
+
+[b]Il primo avvio richiede una trentina di secondi[/b] e la finestra sembra bloccata per tutto il tempo. È normale: BepInEx sta generando i file che gli servono per parlare col gioco, e lo fa una volta sola. Non chiuderlo, aspetta. Gli avvii successivi sono normali.
+
+Poi il gioco parte già in italiano. Se vuoi tornare all'inglese, il selettore della lingua è nelle impostazioni del gioco come sempre: l'italiano si aggiunge alle altre lingue, non le sostituisce.
+
+[h2]Se hai già BepInEx[/h2]
+
+C'è un secondo archivio, molto più piccolo, con dentro solo i due file della traduzione — [i]RonyItalian.dll[/i] e [i]italian.json[/i] — da mettere in [i]BepInEx\plugins[/i]. Serve solo a chi ha già installato [b]BepInEx 6 per IL2CPP[/b] per altre mod. Se non sai di averlo, non ce l'hai: prendi il pacchetto principale.

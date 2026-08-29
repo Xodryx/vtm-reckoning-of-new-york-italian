@@ -1,0 +1,21 @@
+Il gioco esce solo in inglese e francese. Questa è una traduzione italiana non ufficiale: aggiunge [b]Italiano[/b] come terza voce nel selettore della lingua e serve il testo tradotto mentre il gioco gira.
+
+[b]Non modifica nessun file del gioco.[/b] Non è una patch e non sovrascrive niente: la verifica dei file di Steam non ha niente da ripristinare, e i salvataggi restano intatti. Puoi metterla e toglierla a metà partita.
+
+Tradotto è tutto: le otto notti, i finali, le missioni opzionali, il glossario, il diario, gli obiettivi e l'interfaccia. Undicimila battute circa.
+
+[hr][/hr]
+
+[h2]Fatta con l'IA, e non ancora riletta[/h2]
+
+Sia il testo italiano sia il plugin che lo carica sono scritti da un'assistente IA, con direzione e revisione umana — revisione alla scrivania, però, mai giocando. [b]Nessuno ha finito il gioco in italiano per rileggere il risultato.[/b] È una bozza che funziona, non una localizzazione finita, ed è per questo che la versione sta sotto la 1.0.
+
+Vale la pena sapere dove saranno gli errori e dove no.
+
+[list]
+[*][b]La terminologia dovrebbe essere affidabile.[/b] I termini del mondo di gioco non sono inventati: vengono dalla traduzione italiana ufficiale di [i]Coteries of New York[/i], stessa ambientazione e stesso vocabolario. [i]Kindred[/i] è [i]Fratelli[/i], [i]Final Death[/i] è [i]Morte Ultima[/i], [i]Embrace[/i] è [i]Abbraccio[/i].
+[*][b]Gli errori saranno nel tono e nel registro.[/b] Un controllo automatico può verificare che un collegamento del glossario sia sopravvissuto alla traduzione; non può accorgersi che una battuta sarcastica suona sincera.
+[*][b]I sottotitoli possono allontanarsi dal doppiaggio.[/b] Il gioco è interamente doppiato in inglese e l'italiano è più lungo. Le battute sono controllate contro un budget di lunghezza, ma è una stima, non il renderer del gioco.
+[/list]
+
+Se qualcosa suona storto, segnalalo: c'è scritto come nell'ultima sezione. Gli errori che nessuno segnala restano dentro.
