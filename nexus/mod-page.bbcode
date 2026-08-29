@@ -1,0 +1,87 @@
+[size=5]Traduzione italiana completa[/size]
+
+Traduzione italiana non ufficiale di [i]Vampire: The Masquerade — Reckoning of New York[/i], sotto forma di plugin BepInEx. Il gioco esce solo in inglese e francese: questa aggiunge [b]Italiano[/b] come terza voce nel selettore della lingua e serve il testo tradotto mentre il gioco gira.
+
+[b]Non modifica nessun file del gioco.[/b] La verifica dei file di Steam non ha niente da ripristinare, e i salvataggi restano intatti.
+
+[line]
+
+[size=4]Fatta con l'IA — aspettati degli errori[/size]
+
+Sia il testo italiano sia il plugin in C# sono scritti da un'assistente IA, con direzione e revisione umana — revisione alla scrivania, però, mai giocando. [b]Nessuno ha finito il gioco in italiano per rileggere il risultato.[/b] Trattala come una bozza che funziona, non come una localizzazione finita. È per questo che la versione sta sotto la 1.0.
+
+[list]
+[*][b]La terminologia dovrebbe essere affidabile.[/b] I termini del glossario non sono inventati: vengono dalla traduzione italiana ufficiale di [i]Coteries of New York[/i], stessa ambientazione e stesso vocabolario. [i]Kindred[/i] è [i]Fratelli[/i], [i]Final Death[/i] è [i]Morte Ultima[/i].
+[*][b]Gli errori saranno nel tono e nel registro.[/b] Un controllo automatico può verificare che un marcatore sia sopravvissuto; non può accorgersi che una battuta sarcastica suona sincera.
+[*][b]I sottotitoli possono allontanarsi dal doppiaggio.[/b] Il gioco è interamente doppiato in inglese e l'italiano è più lungo. Le battute sono controllate contro un budget di lunghezza, ma il budget è una stima, non il renderer del gioco.
+[/list]
+
+Segnala qualunque cosa suoni storta. Gli errori che nessuno segnala restano dentro.
+
+[line]
+
+[size=4]Installazione[/size]
+
+[list=1]
+[*]Scarica [b]RonyItalian-ita-…-with-bepinex.zip[/b], il file principale. Contiene tutto, BepInEx compreso.
+[*]Estrailo nella [b]cartella del gioco[/b], quella che contiene [i]VtM Reckoning of New York.exe[/i], non una sottocartella. Lascia che Windows unisca le cartelle quando lo chiede. Su un'installazione Steam standard è:
+[code]C:\Program Files (x86)\Steam\steamapps\common\Vampire The Masquerade - Reckoning of New York\[/code]
+Se Steam è altrove: tasto destro sul gioco nella libreria → [b]Gestisci[/b] → [b]Sfoglia i file locali[/b].
+[*]Avvia il gioco. [b]Il primo avvio richiede una trentina di secondi[/b] e la finestra sembra bloccata per tutto il tempo: è BepInEx che genera gli assembly di interop. Poi parte in italiano da solo, e gli avvii successivi sono normali.
+[/list]
+
+Se BepInEx 6 per IL2CPP ce l'hai già, scarica il file più piccolo: contiene solo i due file della traduzione, da mettere in [i]BepInEx\plugins[/i].
+
+[size=4]Disinstallazione[/size]
+
+Cancella questi due file:
+[code]BepInEx\plugins\RonyItalian.dll
+BepInEx\plugins\italian.json[/code]
+
+Al riavvio il gioco torna in inglese. Non c'è altro da annullare, perché nessun file del gioco è mai stato modificato. Se vuoi togliere anche BepInEx, cancella quello che è arrivato con l'archivio: [i]BepInEx\[/i], [i]dotnet\[/i], [i]licenses\[/i], [i]winhttp.dll[/i], [i]doorstop_config.ini[/i], [i].doorstop_version[/i], [i]changelog.txt[/i], [i]LICENZE.txt[/i], [i]LEGGIMI.txt[/i]. Tieni [i]BepInEx\[/i] se usi altre mod.
+
+[size=4]Se il testo resta in inglese[/size]
+
+[list]
+[*]Controlla che i due file siano davvero in [i]BepInEx\plugins[/i], non dentro [i]BepInEx[/i] e non in un [i]BepInEx\BepInEx[/i] annidato. Estrarre nella cartella sbagliata è la causa più comune.
+[*]Apri [i]BepInEx\LogOutput.log[/i]: le righe del plugin cominciano per [i]Reckoning of New York - Italian[/i]. Se non ce ne sono, BepInEx non lo sta caricando.
+[*]Se hai installato BepInEx per conto tuo, verifica che sia il [b]6 per IL2CPP[/b]. Il 5, quello che il sito ufficiale offre per primo, con questo gioco non funziona.
+[/list]
+
+[line]
+
+[size=4]Compatibilità[/size]
+
+Solo Windows, ed è l'unica configurazione su cui è stata provata. Il gioco è Unity 2022.3 IL2CPP, quindi serve BepInEx 6 (bleeding edge), non il più diffuso BepInEx 5.
+
+[size=4]Segnalare un errore[/size]
+
+I moduli di segnalazione stanno su GitHub e chiedono la cosa che serve davvero — il testo esatto letto a schermo, o il log. [url=https://github.com/Xodryx/vtm-reckoning-of-new-york-italian/issues]Apri una segnalazione[/url]. Vanno benissimo anche i commenti qui.
+
+Il codice sorgente, la documentazione tecnica e il flusso di lavoro per contribuire alla traduzione sono su [url=https://github.com/Xodryx/vtm-reckoning-of-new-york-italian]GitHub[/url].
+
+[line]
+
+[size=4]Crediti e ringraziamenti[/size]
+
+[b][url=https://drawdistance.net/]Draw Distance[/url][/b] ha scritto il gioco e ogni riga che questo progetto traduce. Le loro parole sono tutto il lavoro; qui c'è solo l'italiano per dirle.
+
+[b]La traduzione italiana ufficiale di [i]Coteries of New York[/i][/b] è da dove viene la terminologia. Niente nel glossario è indovinato quando esiste una fonte italiana pubblicata.
+
+[b][url=https://github.com/BepInEx/BepInEx]BepInEx[/url][/b] e i quindici progetti che porta con sé rendono possibile tutto questo. Senza un loader capace di iniettarsi in una build IL2CPP, tradurre questo gioco vorrebbe dire modificarne i file, che è esattamente quello che questo progetto non voleva fare. Attribuzioni e licenze complete viaggiano dentro l'archivio, nella cartella [i]licenses\[/i].
+
+[b][url=https://inter-illusion.com/]I2 Localization[/url][/b] è il sistema di localizzazione che il gioco usa. È il suo comportamento di fallback a permettere di servire una traduzione a runtime senza toccare un solo file del gioco.
+
+Il testo italiano e il plugin sono stati scritti da [b]Claude[/b], un'assistente IA, con direzione e revisione umana.
+
+[line]
+
+[size=4]English[/size]
+
+Unofficial [b]Italian[/b] translation of [i]Reckoning of New York[/i], as a BepInEx plugin. It adds Italiano as a third entry in the game's language selector and serves the translated text at runtime. [b]No game file is modified[/b] — uninstalling is deleting two files.
+
+The main archive includes BepInEx, so it installs by unpacking into the game folder. The smaller archive is the translation alone, for anyone already running BepInEx 6 for IL2CPP.
+
+Both the Italian text and the C# plugin were written by an AI assistant, directed and reviewed by a human, and [b]nobody has played the game through in Italian to proofread the result[/b]. Treat it as a draft that runs. Terminology comes from the official Italian translation of [i]Coteries of New York[/i], not from invention. Source, technical documentation and issue forms are on [url=https://github.com/Xodryx/vtm-reckoning-of-new-york-italian]GitHub[/url].
+
+[i]Vampire: The Masquerade — Reckoning of New York[/i] is by [url=https://drawdistance.net/]Draw Distance[/url]. This project is not affiliated with, endorsed by, or connected to Draw Distance or Paradox Interactive.
